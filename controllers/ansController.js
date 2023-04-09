@@ -3,8 +3,8 @@
 // const exam_manageDB = require("../models/exam_manage.model")
 module.exports = {
 
-    render_indexPage : function (req, res) {
-        res.render('index',{title:'index'})
+    render_ansPage : function (req, res) {
+        res.render('ans',{title:'ans'})
     },
     
 } 

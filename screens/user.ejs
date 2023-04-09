@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>แสดงผลข้อมูลนักศึกษา</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+</head>
+<body>
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand">Computer Programmimg</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a class="nav-link" href="/">Home</a>
+        </li>
+        <li class="nav-item active">
+          <a class="nav-link" href="/user">เพิ่มข้อมูลนักศึกษา</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/exammanage">จัดการข้อสอบ</a>
+        </li>
+      </ul>
+      <a href="" class="btn btn-danger" style="margin-left:auto;">ออกจากระบบ</a>
+    </div>
+  </nav>
+ 
+  <div class="w3-container">
+    <h1 class="text-center my-4">ข้อมูลนักศึกษา</h1>
+    <div class="container" style="margin-right:-830px;">
+        <a href="" class="btn btn-warning">เพิ่มข้อมูลแบบ Excel</a>
+        <button onclick="document.getElementById('add_user').style.display='block'" class="btn btn-warning">เพิ่มข้อมูล</button>
+
+        <!-- modol_id add_user -->
+        <div id="add_user" class="w3-modal w3-animate-opacity">
+          <div class="w3-modal-content w3-card-4">
+            <header class="w3-container w3-teal"> 
+              <span onclick="document.getElementById('add_user').style.display='none'" 
+              class="w3-button w3-large w3-display-topright">&times;</span>
+              <h1 class="text-center">เพิ่มข้อมูลนักศึกษา</h1>
+            </header>
+            <br>
+                <form method="post" action="/add" class="form-group border p-3 mt-4">
+                  <div class="form-group">
+                    <label for="id">รหัสนักศึกษา</label>
+                    <input type="text" class="form-control" id="id" name="id" required>
+                  </div>
+                  <div class="form-group">
+                    <label for="password">รหัสผ่าน</label>
+                    <input type="password" class="form-control" id="password" name="password" required>
+                  </div>
+                  <div class="form-group">
+                    <label for="name">ชื่อ</label>
+                    <input type="text" class="form-control" id="name" name="name" required>
+                  </div>
+                  <div class="form-group">
+                    <label for="surname">นามสกุล</label>
+                    <input type="text" class="form-control" id="surname" name="surname" required>
+                  </div>
+                  <div class="form-group">
+                    <label for="sec">ตำแหน่ง</label>
+                    <select class="form-control" id="type" name="type">
+                      <option value="1">อาจารย์</option>
+                      <option value="2">นักศึกษา</option>
+                    </select>
+                  </div>
+                  <div class="form-group">
+                    <label for="sec">กลุ่มเรียน</label>
+                    <input type="text" class="form-control" id="sec" name="sec" required>
+                  </div>
+                  <center>
+                      <button type="submit" class="btn btn-success" style="width:400px;">เพิ่มข้อมูลนักศึกษา</button>
+                  </center>
+                </form>
+            <footer class="w3-container w3-teal">        
+                <div class="modal-footer">
+                  <button onclick="document.getElementById('add_user').style.display='none'" type="button" class="btn btn-danger" data-dismiss="modal">ยกเลิก</button>
+                </div>
+              </div>
+              </footer>
+          </div> 
+
+        <br><br>
+      </div>
+    <table class="table">
+      <thead>
+        <tr>
+          <th>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
+          <th scope="col">ลำดับ</th>
+          <th scope="col">รหัสนักศึกษา</th>
+          <th scope="col">ชื่อ</th>
+          <th scope="col">นามสกุล</th>
+          <th scope="col">กลุ่ม</th>
+          <th scope="col">รหัสผ่าน</th>
+          <th scope="col">การจัดการ</th>
+        </tr>
+      </thead>
+
+      <tbody>
+          <tr>
+            <td></td>
+            <th scope="row"></th>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>
+
+                  <button onclick="document.getElementById('edit_user').style.display='block'" class="btn btn-primary">แก้ไข</button>
+                  <button onclick="document.getElementById('del_user').style.display='block'" class="btn btn-danger">ลบ</button>
+              
+              <!-- modol_id edit_user -->
+              <div id="edit_user" class="w3-modal w3-animate-opacity">
+                <div class="w3-modal-content w3-card-4">
+                  <header class="w3-container w3-teal"> 
+                    <span onclick="document.getElementById('edit_user').style.display='none'" 
+                    class="w3-button w3-large w3-display-topright">&times;</span>
+                    <h1 class="text-center">แก้ไขข้อมูลนักศึกษา</h1>
+                  </header>
+                  <br>
+                      <form method="post" action="/add" class="form-group border p-3 mt-4">
+                        <div class="form-group">
+                          <label for="id">รหัสนักศึกษา</label>
+                          <input type="text" class="form-control" id="id" name="id" required>
+                        </div>
+                        <div class="form-group">
+                          <label for="password">รหัสผ่าน</label>
+                          <input type="password" class="form-control" id="password" name="password" required>
+                        </div>
+                        <div class="form-group">
+                          <label for="name">ชื่อ</label>
+                          <input type="text" class="form-control" id="name" name="name" required>
+                        </div>
+                        <div class="form-group">
+                          <label for="surname">นามสกุล</label>
+                          <input type="text" class="form-control" id="surname" name="surname" required>
+                        </div>
+                        <div class="form-group">
+                          <label for="sec">ตำแหน่ง</label>
+                          <select class="form-control" id="type" name="type">
+                            <option value="1">อาจารย์</option>
+                            <option value="2">นักศึกษา</option>
+                          </select>
+                        </div>
+                        <div class="form-group">
+                          <label for="sec">กลุ่มเรียน</label>
+                          <input type="text" class="form-control" id="sec" name="sec" required>
+                        </div>
+                        <center>
+                            <button type="submit" class="btn btn-warning" style="width:400px;">แก้ไข</button>
+                        </center>
+                      </form>
+                  <footer class="w3-container w3-teal">        
+                      <div class="modal-footer">
+                        <button onclick="document.getElementById('edit_user').style.display='none'" type="button" class="btn btn-danger" data-dismiss="modal">ยกเลิก</button>
+                      </div>
+                    </div>
+                    </footer>
+                </div>              
+
+            </td>
+          </tr> 
+      </tbody>
+    </table>
+
+  </div>
+
+  <!-- modal_id edit_user -->
+
+
+</body>
+</html>
+
+ 
+
+
+<script></script>
+
