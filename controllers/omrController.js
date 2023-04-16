@@ -7,16 +7,12 @@ module.exports = {
 
         const image_processing_api = "http://127.0.0.1:3000/response";
 
-
-        /*---------------------------- เทสผลลัพธ์ ----------------------------*/ 
+        /*---------------------------- เทสผลลัพธ์ (เฉลยมาจาก assets ไฟล์ [answer_example.json]) ----------------------------*/ 
         axios.get(image_processing_api)
         .then(function (response) {
 
             var answer_compare = JSON.parse(fs.readFileSync('./assets/json/answer_example.json', 'utf8'));
             sheet_input = response.data;
-
-            // console.log(answer_compare.answer_data)
-            // console.log(sheet_input.answer)
 
             if(Object.keys(answer_compare.answer_data).length != Object.keys(sheet_input.answer).length){
                 res.send({"error":"invalid"})
@@ -31,8 +27,6 @@ module.exports = {
                 }
             }
 
-            // console.log(score)
-            // console.log(total)
             sheet_input["score"] = score;
             sheet_input["total"] = total;
             res.send(sheet_input)
@@ -41,11 +35,9 @@ module.exports = {
         .catch(function (error) {
             res.send(error)
         })
-        /*---------------------------- เทสผลลัพธ์ ----------------------------*/ 
+        /*---------------------------- เทสผลลัพธ์  ----------------------------*/ 
 
-
-
-        /*---------------------------- ใช้งานจริง ----------------------------*/ 
+        /*---------------------------- ใช้งานจริง (เฉลยมาจาก Database) ----------------------------*/ 
         var bodyFormData = new FormData();
         bodyFormData.append('image', imageFile); 
 
@@ -73,7 +65,6 @@ module.exports = {
                     }
                 }
     
-
                 sheet_input["score"] = score;
                 sheet_input["total"] = total;
                 res.send(sheet_input)
