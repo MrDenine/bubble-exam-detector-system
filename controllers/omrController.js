@@ -39,7 +39,7 @@ module.exports = {
 
         /*---------------------------- ใช้งานจริง (เฉลยมาจาก Database) ----------------------------*/ 
         var bodyFormData = new FormData();
-        bodyFormData.append('image', imageFile); //imageFile ได้จากหน้า view ผ่าน request (ตัวอย่าง req.body.image)
+        bodyFormData.append('file', req.body.image ); //imageFile ได้จากหน้า view ผ่าน request (ตัวอย่าง req.body.image)
 
         axios({
             method: "post",
