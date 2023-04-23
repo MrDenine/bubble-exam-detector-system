@@ -33,6 +33,6 @@ router.get('/ans2', ans2Controller.render_ans2Page);
 
 router.get('/showuser',userController.showUserPage);
 
-router.get('/getAnswer',omrController.getAnswer);
+router.get('/getAnswer'/*, multer */,omrController.getAnswer);
 
 module.exports = router; 
