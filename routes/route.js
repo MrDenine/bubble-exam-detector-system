@@ -13,6 +13,7 @@ const show_scorestuController = require('../controllers/show_scorestuController.
 const re_stuController = require('../controllers/re_stuController.js');
 const ansController = require('../controllers/ansController.js');
 const ans2Controller = require('../controllers/ans2Controller.js');
+const omrController = require('../controllers/omrController.js');
 
 router.use(bodyParser.urlencoded({ extended: false }));
 router.use(bodyParser.json());
@@ -31,5 +32,7 @@ router.get('/ans2', ans2Controller.render_ans2Page);
 
 // use router หลังบ้าน
 router.post('/update_user',userController.updateUser);
+
+router.get('/getAnswer'/*, multer */,omrController.getAnswer);
 
 module.exports = router; 
