@@ -97,6 +97,11 @@
                                 <option value="final">ปลายภาค</option>
                             </select>
                       </div>
+                      <form action="">
+                        <label for="image-input">เลือกรูปภาพ</label>
+                        <input type="file" id="image-input" accept="image/*">
+                        <br>
+                      </form>
                       <div class="form-group">
                       <center>
                         <button class="btn btn-success" type="submit" style="width: 200px;" >อัพกระดาษคำตอบ</button>
@@ -148,11 +153,15 @@
                             </select>
                       </div>
                       <!-- เอาข้อมูลชื่อรหัสชั้นตอนเก็บคำตอบ -->
-                      <div class="form-group">
+                      <form>
+                        <label for="image-input">เลือกรูปภาพ</label>
+                        <input type="file" id="image-input" accept="image/*">
+                        <br>
                         <center>
-                      <button class="btn btn-success" type="submit" style="width: 400px;" >ตรวจกระดาษคำตอบ</button>
-                        </center>
-                      </div>
+                          <button class="btn btn-success" type="submit" style="width: 400px;" id="upload-btn">ตรวจกระดาษคำตอบ</button>
+                          </center>
+                          <br>
+                      </form>                       
                     </div>
                   </form>
     <footer class="w3-container w3-teal">        

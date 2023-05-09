@@ -18,7 +18,7 @@ router.use(bodyParser.urlencoded({ extended: false }));
 router.use(bodyParser.json());
 router.use(cookieParser());
 
-// use router
+// use router หน้าบ้าน
 router.get('/login', loginController.render_loginPage);
 router.get('/', indexController.render_indexPage);
 router.get('/user', userController.render_userPage);
@@ -29,7 +29,7 @@ router.get('/show_sstu', show_scorestuController.render_show_scorestuPage);
 router.get('/ans', ansController.render_ansPage);
 router.get('/ans2', ans2Controller.render_ans2Page);
 
-
-router.get('/showuser',userController.showUserPage);
+// use router หลังบ้าน
+router.post('/update_user',userController.updateUser);
 
 module.exports = router; 

@@ -8,6 +8,22 @@ module.exports = {
         return rows;
    },
 
+    postUpdateuser : async function (data){
+        var rows = await db.promise().query(
+            "UPDATE user SET password = ?, firstname = ?, lastname = ?, type = ?, section = ? WHERE username = ?",
+            [
+                data.password,
+                data.firstname,
+                data.lastname,
+                data.type,
+                data.section,
+                data.username
+            ]
+                    
+            )
+        return rows
+    }
+
 //    showdd : async function (data){
 //         console.log("data: ", username)
 //    }
