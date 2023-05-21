@@ -3,19 +3,21 @@
 <head>
   <meta charset="UTF-8">
   <title>จัดการข้อสอบ</title>
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
-  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+  <!-- Latest compiled and minified CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Latest compiled JavaScript -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 </head>
 <body>
 
    <!-- Navbar -->
    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <a class="navbar-brand">Computer Programmimg</a>
+    &nbsp;&nbsp;<a class="navbar-brand">Computer Programmimg</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
@@ -27,219 +29,56 @@
         <li class="nav-item">
           <a class="nav-link" href="/user">เพิ่มข้อมูลนักศึกษา</a>
         </li>
-        <li class="nav-item active">
-          <a class="nav-link" href="/exammanage">จัดการข้อสอบ</a>
+        <li class="nav-item">
+          <a class="nav-link active" href="/exammanage">จัดการข้อสอบ</a>
         </li>
       </ul>
-      <a href="" class="btn btn-danger" style="margin-left:auto;">ออกจากระบบ</a>
+      <a href="" class="btn btn-danger" style="margin-left:auto;">ออกจากระบบ</a>&nbsp;&nbsp;&nbsp;&nbsp;
     </div>
   </nav>
 
 
-  <!-- modalform -->
-  <div class="w3-container">
-    <br><br>
-    <div class="row">
-          <div class="col-md-3 offset-md-4 mt-5 border p-4" >
-      <h1 class="text-center mb-4">จัดการข้อสอบ</h1>
-      <center>
-              <div class="form-group">
-                <button onclick="document.getElementById('id01').style.display='block'" class="btn btn-success btn-lg shadow w-100">กำหนดข้อสอบ</button>
-              </div>
-  
-              <div class="form-group">
-                <button onclick="document.getElementById('id02').style.display='block'" class="btn btn-success btn-lg shadow w-100">ตรวจกระดาษคำตอบ</button>
-              </div>
-            
-              <div class="form-group">
-                <button onclick="document.getElementById('id03').style.display='block'" class="btn btn-success btn-lg shadow w-100">รายงานผล</button>
-              </div>
+    <!-- modalform -->
+    <div class="container">
+      <br><br>
+      <div class="row">
+            <div class="col-md-4 offset-md-4 mt-2 border p-1" >
+        <h1 class="text-center mb-4">จัดการข้อสอบ</h1>
+        <center>
+                <div class="container mb-2">
+                  <button type="button" class="btn btn-success btn-lg shadow w-100" data-bs-toggle="modal" data-bs-target="#id01">กำหนดข้อสอบ</button> 
+                </div>
+    
+                <div class="container mb-2">
+                  <button type="button" class="btn btn-success btn-lg shadow w-100" data-bs-toggle="modal" data-bs-target="#id02">ตรวจกระดาษคำตอบ</button>
+                </div>
+              
+                <div class="container mb-2">
+                  <button type="button" class="btn btn-success btn-lg shadow w-100" data-bs-toggle="modal" data-bs-target="#id03">รายงานผลคะแนนสอบ</button>
+                </div>
 
-              <div class="form-group">
-              <button onclick="document.getElementById('id04').style.display='block'" class="btn btn-success btn-lg shadow w-100">การวิเคราะห์ผลคำตอบ</button>
-         </div>
-      </center>
+                <div class="container mb-2">
+                  <button type="button" class="btn btn-success btn-lg shadow w-100" data-bs-toggle="modal" data-bs-target="#id04">การวิเคราะห์ผลคำตอบ</button>
+                </div>
+        </center>
+    </div>
+    </div>
   </div>
-  </div>
-</div>
-  
-<!-- modalid01 -->
-<div id="id01" class="w3-modal w3-animate-opacity">
-  <div class="w3-modal-content w3-card-4">
-    <header class="w3-container w3-teal"> 
-      <span onclick="document.getElementById('id01').style.display='none'" 
-      class="w3-button w3-large w3-display-topright">&times;</span>
-      <h2><center>ตรวจกระดาษคำตอบ</center></h2>
-    </header>
-    <br>
-   <form class="container" action="">
-                  <div class="container">
-                      <div class="form-group">
-                        <select class="form-control" id="year">
-                          <option>เลือกปีการศึกษา</option>
-                          <option>2021</option>
-                          <option>2022</option>
-                          <option>2023</option>
-                        </select>
-                      </div>
-                      <div class="form-group">
-                        <select class="form-control" id="term">
-                          <option>เลือกเทอม</option>
-                          <option>1</option>
-                          <option>2</option>
-                          <option>3</option>
-                        </select>
-                      </div>
-                      <div class="form-group">
-                            <select class="form-control" id="term">
-                                <option>เลือกกลางภาค-ปลายภาค</option>
-                                <option value="middle">กลางภาค</option>
-                                <option value="final">ปลายภาค</option>
-                            </select>
-                      </div>
-                      <form action="">
-                        <label for="image-input">เลือกรูปภาพ</label>
-                        <input type="file" id="image-input" accept="image/*">
-                        <br>
-                      </form>
-                      <div class="form-group">
-                      <center>
-                        <button class="btn btn-success" type="submit" style="width: 200px;" >อัพกระดาษคำตอบ</button>
-                        <button class="btn btn-primary" type="submit" style="width:200px;" >กำหนดเอง</button>
-                      </center>
-                    </div>
-                    </div>
-                  </form>
-    <footer class="w3-container w3-teal">        
-        <div class="modal-footer">
-          <button onclick="document.getElementById('id01').style.display='none'" type="button" class="btn btn-danger" data-dismiss="modal">ยกเลิก</button>
+    
+  <!-- modalid01 -->
+  <div class="modal" id="id01">
+    <div class="modal-dialog">
+      <div class="modal-content">
+
+        <!-- Modal Header -->
+        <div class="modal-header">
+          <h4 class="modal-title text-center">กำหนดกระดาษคำตอบ</h4>
         </div>
-      </div>
-      </footer>
-  </div>  
 
-<!-- modalid02 -->
-<div id="id02" class="w3-modal w3-animate-opacity">
-  <div class="w3-modal-content w3-card-4">
-    <header class="w3-container w3-teal"> 
-      <span onclick="document.getElementById('id02').style.display='none'" 
-      class="w3-button w3-large w3-display-topright">&times;</span>
-      <h2><center>ตรวจกระดาษคำตอบ</center></h2>
-    </header>
-    <br>
-   <form class="container" action="">
-                  <div class="container">
-                      <div class="form-group">
-                        <select class="form-control" id="year">
-                          <option>เลือกปีการศึกษา</option>
-                          <option>2021</option>
-                          <option>2022</option>
-                          <option>2023</option>
-                        </select>
-                      </div>
-                      <div class="form-group">
-                        <select class="form-control" id="term">
-                          <option>เลือกเทอม</option>
-                          <option>1</option>
-                          <option>2</option>
-                          <option>3</option>
-                        </select>
-                      </div>
-                      <div class="form-group">
-                            <select class="form-control" id="term">
-                                <option>เลือกกลางภาค-ปลายภาค</option>
-                                <option value="middle">กลางภาค</option>
-                                <option value="final">ปลายภาค</option>
-                            </select>
-                      </div>
-                      <!-- เอาข้อมูลชื่อรหัสชั้นตอนเก็บคำตอบ -->
-                      <form>
-                        <label for="image-input">เลือกรูปภาพ</label>
-                        <input type="file" id="image-input" accept="image/*">
-                        <br>
-                        <center>
-                          <button class="btn btn-success" type="submit" style="width: 400px;" id="upload-btn">ตรวจกระดาษคำตอบ</button>
-                          </center>
-                          <br>
-                      </form>                       
-                    </div>
-                  </form>
-    <footer class="w3-container w3-teal">        
-        <div class="modal-footer">
-          <button onclick="document.getElementById('id02').style.display='none'" type="button" class="btn btn-danger" data-dismiss="modal">ยกเลิก</button>
-        </div>
-      </div>
-      </footer>
-  </div>
-
-<!-- modalid03 -->
-<div id="id03" class="w3-modal w3-animate-opacity">
-  <div class="w3-modal-content w3-card-4">
-    <header class="w3-container w3-teal"> 
-      <span onclick="document.getElementById('id03').style.display='none'" 
-      class="w3-button w3-large w3-display-topright">&times;</span>
-      <h2><center>เลือกรายงานผลสอบ</center></h2>
-    </header>
-    <br>
-   <form class="container" action="">
-                  <div class="container">
-                      <div class="form-group">
-                        <select class="form-control" id="year">
-                          <option>เลือกปีการศึกษา</option>
-                          <option>2021</option>
-                          <option>2022</option>
-                          <option>2023</option>
-                        </select>
-                      </div>
-                      <div class="form-group">
-                        <select class="form-control" id="term">
-                          <option>เลือกเทอม</option>
-                          <option>1</option>
-                          <option>2</option>
-                          <option>3</option>
-                        </select>
-                      </div>
-                      <div class="form-group">
-                            <select class="form-control" id="term">
-                                <option>เลือกกลางภาค-ปลายภาค</option>
-                                <option value="middle">กลางภาค</option>
-                                <option value="final">ปลายภาค</option>
-                            </select>
-                      </div>
-                      <div class="form-group">
-                        <select class="form-control" id="group" required>
-                          <option>เลือก Sec</option>
-                          <option>Sec 1</option>
-                          <option>Sec 2</option>
-                        </select>
-                      </div>
-                      <div class="form-group">
-                        <center>
-                      <button class="btn btn-success" type="submit" style="width: 400px;" >แสดงผล</button>
-                        </center>
-                      </div>
-                    </div>
-                  </form>
-        <footer class="w3-container w3-teal">        
-            <div class="modal-footer">
-              <button onclick="document.getElementById('id03').style.display='none'" type="button" class="btn btn-danger" data-dismiss="modal">ยกเลิก</button>
-            </div>
-          </div>
-        </footer>
-  </div>
-
-    <!-- modalid04 -->
-  <div id="id04" class="w3-modal w3-animate-opacity">
-    <div class="w3-modal-content w3-card-4">
-      <header class="w3-container w3-teal"> 
-        <span onclick="document.getElementById('id04').style.display='none'" 
-        class="w3-button w3-large w3-display-topright">&times;</span>
-        <h2><center>เลือกรายงานวิเคราะห์ผลคำตอบ</center></h2>
-      </header>
       <br>
-     <form class="container" action="">
+    <form class="container" action="">
                     <div class="container">
-                        <div class="form-group">
+                        <div class="form-group mb-3">
                           <select class="form-control" id="year">
                             <option>เลือกปีการศึกษา</option>
                             <option>2021</option>
@@ -247,7 +86,7 @@
                             <option>2023</option>
                           </select>
                         </div>
-                        <div class="form-group">
+                        <div class="form-group mb-3">
                           <select class="form-control" id="term">
                             <option>เลือกเทอม</option>
                             <option>1</option>
@@ -255,34 +94,210 @@
                             <option>3</option>
                           </select>
                         </div>
-                        <div class="form-group">
+                        <div class="form-group mb-3">
                               <select class="form-control" id="term">
                                   <option>เลือกกลางภาค-ปลายภาค</option>
                                   <option value="middle">กลางภาค</option>
                                   <option value="final">ปลายภาค</option>
                               </select>
                         </div>
-                        <div class="form-group">
+                        <form action="">
+                          <label for="image-input">เลือกรูปภาพ</label>
+                          <input type="file" id="image-input" accept="image/*" class="mb-3">
+                          <br>
+                        </form>
+                        <div class="form-group mb-3">
+                        <center>
+                          <button class="btn btn-success" type="submit" style="width:200px;" >อัพกระดาษคำตอบ</button>
+                          <button class="btn btn-primary" type="submit" style="width:200px;" >กำหนดเอง</button>
+                        </center>
+                      </div>
+                      </div>
+                    </form>
+                    <!-- Modal footer -->
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+                    </div>
+
+                    </div>
+                  </div>
+                </div>
+
+  <!-- modalid02 -->
+  <div class="modal" id="id02">
+    <div class="modal-dialog">
+      <div class="modal-content">
+
+        <!-- Modal Header -->
+        <div class="modal-header">
+          <h4 class="modal-title text-center">ตรวจกระดาษคำตอบ</h4>
+        </div>
+
+      <br>
+    <form class="container" action="">
+                    <div class="container">
+                        <div class="form-group mb-3">
+                          <select class="form-control" id="year">
+                            <option>เลือกปีการศึกษา</option>
+                            <option>2021</option>
+                            <option>2022</option>
+                            <option>2023</option>
+                          </select>
+                        </div>
+                        <div class="form-group mb-3">
+                          <select class="form-control" id="term">
+                            <option>เลือกเทอม</option>
+                            <option>1</option>
+                            <option>2</option>
+                            <option>3</option>
+                          </select>
+                        </div>
+                        <div class="form-group mb-3">
+                              <select class="form-control" id="term">
+                                  <option>เลือกกลางภาค-ปลายภาค</option>
+                                  <option value="middle">กลางภาค</option>
+                                  <option value="final">ปลายภาค</option>
+                              </select>
+                        </div>
+                        <!-- เอาข้อมูลชื่อรหัสชั้นตอนเก็บคำตอบ -->
+                        <form action="">
+                          <label for="image-input">เลือกรูปภาพ</label>
+                          <input type="file" id="image-input" accept="image/*" class="mb-3">
+                          <br>
+                        </form>
+                        <div class="form-group mb-3">
+                        <center>
+                            <button class="btn btn-success" type="submit" style="width: 400px;" id="upload-btn">ตรวจกระดาษคำตอบ</button>
+                          </center>
+                        </div>
+                        </div>
+                      </form>
+                      <!-- Modal footer -->
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+                      </div>
+    
+                      </div>
+                    </div>
+                  </div>
+
+  <!-- modalid03 -->
+  <div class="modal" id="id03">
+    <div class="modal-dialog">
+      <div class="modal-content">
+
+        <!-- Modal Header -->
+        <div class="modal-header">
+          <h4 class="modal-title text-center">รายงานผลคะแนนสอบ</h4>
+        </div>
+
+      <br>
+    <form class="container" action="">
+                    <div class="container">
+                        <div class="form-group mb-3">
+                          <select class="form-control" id="year">
+                            <option>เลือกปีการศึกษา</option>
+                            <option>2021</option>
+                            <option>2022</option>
+                            <option>2023</option>
+                          </select>
+                        </div>
+                        <div class="form-group mb-3">
+                          <select class="form-control" id="term">
+                            <option>เลือกเทอม</option>
+                            <option>1</option>
+                            <option>2</option>
+                            <option>3</option>
+                          </select>
+                        </div>
+                        <div class="form-group mb-3">
+                              <select class="form-control" id="term">
+                                  <option>เลือกกลางภาค-ปลายภาค</option>
+                                  <option value="middle">กลางภาค</option>
+                                  <option value="final">ปลายภาค</option>
+                              </select>
+                        </div>
+                        <div class="form-group mb-3">
                           <select class="form-control" id="group" required>
                             <option>เลือก Sec</option>
                             <option>Sec 1</option>
                             <option>Sec 2</option>
                           </select>
                         </div>
-                        <div class="form-group">
+                        <div class="form-group mb-3">
                           <center>
                         <button class="btn btn-success" type="submit" style="width: 400px;" >แสดงผล</button>
-                          </center>
-                        </div>
+                      </center>
+                    </div>
+                    </div>
+                  </form>
+                  <!-- Modal footer -->
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+                  </div>
+
+                  </div>
+                </div>
+              </div>
+
+    <!-- modalid04 -->
+    <div class="modal" id="id04">
+      <div class="modal-dialog">
+        <div class="modal-content">
+  
+          <!-- Modal Header -->
+          <div class="modal-header">
+            <h4 class="modal-title text-center">รายงานผลคะแนนสอบ</h4>
+          </div>
+  
+        <br>
+      <form class="container" action="">
+                      <div class="container">
+                          <div class="form-group mb-3">
+                            <select class="form-control" id="year">
+                              <option>เลือกปีการศึกษา</option>
+                              <option>2021</option>
+                              <option>2022</option>
+                              <option>2023</option>
+                            </select>
+                          </div>
+                          <div class="form-group mb-3">
+                            <select class="form-control" id="term">
+                              <option>เลือกเทอม</option>
+                              <option>1</option>
+                              <option>2</option>
+                              <option>3</option>
+                            </select>
+                          </div>
+                          <div class="form-group mb-3">
+                                <select class="form-control" id="term">
+                                    <option>เลือกกลางภาค-ปลายภาค</option>
+                                    <option value="middle">กลางภาค</option>
+                                    <option value="final">ปลายภาค</option>
+                                </select>
+                          </div>
+                          <div class="form-group mb-3">
+                            <select class="form-control" id="group" required>
+                              <option>เลือก Sec</option>
+                              <option>Sec 1</option>
+                              <option>Sec 2</option>
+                            </select>
+                          </div>
+                          <div class="form-group mb-3">
+                            <center>
+                          <button class="btn btn-success" type="submit" style="width: 400px;" >แสดงผล</button>
+                        </center>
+                      </div>
                       </div>
                     </form>
-      <footer class="w3-container w3-teal">        
-        <div class="modal-footer">
-          <button onclick="document.getElementById('id04').style.display='none'" type="button" class="btn btn-danger" data-dismiss="modal">ยกเลิก</button>
-        </div>
-      </div>
-      </footer>
-    </div>
+                    <!-- Modal footer -->
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+                    </div>
+  
+                    </div>
+                  </div>
+                </div>
 
 </body>
 </html>

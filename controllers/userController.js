@@ -12,8 +12,20 @@ module.exports = {
     },
 
     updateUser : async function (req, res) {
-        let user = await userModel.postUpdateuser(req.body);
+        let updateuser = await userModel.postUpdateuser(req.body);
         res.json({"response" : req.body})
         //console.log(req.body.username);
-    } 
+    },
+
+    // addUser : async function (req, res) {
+    //     let adduser = await userModel.postAdduser(req.body);
+    //     res.json({"adduser" : req.body})
+    //     //console.log(req.body.username);
+    // },
+
+    // delUser : async function (req, res) {
+    //     let deluser = await userModel.postDeluser(req.body);
+    //     res.json({"response" : req.body})
+    //     //console.log(req.body.username);
+    // }  
 }

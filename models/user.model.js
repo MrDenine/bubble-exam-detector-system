@@ -22,7 +22,30 @@ module.exports = {
                     
             )
         return rows
-    }
+    },
+
+    // postAdduser : async function (data){
+    //     var rows = await db.promise().query(
+    //         "INSERT INTO `user`(`id`, `username`, `password`, `firstname`, `lastname`, `type`, `section`)" +
+    //         "VALUES username = ? password = ?, firstname = ?, lastname = ?, type = ?, section = ?",
+    //         [
+    //             data.username,
+    //             data.password,
+    //             data.firstname,
+    //             data.lastname,
+    //             data.type,
+    //             data.section
+    //         ]
+                    
+    //         )
+    //     return rows
+    // },
+//     postDeluser : async function (data){
+//         var rows = await db.promise().query(
+//             'DELETE FROM `user` WHERE `username` = username?',
+//             )
+//         return rows;
+//    }
 
 //    showdd : async function (data){
 //         console.log("data: ", username)
