@@ -12,34 +12,35 @@ module.exports = {
         var rows = await db.promise().query(
             "UPDATE user SET password = ?, firstname = ?, lastname = ?, type = ?, section = ? WHERE username = ?",
             [
+                data.username,
                 data.password,
                 data.firstname,
                 data.lastname,
                 data.type,
-                data.section,
-                data.username
+                data.section
             ]
                     
             )
         return rows
     },
 
-    // postAdduser : async function (data){
-    //     var rows = await db.promise().query(
-    //         "INSERT INTO `user`(`id`, `username`, `password`, `firstname`, `lastname`, `type`, `section`)" +
-    //         "VALUES username = ? password = ?, firstname = ?, lastname = ?, type = ?, section = ?",
-    //         [
-    //             data.username,
-    //             data.password,
-    //             data.firstname,
-    //             data.lastname,
-    //             data.type,
-    //             data.section
-    //         ]
+    postAdduser : async function (callback){
+        var rows = await db.promise().query(
+            "INSERT INTO `user`(`id`, `username`, `password`, `firstname`, `lastname`, `type`, `section`)" +
+            "VALUES (?,?,?,?,?,?,?)",
+            [
+                data.id,
+                data.username,
+                data.password,
+                data.firstname,
+                data.lastname,
+                data.type,
+                data.section
+            ]
                     
-    //         )
-    //     return rows
-    // },
+            )
+        return rows
+    },
 //     postDeluser : async function (data){
 //         var rows = await db.promise().query(
 //             'DELETE FROM `user` WHERE `username` = username?',

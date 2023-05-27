@@ -17,11 +17,11 @@ module.exports = {
         //console.log(req.body.username);
     },
 
-    // addUser : async function (req, res) {
-    //     let adduser = await userModel.postAdduser(req.body);
-    //     res.json({"adduser" : req.body})
-    //     //console.log(req.body.username);
-    // },
+    addUser : async function (req, res) {
+        let adduser = await userModel.postAdduser(req.body);
+        res.json({"adduser" : req.body})
+        //console.log(req.body.username);
+    },
 
     // delUser : async function (req, res) {
     //     let deluser = await userModel.postDeluser(req.body);

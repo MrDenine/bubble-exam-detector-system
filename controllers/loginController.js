@@ -1,5 +1,6 @@
-
 // exports.index = (req, res) =>  res.render('index',{title:'index'})
+const { json } = require("express");
+const userModel = require("../models/login.model");
 
 module.exports = {
 

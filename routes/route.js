@@ -32,7 +32,7 @@ router.get('/ans2', ans2Controller.render_ans2Page);
 
 // use router หลังบ้าน
 router.post('/update_user',userController.updateUser);
-// router.post('/add_user',userController.addUser);
+router.post('/add_user',userController.addUser);
 // router.post('/del_user ',userController.delUser);
 
 router.get('/getAnswer'/*, multer */,omrController.getAnswer);
