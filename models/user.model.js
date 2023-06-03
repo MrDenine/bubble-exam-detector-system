@@ -1,14 +1,14 @@
 const db = require("../config/dbconnection");
 
-module.exports = { 
-    getUserAll : async function (callback){
+module.exports = {
+    getUserAll: async function (callback) {
         var rows = await db.promise().query(
             'SELECT * FROM `user` WHERE 1',
-            )
+        )
         return rows;
-   },
+    },
 
-    postUpdateuser : async function (data){
+    postUpdateuser: async function (data) {
         var rows = await db.promise().query(
             "UPDATE user SET password = ?, firstname = ?, lastname = ?, type = ?, section = ? WHERE username = ?",
             [
@@ -19,12 +19,11 @@ module.exports = {
                 data.type,
                 data.section
             ]
-                    
-            )
+        )
         return rows
     },
 
-    postAdduser : async function (callback){
+    postAdduser: async function (callback) {
         var rows = await db.promise().query(
             "INSERT INTO `user`(`id`, `username`, `password`, `firstname`, `lastname`, `type`, `section`)" +
             "VALUES (?,?,?,?,?,?,?)",
@@ -37,28 +36,14 @@ module.exports = {
                 data.type,
                 data.section
             ]
-                    
-            )
+        )
         return rows
     },
-//     postDeluser : async function (data){
-//         var rows = await db.promise().query(
-//             'DELETE FROM `user` WHERE `username` = username?',
-//             )
-//         return rows;
-//    }
 
-//    showdd : async function (data){
-//         console.log("data: ", username)
-//    }
-    //   addUser : function (data) {
-//       return db.promise().query(
-//        "INSERT INTO `user`(`id`, `username`, `password`, `firstname`, `lastname`, `type`, `section`)" +
-//        "VALUES (?,?,?,?,?,?,?) ",
-//        [
-//            
-//        ]
-            
-//       )
- //   }
+    postDeluser: async function (callback) {
+        var rows = await db.promise().query(
+            'DELETE FROM `user` WHERE `username` = username?',
+        )
+        return rows;
+    }
 }

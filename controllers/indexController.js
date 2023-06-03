@@ -1,10 +1,14 @@
+const db = require("../config/dbconnection");
 
-// exports.index = (req, res) =>  res.render('index',{title:'index'})
-// const exam_manageDB = require("../models/exam_manage.model")
 module.exports = {
+  render_indexPage: async function (req, res) {
+    const sql = "SELECT * FROM user";
 
-    render_indexPage : function (req, res) {
-        res.render('index',{title:'index'})
-    },
-    
-} 
+    try {
+      const [results] = await db.execute(sql);
+      res.render('index', { title: 'index', data: results });
+    } catch (err) {
+      console.error('Error executing SQL query: ', err);
+    }
+  },
+};

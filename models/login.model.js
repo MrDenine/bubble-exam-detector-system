@@ -1,10 +1,13 @@
-const db = require("../config/dbconnection");
+const connection = require("../config/dbconnection");
 
-module.exports = { 
-    getUserAll : async function (callback){
-        var rows = await db.promise().query(
-            'SELECT * FROM `user` WHERE 1',
-            )
-        return rows;
-   }
-}
+module.exports = {
+    getUserByUsernameAndPassword: async function (username, password) {
+        try {
+            console.log(username, ' ', password);
+            const [rows] = await connection.execute(`SELECT * FROM user WHERE username = ${username} AND password = ${password}`);
+            return rows;
+        } catch (err) {
+            throw err;
+        }
+    }
+};

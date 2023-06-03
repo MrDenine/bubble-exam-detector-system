@@ -1,9 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <title>แสดงผลข้อมูลนักศึกษา</title>
-    <!-- Latest compiled and minified CSS -->
+  <!-- Latest compiled and minified CSS -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
   <!-- Latest compiled JavaScript -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
@@ -12,34 +13,35 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
 
 </head>
+
 <body>
   <!-- Navbar -->
   <nav class="navbar navbar-expand-lg navbar-light bg-light">
     &nbsp;&nbsp;<a class="navbar-brand">Computer Programmimg</a>
-  <div class="collapse navbar-collapse" id="navbarNav">
-    <ul class="navbar-nav">
-      <li class="nav-item">
-        <a class="nav-link" href="/">Home</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link active" href="/user">เพิ่มข้อมูลนักศึกษา</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="/exammanage">จัดการข้อสอบ</a>
-      </li>
-    </ul>
-    <a href="" class="btn btn-danger" style="margin-left:auto;">ออกจากระบบ</a>&nbsp;&nbsp;&nbsp;&nbsp;
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a class="nav-link" href="/">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link active" href="/user">เพิ่มข้อมูลนักศึกษา</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/exammanage">จัดการข้อสอบ</a>
+        </li>
+      </ul>
+      <a href="" class="btn btn-danger" style="margin-left:auto;">ออกจากระบบ</a>&nbsp;&nbsp;&nbsp;&nbsp;
+    </div>
+  </nav>
+
+  <h1 class="text-center my-4">ข้อมูลนักศึกษา</h1>
+  <div class="container" style="margin-left: 70%">
+    <button href="" class="btn btn-warning">เพิ่มข้อมูลแบบ Excel</button>
+    <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#add_user">เพิ่มข้อมูล</button>
   </div>
-</nav>
+  <br>
 
-    <h1 class="text-center my-4">ข้อมูลนักศึกษา</h1>
-      <div class="container" style="margin-left: 70%">
-        <button href="" class="btn btn-warning">เพิ่มข้อมูลแบบ Excel</button>
-        <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#add_user">เพิ่มข้อมูล</button>
-      </div>        
-      <br>
-
-      <div class="container">
+  <div class="container">
     <table class="table">
       <thead>
         <tr>
@@ -51,216 +53,228 @@
           <th scope="col" style="text-align: center;">กลุ่มเรียน</th>
           <th scope="col" style="text-align: center;">ตำแหน่ง</th>
           <th scope="col" style="text-align: center;">การจัดการ</th>
-        </tr>     
+        </tr>
       </thead>
 
       <tbody>
-        <% for(let i = 0; i < title.length; i++){ %>
+        <% for(let i=0; i < title.length; i++){ %>
           <tr>
             <td></td>
-            <td style="text-align: center;"> <%= i+1 %> </td>
-            <td style="text-align: center;"> <%= title[i].username %> </td>
-            <td style="text-align: center;"> <%= title[i].firstname %> </td>
-            <td style="text-align: center;"> <%= title[i].lastname %> </td>
-            <td style="text-align: center;"> <%= title[i].section %> </td>
-            <td style="text-align: center;"> <%= title[i].type %> </td>
             <td style="text-align: center;">
-                <button onclick="onClickModalEdit('<%= title[i] %>')" class="btn btn-primary" >แก้ไข</button>
-
-                <batton class="btn btn-danger" onclick="return confirm('คุณต้องการลบใช่หรือไม่')">ลบ</batton>
+              <%= i+1 %>
             </td>
-          </tr> 
+            <td style="text-align: center;">
+              <%= title[i].username %>
+            </td>
+            <td style="text-align: center;">
+              <%= title[i].firstname %>
+            </td>
+            <td style="text-align: center;">
+              <%= title[i].lastname %>
+            </td>
+            <td style="text-align: center;">
+              <%= title[i].section %>
+            </td>
+            <td style="text-align: center;">
+              <%= title[i].type %>
+            </td>
+            <td style="text-align: center;">
+              <button onclick="onClickModalEdit('<%= title[i] %>')" class="btn btn-primary">แก้ไข</button>
+
+              <a href="/del_user/<%= title[i].username%>" class="btn btn-danger"
+                onclick="return confirm('คุณต้องการลบใช่หรือไม่')">ลบ</ฟ>
+            </td>
+          </tr>
           <% } %>
-      </tbody>           
+      </tbody>
     </table>
-    
+
 
   </div>
-            <!-- The Modal id add_user -->
-            <div class="modal" id="add_user">
-              <div class="modal-dialog">
-                <div class="modal-content">
-        
-                  <!-- Modal Header -->
-                  <div class="modal-header">
-                    <h4 class="modal-title">เพิ่มข้อมูลนักศึกษา</h4>
-                  </div>
-        
-                <!-- Modal body -->
-                <form action="add_user" class="needs-validation" novalidate>
-                <div class="modal-body">
-                          <div class="form-group">
-                            <label for="id">รหัสผู้ใช้</label>
-                            <input type="text" class="form-control" name="username" id="addusername" required>
-                          </div>
-                          <div class="form-group">
-                            <label for="password">รหัสผ่าน</label>
-                            <input type="password" class="form-control" name="password" id="addpassword" required>
-                          </div>
-                          <div class="form-group">
-                            <label for="name">ชื่อ</label>
-                            <input type="text" class="form-control" name="firstname" id="addfirstname" required>
-                          </div>
-                          <div class="form-group">
-                            <label for="surname">นามสกุล</label>
-                            <input type="text" class="form-control" name="lastname" id="addlastname" required>
-                          </div>
-                          <div class="form-group">
-                            <label for="sec">ตำแหน่ง</label>
-                            <select class="form-select" style="margin-top: 7px;margin-bottom: 7px;padding-top: 9px;padding-bottom: 9px;" id="addtype" required>
-                              <option selected disabled value="">Select Role...</option>
-                              <option value="1">Teacher</option>
-                              <option value="2">Student</option>
-                            </select>
-                          </div>
-                          <div class="form-group">
-                            <label for="sec">กลุ่มเรียน</label>
-                            <input type="text" class="form-control" name="sec" id="addsec" required>
-                          </div>
-                          <br>
-                          
-                   </div>
-        
-                      <!-- Modal footer -->
-                      <div class="modal-footer">
-                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">ปิด</button>
-                        <button type="submit-adduser" class="btn btn-success">เพิ่มข้อมูลนักศึกษา</button>
-                      </div>
-                    </form>
-                    </div>
-                  </div>
-                </div>
+  <!-- The Modal id add_user -->
+  <div class="modal" id="add_user">
+    <div class="modal-dialog">
+      <div class="modal-content">
 
-          <!-- The Modal id edit_user -->
-        <div class="modal" id="edit_user">
-          <div class="modal-dialog">
-            <div class="modal-content">
-
-              <!-- Modal Header -->
-              <div class="modal-header">
-                <h4 class="modal-title">แก้ไขข้อมูลนักศึกษา</h4>
-              </div>
-
-              <!-- Modal body -->
-              <form method="post" action="/update_user" class="form-group">
-                <div class="modal-body">
-                          <div class="form-group">
-                            <label for="username">รหัสผู้ใช้</label>
-                            <input type="text" class="form-control" name="username" id="updateusername" value="">
-                          </div>
-                          <div class="form-group">
-                            <label for="password">รหัสผ่าน</label>
-                            <input type="password" class="form-control" name="password" id="updatepassword" value="">
-                          </div>
-                          <div class="form-group">
-                            <label for="name">ชื่อ</label>
-                            <input type="text" class="form-control" name="firstname" id="updatefirstname" value="">
-                          </div>
-                          <div class="form-group">
-                            <label for="surname">นามสกุล</label>
-                            <input type="text" class="form-control" name="lastname" id="updatelastname" value="">
-                          </div>
-                          <div class="form-group">
-                            <label for="sec">ตำแหน่ง</label>
-                            <select class="form-select" style="margin-top: 7px;margin-bottom: 7px;padding-top: 9px;padding-bottom: 9px;" id="updatetype" required>
-                              <option value="1">Teacher</option>
-                              <option value="2">Student</option>
-                            </select>
-                          </div>
-                          <div class="form-group">
-                            <label for="sec">กลุ่มเรียน</label>
-                            <input type="text" class="form-control" name="sec" id="updatesec" value="">
-                          </div>
-                          <br>   
-              </div>
-
-              <!-- Modal footer -->
-              <div class="modal-footer">
-                <button type="button" class="btn btn-danger" data-bs-dismiss="modal">ปิด</button>
-                <button type="submit" class="btn btn-success">แก้ไข</button>
-              </div>
-            </form>
-            </div>
-          </div>
+        <!-- Modal Header -->
+        <div class="modal-header">
+          <h4 class="modal-title">เพิ่มข้อมูลนักศึกษา</h4>
         </div>
 
+        <!-- Modal body -->
+        <form action="add_user" class="needs-validation" novalidate>
+          <div class="modal-body">
+            <div class="form-group">
+              <label for="id">รหัสผู้ใช้</label>
+              <input type="text" class="form-control" name="username" id="addusername" required>
+            </div>
+            <div class="form-group">
+              <label for="password">รหัสผ่าน</label>
+              <input type="password" class="form-control" name="password" id="addpassword" required>
+            </div>
+            <div class="form-group">
+              <label for="name">ชื่อ</label>
+              <input type="text" class="form-control" name="firstname" id="addfirstname" required>
+            </div>
+            <div class="form-group">
+              <label for="surname">นามสกุล</label>
+              <input type="text" class="form-control" name="lastname" id="addlastname" required>
+            </div>
+            <div class="form-group">
+              <label for="sec">ตำแหน่ง</label>
+              <select class="form-select"
+                style="margin-top: 7px;margin-bottom: 7px;padding-top: 9px;padding-bottom: 9px;" id="addtype" required>
+                <option selected disabled value="">Select Role...</option>
+                <option value="1">Teacher</option>
+                <option value="2">Student</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="sec">กลุ่มเรียน</label>
+              <input type="text" class="form-control" name="sec" id="addsec" required>
+            </div>
+            <br>
+
+          </div>
+
+          <!-- Modal footer -->
+          <div class="modal-footer">
+            <button type="button" class="btn btn-danger" data-bs-dismiss="modal">ปิด</button>
+            <button type="submit-adduser" class="btn btn-success">เพิ่มข้อมูลนักศึกษา</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- The Modal id edit_user -->
+  <div class="modal" id="edit_user">
+    <div class="modal-dialog">
+      <div class="modal-content">
+
+        <!-- Modal Header -->
+        <div class="modal-header">
+          <h4 class="modal-title">แก้ไขข้อมูลนักศึกษา</h4>
+        </div>
+
+        <!-- Modal body -->
+        <form method="post" action="/update_user" class="form-group">
+          <div class="modal-body">
+            <div class="form-group">
+              <label for="username">รหัสผู้ใช้</label>
+              <input type="text" class="form-control" name="username" id="updateusername" value="">
+            </div>
+            <div class="form-group">
+              <label for="password">รหัสผ่าน</label>
+              <input type="password" class="form-control" name="password" id="updatepassword" value="">
+            </div>
+            <div class="form-group">
+              <label for="name">ชื่อ</label>
+              <input type="text" class="form-control" name="firstname" id="updatefirstname" value="">
+            </div>
+            <div class="form-group">
+              <label for="surname">นามสกุล</label>
+              <input type="text" class="form-control" name="lastname" id="updatelastname" value="">
+            </div>
+            <div class="form-group">
+              <label for="sec">ตำแหน่ง</label>
+              <select class="form-select"
+                style="margin-top: 7px;margin-bottom: 7px;padding-top: 9px;padding-bottom: 9px;" id="updatetype"
+                required>
+                <option value="1">Teacher</option>
+                <option value="2">Student</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="sec">กลุ่มเรียน</label>
+              <input type="text" class="form-control" name="sec" id="updatesec" value="">
+            </div>
+            <br>
+          </div>
+
+          <!-- Modal footer -->
+          <div class="modal-footer">
+            <button type="button" class="btn btn-danger" data-bs-dismiss="modal">ปิด</button>
+            <button type="submit" class="btn btn-success">แก้ไข</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
 </body>
+
 </html>
-
- 
-
 <!-- script -->
 <script>
-  function onClickModalEdit(data_user){
+  function onClickModalEdit(data_user) {
     $('#edit_user').modal('show');
   }
-     function onSubmitAddUser(data_user){
-            'use strict'
-            // Fetch all the forms we want to apply custom Bootstrap validation styles to
-            var forms = document.querySelectorAll('#add_user.needs-validation')     
-            // Loop over them and prevent submission
-            Array.prototype.slice.call(forms)
-              .forEach(function (form) {
-                form.addEventListener('submit', function (event) {
-                  if (!form.checkValidity()) {
-                    event.preventDefault();
-                    event.stopPropagation();
-                  }else{
-                    event.preventDefault();
-                    let dateNow = Feature.getDateNow();
-                    let username = $('#addusername').val();
-                    let password = $('#addpassword').val();       // นำข้อมูล response ของรหัสพนักงานมาใส่ในฟอร์ม 'รหัสพนักงาน' ข้อมูลบุคลากร
-                    let s_name = $('#addfirstname').val();               // นำข้อมูล response ของรหัส RFID มาใส่ในฟอร์ม 'รหัส RFID' ข้อมูลบุคลากร
-                    let l_name = $('#addlastname').val();     // นำข้อมูล response ของชื่อ มาใส่ในฟอร์ม 'ชื่อ' ข้อมูลบุคลากร
-                    let type = $("#addtype").val();
-                    let section = $("#addsec").val(); 
-                    var id = $('[name="delete_data"]').data('id');
-                    $.ajax({ 
-                      url: '/add_user',
-                      data: {
-                        "id":id,
-                        "username":username,
-                        "password":password,
-                        "s_name":s_name,
-                        "l_name":l_name,
-                        "type":type,
-                        "section":sec,
-                      },
-                    type: 'post',
-                    success: function(response)
-                    { 
-                      if(response.status == 'Failed'){
-                        Swal.fire({
-                          icon: 'error',
-                          title: 'Sorry...',
-                          text: "Can't add this user."}).then(function(){
-                            $('#addusername').val('');
-                            $('#addpassword').val('');
-                            $('#addfirstname').val('');               // นำข้อมูล response ของรหัส RFID มาใส่ในฟอร์ม 'รหัส RFID' ข้อมูลบุคลากร
-                            $('#addlastname').val('');     // นำข้อมูล response ของชื่อ มาใส่ในฟอร์ม 'ชื่อ' ข้อมูลบุคลากร
-                            $('#addtype').val('');       // นำข้อมูล response ของรหัสพนักงานมาใส่ในฟอร์ม 'รหัสพนักงาน' ข้อมูลบุคลากร
-                            $("#addsec").val('');
-                            $('#add_user').modal('toggle');
-                            dataTable.ajax.reload();
-                          });
-                        } 
-                      
-                        else if (response.status == 'Successes'){
-                          Swal.fire(
-                            'Succeed!',
-                            'User has been added successfully.',
-                            'success').then(function(){
-                            $('#add_user').modal('toggle');
-                            dataTable.ajax.reload();
-                          });
-                        }
-                      }
-                    });
-                    }
-                  form.classList.add('was-validated')
-                  
-                }, false)
-              })
-          }
+  function onSubmitAddUser(data_user) {
+    'use strict'
+    // Fetch all the forms we want to apply custom Bootstrap validation styles to
+    var forms = document.querySelectorAll('#add_user.needs-validation')
+    // Loop over them and prevent submission
+    Array.prototype.slice.call(forms)
+      .forEach(function (form) {
+        form.addEventListener('submit', function (event) {
+          if (!form.checkValidity()) {
+            event.preventDefault();
+            event.stopPropagation();
+          } else {
+            event.preventDefault();
+            let dateNow = Feature.getDateNow();
+            let username = $('#addusername').val();
+            let password = $('#addpassword').val();       // นำข้อมูล response ของรหัสพนักงานมาใส่ในฟอร์ม 'รหัสพนักงาน' ข้อมูลบุคลากร
+            let s_name = $('#addfirstname').val();               // นำข้อมูล response ของรหัส RFID มาใส่ในฟอร์ม 'รหัส RFID' ข้อมูลบุคลากร
+            let l_name = $('#addlastname').val();     // นำข้อมูล response ของชื่อ มาใส่ในฟอร์ม 'ชื่อ' ข้อมูลบุคลากร
+            let type = $("#addtype").val();
+            let section = $("#addsec").val();
+            var id = $('[name="delete_data"]').data('id');
+            $.ajax({
+              url: '/add_user',
+              data: {
+                "id": id,
+                "username": username,
+                "password": password,
+                "s_name": s_name,
+                "l_name": l_name,
+                "type": type,
+                "section": sec,
+              },
+              type: 'post',
+              success: function (response) {
+                if (response.status == 'Failed') {
+                  Swal.fire({
+                    icon: 'error',
+                    title: 'Sorry...',
+                    text: "Can't add this user."
+                  }).then(function () {
+                    $('#addusername').val('');
+                    $('#addpassword').val('');
+                    $('#addfirstname').val('');               // นำข้อมูล response ของรหัส RFID มาใส่ในฟอร์ม 'รหัส RFID' ข้อมูลบุคลากร
+                    $('#addlastname').val('');     // นำข้อมูล response ของชื่อ มาใส่ในฟอร์ม 'ชื่อ' ข้อมูลบุคลากร
+                    $('#addtype').val('');       // นำข้อมูล response ของรหัสพนักงานมาใส่ในฟอร์ม 'รหัสพนักงาน' ข้อมูลบุคลากร
+                    $("#addsec").val('');
+                    $('#add_user').modal('toggle');
+                    dataTable.ajax.reload();
+                  });
+                }
 
+                else if (response.status == 'Successes') {
+                  Swal.fire(
+                    'Succeed!',
+                    'User has been added successfully.',
+                    'success').then(function () {
+                      $('#add_user').modal('toggle');
+                      dataTable.ajax.reload();
+                    });
+                }
+              }
+            });
+          }
+          form.classList.add('was-validated')
+
+        }, false)
+      })
+  }
 </script>

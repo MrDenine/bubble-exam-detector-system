@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <title>Home</title>
@@ -8,13 +9,14 @@
   <!-- Latest compiled JavaScript -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
   <meta name="viewport" content="width=device-width, initial-scale=1">
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
 </head>
+
 <body>
   <!-- Navbar -->
   <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    &nbsp;&nbsp;<a class="navbar-brand">Computer Programmimg</a>
+    &nbsp;&nbsp;<a class="navbar-brand">Computer Programming</a>
     <div class="collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav">
         <li class="nav-item">
@@ -33,24 +35,25 @@
 
   <div class="container mt-3">
     <h2 class="text-center mb-2">
-      <button id="download-pdfexam" type="button" class="btn btn-warning btn-lg">ดาวโหลดกระดาษคำตอบ</a></button>
+      <button id="download-pdfexam" type="button" class="btn btn-warning btn-lg">ดาวน์โหลดกระดาษคำตอบ</button>
     </h2>
     <form>
       <div class="bg-illustration">
         <center>
           <img src="../assets/images/examsheet.png" width="50%" height="20%">
         </center>
-     </form>
+    </form>
   </div>
 </body>
-</html>
 
 <script>
   var downloadButton = document.getElementById("download-pdfexam");
-  downloadButton.addEventListener("click", function() {
+  downloadButton.addEventListener("click", function () {
     // ระบุ URL ของไฟล์ PDF ที่คุณอัพโหลดขึ้นเว็บเซิร์ฟเวอร์
     var pdfUrl = "../assets/examsheet.pdf";
     // เปิดไฟล์ PDF ในหน้าต่างใหม่
     window.open(pdfUrl);
   });
 </script>
+
+</html>

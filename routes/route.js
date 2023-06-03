@@ -1,40 +1,48 @@
 const express = require('express');
 const router = express.Router();
 const cookieParser = require('cookie-parser');
-const bodyParser = require('body-parser');
 
 // require controller
-const indexController = require('../controllers/indexController.js');
-const loginController = require('../controllers/loginController.js');
-const userController = require('../controllers/userController.js');
-const exam_manageController = require('../controllers/exam_manageController.js');
-const show_scoreadminController = require('../controllers/show_scoreadminController.js');
-const show_scorestuController = require('../controllers/show_scorestuController.js');
-const re_stuController = require('../controllers/re_stuController.js');
-const ansController = require('../controllers/ansController.js');
-const ans2Controller = require('../controllers/ans2Controller.js');
-const omrController = require('../controllers/omrController.js');
+const indexController = require('../controllers/indexController');
+const loginController = require('../controllers/loginController');
+const userController = require('../controllers/userController');
+const exam_manageController = require('../controllers/exam_manageController');
+const re_stuController = require('../controllers/re_stuController');
+const show_scoreadminController = require('../controllers/show_scoreadminController');
+const show_scorestuController = require('../controllers/show_scorestuController');
+const ansController = require('../controllers/ansController');
+const ans2Controller = require('../controllers/ans2Controller');
+const omrController = require('../controllers/omrController');
 
-router.use(bodyParser.urlencoded({ extended: false }));
-router.use(bodyParser.json());
+router.use(express.json());
+router.use(express.urlencoded({ extended: false }));
 router.use(cookieParser());
+
+const checkAuth = (req, res, next) => {
+    if (req.cookies.loggedIn === 'true') {
+        next();
+    } else {
+        res.redirect('/login');
+    }
+};
 
 // use router หน้าบ้าน
 router.get('/login', loginController.render_loginPage);
-router.get('/', indexController.render_indexPage);
-router.get('/user', userController.render_userPage);
-router.get('/exammanage', exam_manageController.render_manageExamPage);
-router.get('/restu', re_stuController.render_re_stuPage);
-router.get('/show_sadmin', show_scoreadminController.render_show_scoreadminPage);
-router.get('/show_sstu', show_scorestuController.render_show_scorestuPage);
-router.get('/ans', ansController.render_ansPage);
-router.get('/ans2', ans2Controller.render_ans2Page);
+router.post('/login1', loginController.handleLogin);
+router.get('/', checkAuth, indexController.render_indexPage);
+router.get('/user', checkAuth, userController.render_userPage);
+router.get('/exammanage', checkAuth, exam_manageController.render_manageExamPage);
+router.get('/restu', checkAuth, re_stuController.render_re_stuPage);
+router.get('/show_sadmin', checkAuth, show_scoreadminController.render_show_scoreadminPage);
+router.get('/show_sstu', checkAuth, show_scorestuController.render_show_scorestuPage);
+router.get('/ans', checkAuth, ansController.render_ansPage);
+router.get('/ans2', checkAuth, ans2Controller.render_ans2Page);
 
 // use router หลังบ้าน
-router.post('/update_user',userController.updateUser);
-router.post('/add_user',userController.addUser);
-// router.post('/del_user ',userController.delUser);
+router.post('/update_user', userController.updateUser);
+router.post('/add_user', userController.addUser);
+router.post('/del_user', userController.delUser);
 
-router.get('/getAnswer'/*, multer */,omrController.getAnswer);
+router.get('/getAnswer', omrController.getAnswer);
 
-module.exports = router; 
+module.exports = router;

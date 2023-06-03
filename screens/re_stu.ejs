@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <title>เลือกรายงานผลคะแนน</title>
   <meta charset="UTF-8">
@@ -9,20 +10,24 @@
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
   <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
+
 <body>
-    <!-- Navbar -->
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        &nbsp;&nbsp;<a class="navbar-brand">Computer Programmimg</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    &nbsp;&nbsp;<a class="navbar-brand">Computer Programmimg</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+      aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
     <a href="" class="btn btn-danger" style="margin-left:auto;">ออกจากระบบ</a>&nbsp;&nbsp;
-    </nav>
-    <br> 
+  </nav>
+  <br>
   <div class="container h-100 mt-1">
     <div class="row h-100 justify-content-center align-items-center">
       <div class="col-md-5 border p-3">
-        <h2><center>เลือกรายงานผลสอบ</center></h2>
+        <h2>
+          <center>เลือกรายงานผลสอบ</center>
+        </h2>
         <form>
           <div class="form-group">
             <select class="form-control mb-2" id="year">
@@ -41,11 +46,11 @@
             </select>
           </div>
           <div class="form-group">
-                <select class="form-control mb-3" id="term">
-                    <option>เลือกกลางภาค-ปลายภาค</option>
-                    <option value="middle">กลางภาค</option>
-                    <option value="final">ปลายภาค</option>
-                </select>
+            <select class="form-control mb-3" id="term">
+              <option>เลือกกลางภาค-ปลายภาค</option>
+              <option value="middle">กลางภาค</option>
+              <option value="final">ปลายภาค</option>
+            </select>
           </div>
           <button type="submit" class="btn btn-success btn-lg shadow w-100">แสดงผล</button>
         </form>
@@ -53,4 +58,5 @@
     </div>
   </div>
 </body>
+
 </html>
