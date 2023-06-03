@@ -2,46 +2,38 @@ const db = require("../config/dbconnection");
 
 exports.getUserAll = async function (callback) {
     var rows = await db.execute(
-        'SELECT * FROM `user` WHERE 1',
+        'SELECT * FROM `user`',
     )
     return rows;
 }
 
-exports.postUpdateuser = async function (data) {
-    var rows = await db.execute(
-        "UPDATE user SET password = ?, firstname = ?, lastname = ?, type = ?, section = ? WHERE username = ?",
-        [
-            data.username,
-            data.password,
-            data.firstname,
-            data.lastname,
-            data.type,
-            data.section
-        ]
-    )
-    return rows
-}
+exports.postUpdateuser = async function (username, password, firstname, lastname, type, section) {
+    const query = `
+        UPDATE user
+        SET password = ?, firstname = ?, lastname = ?, type = ?, section = ?
+        WHERE username = ?
+    `;
+    const params = [password, firstname, lastname, type, section, username];
 
-exports.postAdduser = async function (callback) {
-    var rows = await db.execute(
-        "INSERT INTO `user`(`id`, `username`, `password`, `firstname`, `lastname`, `type`, `section`)" +
-        "VALUES (?,?,?,?,?,?,?)",
-        [
-            data.id,
-            data.username,
-            data.password,
-            data.firstname,
-            data.lastname,
-            data.type,
-            data.section
-        ]
-    )
-    return rows
-}
+    const [result] = await db.execute(query, params);
+    return result;
+};
 
-exports.postDeluser = async function (callback) {
-    var rows = await db.execute(
-        'DELETE FROM `user` WHERE `username` = username?',
-    )
+exports.postAdduser = async function (username, password, firstname, lastname, type, section) {
+    const query = `
+      INSERT INTO user (username, password, firstname, lastname, type, section)
+      VALUES (?, ?, ?, ?, ?, ?)
+    `;
+    const params = [username, password, firstname, lastname, type, section];
+
+    const [result] = await db.execute(query, params);
+    return result;
+};
+
+exports.postDelUser = async function (username) {
+    let rows = await db.execute(
+        'DELETE FROM `user` WHERE `username` = ?',
+        [username]
+    );
     return rows;
 }

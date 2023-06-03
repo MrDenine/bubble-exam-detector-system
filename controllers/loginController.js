@@ -14,6 +14,7 @@ exports.handleLogin = async (req, res, next) => {
     const user = await loginModel.getUserByUsernameAndPassword(username, password);
     if (user.length > 0) {
       const userType = user[0].type;
+      req.session.username = user[0].username;
       if (userType === 'teacher') {
         res.cookie('loggedIn', 'true');
         res.redirect('/');

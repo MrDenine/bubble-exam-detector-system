@@ -1,9 +1,18 @@
 const express = require('express');
 const bodyParser = require('body-parser');
+const session = require('express-session');
+const cookieParser = require('cookie-parser');
 const app = express();
 
-app.listen(8000, function () {
-  console.info('[SERVER] Listening on port 8000');
+app.listen(3000, function () {
+  console.info('[SERVER] Listening on port 3000');
+
+  app.use(cookieParser());
+  app.use(session({
+    secret: 'my-secret-key',
+    resave: false,
+    saveUninitialized: true,
+  }));
 
   // Static File
   app.use(express.static('public'));

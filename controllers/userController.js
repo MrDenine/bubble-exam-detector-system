@@ -1,4 +1,3 @@
-const { json } = require("express");
 const userModel = require("../models/user.model");
 
 exports.handleLogout = (req, res) => {
@@ -7,24 +6,37 @@ exports.handleLogout = (req, res) => {
 };
 
 exports.render_userPage = async function (req, res) {
+    let username = req.session.username;
     let user = await userModel.getUserAll();
-    res.render('user', { "title": user[0] })
+    res.render('user', { title: user[0] });
 }
 
 exports.updateUser = async function (req, res) {
-    let updateuser = await userModel.postUpdateuser(req.body);
-    res.json({ "response": req.body })
-    //console.log(req.body.username);
-}
+    try {
+        const { username, password, firstname, lastname, type, section } = req.body;
+        const updateuser = await userModel.postUpdateuser(username, password, firstname, lastname, type, section);
+        res.json({ status: "Success", message: "User update successfully" });
+    } catch (error) {
+        res.json({ status: "Failed", message: "Failed to update user" });
+    }
+};
 
 exports.addUser = async function (req, res) {
-    let adduser = await userModel.postAdduser(req.body);
-    res.json({ "adduser": req.body })
-    //console.log(req.body.username);
-}
+    try {
+        const { username, password, firstname, lastname, type, section } = req.body;
+        const result = await userModel.postAdduser(username, password, firstname, lastname, type, section);
+        res.json({ status: "Success", message: "User added successfully" });
+    } catch (error) {
+        res.json({ status: "Failed", message: "Failed to add user" });
+    }
+};
 
 exports.delUser = async function (req, res) {
-    let deluser = await userModel.postDeluser(req.body);
-    res.json({ "response": req.body })
-    //console.log(req.body.username);
+    try {
+        let username = req.params.username;
+        let result = await userModel.postDelUser(username);
+        res.redirect('/user');
+    } catch (error) {
+        res.json({ status: "Failed", message: "Failed to dalete user" });
+    }
 }
