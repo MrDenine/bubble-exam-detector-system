@@ -6,18 +6,23 @@ exports.render_loginPage = (req, res) => {
 
 exports.handleLogin = async (req, res, next) => {
   const { username, password } = req.body;
-
   if (!username || !password) {
     res.render('login', { error: 'Username and password are required.' });
     return;
   }
-
   try {
     const user = await loginModel.getUserByUsernameAndPassword(username, password);
-
     if (user.length > 0) {
-      res.cookie('loggedIn', 'true');
-      res.redirect('/');
+      const userType = user[0].type;
+      if (userType === 'teacher') {
+        res.cookie('loggedIn', 'true');
+        res.redirect('/');
+      } else if (userType === 'studen') {
+        res.cookie('loggedIn', 'true');
+        res.redirect('/restu');
+      } else {
+        res.render('login', { error: 'Invalid user type.' });
+      }
     } else {
       res.render('login', { error: 'Invalid username or password.' });
     }

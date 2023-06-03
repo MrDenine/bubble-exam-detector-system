@@ -28,7 +28,6 @@ const checkAuth = (req, res, next) => {
 
 // use router หน้าบ้าน
 router.get('/login', loginController.render_loginPage);
-router.post('/login1', loginController.handleLogin);
 router.get('/', checkAuth, indexController.render_indexPage);
 router.get('/user', checkAuth, userController.render_userPage);
 router.get('/exammanage', checkAuth, exam_manageController.render_manageExamPage);
@@ -42,7 +41,9 @@ router.get('/ans2', checkAuth, ans2Controller.render_ans2Page);
 router.post('/update_user', userController.updateUser);
 router.post('/add_user', userController.addUser);
 router.post('/del_user', userController.delUser);
+router.post('/login1', loginController.handleLogin);
 
 router.get('/getAnswer', omrController.getAnswer);
+router.get('/logout', indexController.handleLogout);
 
 module.exports = router;
