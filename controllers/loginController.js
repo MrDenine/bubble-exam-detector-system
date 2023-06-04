@@ -18,7 +18,7 @@ exports.handleLogin = async (req, res, next) => {
       if (userType === 'teacher') {
         res.cookie('loggedIn', 'true');
         res.redirect('/');
-      } else if (userType === 'studen') {
+      } else if (userType === 'student') {
         res.cookie('loggedIn', 'true');
         res.redirect('/restu');
       } else {
@@ -26,7 +26,7 @@ exports.handleLogin = async (req, res, next) => {
       }
     } else {
       res.render('login', { error: 'Invalid username or password.' });
-    }
+    } 
   } catch (err) {
     next(err);
   }

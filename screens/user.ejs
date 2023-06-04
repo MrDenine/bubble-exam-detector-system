@@ -77,12 +77,62 @@
             </td>
             <td style="text-align: center;">
               <button onclick="onClickModalEdit('<%= title[i] %>')" class="btn btn-primary">แก้ไข</button>
+
               <a href="javascript:void(0);" class="btn btn-danger" data-username="<%= title[i].username %>"
                 onclick="onClickModalDelete(this)" data-toggle="modal" data-target="#confirmDeleteModal">
                 ลบ
               </a>
             </td>
           </tr>
+
+          <div class="modal" id="edit_user">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h4 class="modal-title">แก้ไขข้อมูลนักศึกษา</h4>
+                </div>
+                <form action="update_user" class="needs-validation" novalidate></form>
+                <div class="modal-body">
+                  <div class="form-group">
+                    <label for="username">รหัสผู้ใช้</label>
+                    <input type="text" class="form-control" name="username" id="updateusername" value="<%= title[i].username %>" disabled>
+                  </div>
+                  <div class="form-group">
+                    <label for="password">รหัสผ่าน</label>
+                    <input type="password" class="form-control" name="password" id="updatepassword" value="<%= title[i].password %>">
+                  </div>
+                  <div class="form-group">
+                    <label for="name">ชื่อ</label>
+                    <input type="text" class="form-control" name="firstname" id="updatefirstname" value="<%= title[i].firstname %>">
+                  </div>
+                  <div class="form-group">
+                    <label for="surname">นามสกุล</label>
+                    <input type="text" class="form-control" name="lastname" id="updatelastname" value="<%= title[i].lastname %>">
+                  </div>
+                  <div class="form-group">
+                    <label for="sec">ตำแหน่ง</label>
+                    <select class="form-select" style="margin-top: 7px;margin-bottom: 7px;padding-top: 9px;padding-bottom: 9px;"
+                      id="updatetype" required>
+                      <option value="type"><%= title[i].type %></option>
+                      <option value="teacher">teacher</option>
+                      <option value="studen">student</option>
+                    </select>
+                  </div>
+                  <div class="form-group">
+                    <label for="sec">กลุ่มเรียน</label>
+                    <input type="text" class="form-control" name="sec" id="updatesec" value="<%= title[i].section %>">
+                  </div>
+                  <br>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-danger" data-bs-dismiss="modal">ปิด</button>
+                  <button type="submit" id="submitUpdateUser" class="btn btn-success">แก้ไข</button>
+                </div>
+                </form>
+              </div>
+            </div>
+          </div>
+
           <% } %>
       </tbody>
     </table>
@@ -114,8 +164,7 @@
             </div>
             <div class="form-group">
               <label for="sec">ตำแหน่ง</label>
-              <select class="form-select"
-                style="margin-top: 7px;margin-bottom: 7px;padding-top: 9px;padding-bottom: 9px;" id="addtype" required>
+              <select class="form-select" style="margin-top: 7px;margin-bottom: 7px;padding-top: 9px;padding-bottom: 9px;" id="addtype" required>
                 <option selected disabled value="">Select Role...</option>
                 <option value="teacher">Teacher</option>
                 <option value="studen">Student</option>
@@ -123,7 +172,7 @@
             </div>
             <div class="form-group">
               <label for="sec">กลุ่มเรียน</label>
-              <input type="text" class="form-control" name="sec" id="addsec" required>
+              <input type="text" class="form-control" name="sec" id="addsec" required value="sec">
             </div>
             <br>
           </div>
@@ -136,56 +185,10 @@
     </div>
   </div>
 
-  <div class="modal" id="edit_user">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h4 class="modal-title">แก้ไขข้อมูลนักศึกษา</h4>
-        </div>
-        <form action="update_user" class="needs-validation" novalidate></form>
-        <div class="modal-body">
-          <div class="form-group">
-            <label for="username">รหัสผู้ใช้</label>
-            <input type="text" class="form-control" name="username" id="updateusername" value="">
-          </div>
-          <div class="form-group">
-            <label for="password">รหัสผ่าน</label>
-            <input type="password" class="form-control" name="password" id="updatepassword" value="">
-          </div>
-          <div class="form-group">
-            <label for="name">ชื่อ</label>
-            <input type="text" class="form-control" name="firstname" id="updatefirstname" value="">
-          </div>
-          <div class="form-group">
-            <label for="surname">นามสกุล</label>
-            <input type="text" class="form-control" name="lastname" id="updatelastname" value="">
-          </div>
-          <div class="form-group">
-            <label for="sec">ตำแหน่ง</label>
-            <select class="form-select" style="margin-top: 7px;margin-bottom: 7px;padding-top: 9px;padding-bottom: 9px;"
-              id="updatetype" required>
-              <option value="teacher">Teacher</option>
-              <option value="studen">Student</option>
-            </select>
-          </div>
-          <div class="form-group">
-            <label for="sec">กลุ่มเรียน</label>
-            <input type="text" class="form-control" name="sec" id="updatesec" value="">
-          </div>
-          <br>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-danger" data-bs-dismiss="modal">ปิด</button>
-          <button type="submit" id="submitUpdateUser" class="btn btn-success">แก้ไข</button>
-        </div>
-        </form>
-      </div>
-    </div>
-  </div>
-
 </body>
-
 </html>
+
+
 <script>
   document.getElementById('submitAddUser').addEventListener('click', function (event) {
     event.preventDefault();
@@ -198,7 +201,7 @@
       firstname: document.getElementById('addfirstname').value,
       lastname: document.getElementById('addlastname').value,
       type: document.getElementById('addtype').value,
-      section: "sec" + document.getElementById('addsec').value
+      section: document.getElementById('addsec').value
     };
 
     fetch('/add_user', {
@@ -223,6 +226,7 @@
       });
   }
 </script>
+
 <script>
   function onClickModalEdit(data_user) {
     $('#edit_user').modal('show');
@@ -234,16 +238,17 @@
     submitUpdateUser();
   });
   function submitUpdateUser() {
-    let data = {
+      let data = {
       username: document.getElementById('updateusername').value,
       password: document.getElementById('updatepassword').value,
       firstname: document.getElementById('updatefirstname').value,
       lastname: document.getElementById('updatelastname').value,
       type: document.getElementById('updatetype').value,
-      section: "sec" + document.getElementById('updatesec').value
+      section : document.getElementById('updatesec').value,
     };
 
     fetch('/update_user', {
+      
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
