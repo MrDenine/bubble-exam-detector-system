@@ -6,7 +6,6 @@ exports.handleLogout = (req, res) => {
 };
 
 exports.render_userPage = async function (req, res) {
-    let username = req.session.username;
     let user = await userModel.getUserAll();
     res.render('user', { title: user[0] });
 }
