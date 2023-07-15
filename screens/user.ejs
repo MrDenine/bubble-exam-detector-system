@@ -114,7 +114,9 @@
             </div>
             <div class="form-group">
               <label for="sec">ตำแหน่ง</label>
-              <select class="form-select" style="margin-top: 7px;margin-bottom: 7px;padding-top: 9px;padding-bottom: 9px;" id="updatetype" required>
+              <select class="form-select"
+                style="margin-top: 7px;margin-bottom: 7px;padding-top: 9px;padding-bottom: 9px;" id="updatetype"
+                required>
                 <option value="type"></option>
                 <option value="teacher">teacher</option>
                 <option value="student">student</option>
@@ -232,7 +234,17 @@
 <script>
   function onClickModalEdit(data_user) {
     var username = data_user;
-    document.getElementById('updateusername').value = username;
+    var users = JSON.parse('<%- JSON.stringify(title) %>');
+    var user = users.find(function (item) {
+      return item.username === username;
+    });
+
+    document.getElementById('updateusername').value = user.username;
+    document.getElementById('updatepassword').value = user.password;
+    document.getElementById('updatefirstname').value = user.firstname;
+    document.getElementById('updatelastname').value = user.lastname;
+    document.getElementById('updatetype').value = user.type !== 'teacher' ? 'student' : user.type;
+    document.getElementById('updatesec').value = user.section;
     $('#edit_user').modal('show');
   }
 </script>
