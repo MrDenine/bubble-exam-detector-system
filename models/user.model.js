@@ -37,3 +37,11 @@ exports.postDelUser = async function (username) {
     );
     return rows;
 }
+
+exports.postAddANS = async function (year, term, topic, sub_term) {
+    const sql = `INSERT INTO master_exam (topic, answer, exam_score, year, term, sub_term) VALUES (?, ?, ?, ?, ?, ?)`;
+    const values = [topic, '', null, year, term, sub_term];
+
+    const [result] = await db.execute(sql, values);
+    return result;
+}

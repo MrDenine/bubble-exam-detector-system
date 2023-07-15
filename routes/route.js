@@ -42,6 +42,7 @@ router.post('/update_user', userController.updateUser);
 router.post('/add_user', userController.addUser);
 router.post('/del_user/:username', userController.delUser);
 router.post('/login1', loginController.handleLogin);
+router.post('/exam_manage', exam_manageController.insertData);
 
 router.get('/getAnswer', omrController.getAnswer);
 router.get('/logout', indexController.handleLogout);
