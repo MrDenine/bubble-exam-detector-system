@@ -20,6 +20,16 @@ exports.updateUser = async function (req, res) {
     }
 };
 
+exports.insertUser = async function (req, res) {
+    try {
+        const { user, firstName, lastName, sec, status } = req.body;
+        const insertuser = await userModel.postInsertuser(user, firstName, lastName, sec, status);
+        res.json({ status: "Success", message: "User update successfully" });
+    } catch (error) {
+        res.json({ status: "Failed", message: "Failed to update user" });
+    }
+};
+
 exports.addUser = async function (req, res) {
     try {
         const { username, password, firstname, lastname, type, section } = req.body;

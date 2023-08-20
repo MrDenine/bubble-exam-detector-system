@@ -39,6 +39,7 @@ router.get('/ans2', checkAuth, ans2Controller.render_ans2Page);
 
 // use router หลังบ้าน
 router.post('/update_user', userController.updateUser);
+router.post('/insert_user', userController.insertUser);
 router.post('/add_user', userController.addUser);
 router.post('/del_user/:username', userController.delUser);
 router.post('/login1', loginController.handleLogin);

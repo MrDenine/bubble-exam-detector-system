@@ -335,36 +335,6 @@
   const wordFileInput = document.getElementById('wordFileInput');
   const confirmWordBtn = document.getElementById('confirmWordBtn');
 
-  confirmWordBtn.addEventListener('click', async () => {
-    const selectedFile = wordFileInput.files[0];
-    if (selectedFile) {
-      const reader = new FileReader();
-      reader.readAsArrayBuffer(selectedFile);
-
-      reader.onload = async () => {
-        const arrayBuffer = reader.result;
-        const result = await convertDocxToText(arrayBuffer);
-        const lines = result.split(/\d+\s/);
-
-        const extractedData = lines.map(line => {
-          const [index, data] = line.split(/\s\d+\s/);
-          const [id, fullName] = data.split(/(\d+)/).filter(part => part.trim() !== '');
-          const formattedId = id.replace(/-/g, ''); // Remove dashes from the ID
-          const [firstName, lastName] = fullName.split(/\s/);
-          return {
-            id: formattedId,
-            firstName: firstName,
-            lastName: lastName,
-            index: index
-          };
-        });
-
-
-        console.log('Extracted data:', extractedData);
-      };
-    }
-  });
-
   async function convertDocxToText(arrayBuffer) {
     return new Promise((resolve, reject) => {
       mammoth.convertToHtml({ arrayBuffer: arrayBuffer })
@@ -378,4 +348,53 @@
     });
   }
 
+  confirmWordBtn.addEventListener('click', async () => {
+    const selectedFile = wordFileInput.files[0];
+    if (selectedFile) {
+      const reader = new FileReader();
+      reader.readAsArrayBuffer(selectedFile);
+
+      reader.onload = async () => {
+        const arrayBuffer = reader.result;
+        const textData = await convertDocxToText(arrayBuffer);
+
+        const regex = /(\d+-\d+)([\u0E00-\u0E7F]+)\s?([\u0E00-\u0E7F]+)(\d*)(Student|student|teacher)/g;
+        let match;
+        const extractedData = [];
+
+        while ((match = regex.exec(textData)) !== null) {
+          extractedData.push({
+            user: match[1].replace('-', ''),
+            firstName: match[2].trim(),
+            lastName: match[3].trim(),
+            sec: match[4] ? parseInt(match[4]) : null,
+            status: match[5]
+          });
+        }
+
+        extractedData.forEach(data => {
+          fetch('/insert_user', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data)
+          })
+            .then(function (response) {
+              if (response.ok) {
+                return response.json();
+              }
+              throw new Error('Network response was not ok.');
+            })
+            .then(function (data) {
+              console.log(data);
+              location.reload();
+            })
+            .catch(function (error) {
+              console.log('Error:', error.message);
+            });
+        });
+      };
+    }
+  });
 </script>

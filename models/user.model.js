@@ -45,3 +45,19 @@ exports.postAddANS = async function (year, term, topic, sub_term) {
     const [result] = await db.execute(sql, values);
     return result;
 }
+
+exports.postInsertuser = async function (user, firstName, lastName, sec, status) {
+    try {
+        const query = `
+            INSERT INTO user (username, firstname, password, lastname, type, section)
+            VALUES (?, ?, '1234', ?, ?, ?)
+        `;
+
+        const values = [user, firstName, lastName, status, sec];
+        const [rows] = await db.execute(query, values);
+
+        console.log(`Inserted ${rows.affectedRows} row(s)`);
+    } catch (error) {
+        console.error('Error inserting data:', error);
+    }
+}
