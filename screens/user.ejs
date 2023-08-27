@@ -34,7 +34,11 @@
       </div>
     </nav>
     <!-- modalform -->
-  <h1 class="text-center my-4">ข้อมูลนักศึกษา</h1>
+  <h1 class="text-center my-4">ข้อมูลนักศึกษา</h1>    
+    <div class="input-group" style="width: 100%; margin-bottom: 10px;">
+      <input type="text" class="form" style="margin-left: 65%; width: 15%;" placeholder="ค้นหาข้อมูลนักศึกษา">
+      <button class="btn btn-primary" type="button">ค้นหา</button>
+    </div>
   <div style="margin-left: 70%">
     <button id="wordBtn" class="btn btn-warning">เพิ่มข้อมูลแบบ Word</button>
     <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#add_user">เพิ่มข้อมูล</button>
@@ -46,23 +50,30 @@
     </form>
     <table class="table">
       <thead>
-        <tr>
+                <tr>
           <th>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
           <th scope="col" style="text-align: center;">ลำดับ</th>
+          <th scope="col" style="text-align: center;">เลขที่</th>
           <th scope="col" style="text-align: center;">รหัสผู้ใช้</th>
           <th scope="col" style="text-align: center;">ชื่อ</th>
           <th scope="col" style="text-align: center;">นามสกุล</th>
           <th scope="col" style="text-align: center;">กลุ่มเรียน</th>
+          <th scope="col" style="text-align: center;">กลุ่ม CPE</th>
           <th scope="col" style="text-align: center;">ตำแหน่ง</th>
+          <th scope="col" style="text-align: center;">เวลาเรียน</th>
           <th scope="col" style="text-align: center;">การจัดการ</th>
         </tr>
       </thead>
       <tbody>
         <% for(let i=0; i < title.length; i++){ %>
           <tr>
+            
             <td></td>
             <td style="text-align: center;">
               <%= i+1 %>
+            </td>
+            <td style="text-align: center;">
+              <%= title[i].number %>
             </td>
             <td style="text-align: center;">
               <%= title[i].username %>
@@ -77,7 +88,13 @@
               <%= title[i].section %>
             </td>
             <td style="text-align: center;">
+              <%= title[i].group %>
+            </td>
+            <td style="text-align: center;">
               <%= title[i].type %>
+            </td>
+            <td style="text-align: center;">
+              <%= title[i].time %>
             </td>
             <td style="text-align: center;">
               <button onclick="onClickModalEdit('<%= title[i].username %>')" class="btn btn-primary">แก้ไข</button>
@@ -118,6 +135,10 @@
         <form action="update_user" class="needs-validation" novalidate>
           <div class="modal-body">
             <div class="form-group">
+              <label for="id">เลขที่</label>
+              <input type="text" class="form-control" name="number" id="updatenumber" required>
+            </div>
+            <div class="form-group">
               <label for="username">รหัสผู้ใช้</label>
               <input type="text" class="form-control" name="username" id="updateusername" value="" readonly disabled>
             </div>
@@ -147,6 +168,20 @@
               <label for="sec">กลุ่มเรียน</label>
               <input type="text" class="form-control" name="sec" id="updatesec">
             </div>
+            <div class="form-group">
+              <label for="sec">กลุ่ม CPE</label>
+              <input type="text" class="form-control" name="group" id="updategroup" required>
+            </div>
+            <div class="form-group">
+              <label for="sec">เวลาเรียน</label>
+              <select class="form-select"
+                style="margin-top: 7px;margin-bottom: 7px;padding-top: 9px;padding-bottom: 9px;" id="updatetime" required>
+                <option value="time"></option>
+                <option value="time1">08:00-13:00</option>
+                <option value="time2">13:00-18:00</option>
+                <option value="time3">16:00-21:00</option>
+              </select>
+            </div>
             <br>
           </div>
           <div class="modal-footer">
@@ -167,6 +202,10 @@
         <form action="add_user" class="needs-validation" novalidate>
           <div class="modal-body">
             <div class="form-group">
+              <label for="number">เลขที่</label>
+              <input type="text" class="form-control" name="number" id="addnumber" required>
+            </div>
+            <div class="form-group">
               <label for="id">รหัสผู้ใช้</label>
               <input type="text" class="form-control" name="username" id="addusername" required>
             </div>
@@ -186,7 +225,7 @@
               <label for="sec">ตำแหน่ง</label>
               <select class="form-select"
                 style="margin-top: 7px;margin-bottom: 7px;padding-top: 9px;padding-bottom: 9px;" id="addtype" required>
-                <option selected disabled value="">Select Role...</option>
+                <option selected disabled value="">เลือกสถานะ</option>
                 <option value="teacher">Teacher</option>
                 <option value="student">Student</option>
               </select>
@@ -194,6 +233,20 @@
             <div class="form-group">
               <label for="sec">กลุ่มเรียน</label>
               <input type="text" class="form-control" name="sec" id="addsec" required>
+            </div>
+            <div class="form-group">
+              <label for="group">กลุ่ม CPE</label>
+              <input type="text" class="form-control" name="group" id="addgroup" required>
+            </div>
+            <div class="form-group">
+              <label for="time">เวลาเรียน</label>
+              <select class="form-select"
+                style="margin-top: 7px;margin-bottom: 7px;padding-top: 9px;padding-bottom: 9px;" id="addtime" required>
+                <option selected disabled value="">เลือกเวลา</option>
+                <option value="time1">08:00-13:00</option>
+                <option value="time2">13:00-18:00</option>
+                <option value="time3">16:00-21:00</option>
+              </select>
             </div>
             <br>
           </div>
@@ -222,12 +275,15 @@
       sec = "Sec" + document.getElementById('addsec').value
     }
     let data = {
+           number: document.getElementById('addnumber').value,
       username: document.getElementById('addusername').value,
       password: document.getElementById('addpassword').value,
       firstname: document.getElementById('addfirstname').value,
       lastname: document.getElementById('addlastname').value,
+      group: document.getElementById('addgroup').value,
       type: type,
-      section: sec
+      section: sec,
+      time : time
     };
 
     fetch('/add_user', {
@@ -260,12 +316,15 @@
       return item.username === username;
     });
 
+    document.getElementById('updatenumber').value = user.number;
     document.getElementById('updateusername').value = user.username;
     document.getElementById('updatepassword').value = user.password;
     document.getElementById('updatefirstname').value = user.firstname;
     document.getElementById('updatelastname').value = user.lastname;
     document.getElementById('updatetype').value = user.type !== 'teacher' ? 'student' : user.type;
     document.getElementById('updatesec').value = user.section;
+    document.getElementById('updategroup').value = user.group;
+    document.getElementById('updatetime').value = user.time !== 'time1' ? 'time2' ?? 'time3'  : user.time;
     $('#edit_user').modal('show');
   }
 </script>
@@ -283,12 +342,15 @@
       sec = "Sec" + document.getElementById('updatesec').value
     }
     let data = {
+      number: document.getElementById('updatenumber').value,
       username: document.getElementById('updateusername').value,
       password: document.getElementById('updatepassword').value,
       firstname: document.getElementById('updatefirstname').value,
       lastname: document.getElementById('updatelastname').value,
+      group: document.getElementById('updategroup').value,
       type: type,
       section: sec,
+      time : time
     };
 
     fetch('/update_user', {
