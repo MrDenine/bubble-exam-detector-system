@@ -12,37 +12,46 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/mammoth/1.6.0/mammoth.browser.min.js"></script>
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.11.6/umd/popper.min.js"></script>
+<style>
+  .input-group {
+    position: relative;
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: stretch;
+    align-content: center;
+    justify-content: space-evenly;
+    flex-direction: row;
+}
+</style>
 </head>
 
 <body>
-    <!-- Navbar -->
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-      &nbsp;&nbsp;<a class="navbar-brand">Computer Programmimg</a>
-      <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav">
-          <li class="nav-item">
-            <a class="nav-link" href="/">Home</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link active" href="/user">เพิ่มข้อมูลนักศึกษา</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="/exammanage">จัดการข้อสอบ</a>
-          </li>
-        </ul>
-        <a href="/logout" class="btn btn-danger" style="margin-left:auto;">ออกจากระบบ</a>&nbsp;&nbsp;&nbsp;&nbsp;
-      </div>
-    </nav>
-    <!-- modalform -->
-  <h1 class="text-center my-4">ข้อมูลนักศึกษา</h1>    
-    <div class="input-group" style="width: 100%; margin-bottom: 10px;">
-      <input type="text" class="form" style="margin-left: 65%; width: 15%;" placeholder="ค้นหาข้อมูลนักศึกษา">
-      <button class="btn btn-primary" type="button">ค้นหา</button>
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    &nbsp;&nbsp;<a class="navbar-brand">Computer Programmimg</a>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a class="nav-link" href="/">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link active" href="/user">เพิ่มข้อมูลนักศึกษา</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/exammanage">จัดการข้อสอบ</a>
+        </li>
+      </ul>
+      <a href="/logout" class="btn btn-danger" style="margin-left:auto;">ออกจากระบบ</a>&nbsp;&nbsp;&nbsp;&nbsp;
     </div>
-  <div style="margin-left: 70%">
+  </nav>
+  <!-- modalform -->
+  <h1 class="text-center my-4">ข้อมูลนักศึกษา</h1>
+  <div class="input-group" style="width: 50%; margin-bottom: 10px; right: -40%;">
+    <input type="text" class="form" style="width: 35%;" placeholder="ค้นหาข้อมูลนักศึกษา">
+    <button class="btn btn-primary" type="button">ค้นหา</button>
     <button id="wordBtn" class="btn btn-warning">เพิ่มข้อมูลแบบ Word</button>
     <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#add_user">เพิ่มข้อมูล</button>
-  </div>
+</div>
   <br>
   <div class="container" style="width: 100%;">
     <form id="deleteForm" action="/del_user" method="POST">
@@ -50,7 +59,7 @@
     </form>
     <table class="table">
       <thead>
-                <tr>
+        <tr>
           <th>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
           <th scope="col" style="text-align: center;">ลำดับ</th>
           <th scope="col" style="text-align: center;">เลขที่</th>
@@ -67,7 +76,7 @@
       <tbody>
         <% for(let i=0; i < title.length; i++){ %>
           <tr>
-            
+
             <td></td>
             <td style="text-align: center;">
               <%= i+1 %>
@@ -112,12 +121,36 @@
   <div class="modal fade" id="wordModal" tabindex="-1" aria-labelledby="wordModalLabel" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
+        <h5 class="modal-title" id="wordModalLabel" style="margin-left: 3%;">เลือกไฟล์ Word</h5>
         <div class="modal-header">
-          <h5 class="modal-title" id="wordModalLabel">เลือกไฟล์ Word</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
         </div>
         <div class="modal-body">
-          <input type="file" id="wordFileInput" accept=".docx, .doc">
+          <label for="numberDropdown">Sec : </label>
+          <select class="form-select" id="numberDropdown">
+            <option value=""></option>
+            <% for (let i=1; i <=100; i++) { %>
+              <option value="<%= i %>">
+                <%= i %>
+              </option>
+              <% } %>
+          </select>
+          <br>
+          <label for="roleDropdown">Status : </label>
+          <select class="form-select" id="roleDropdown1">
+            <option value=""></option>
+            <option value="student">Student</option>
+            <option value="teacher">Teacher</option>
+          </select>
+          <br>
+          <label for="sec">เวลาเรียน</label>
+          <select class="form-select" style="margin-top: 7px;margin-bottom: 7px;padding-top: 9px;padding-bottom: 9px;"
+            id="time" required>
+            <option value="time"></option>
+            <option value="time1">08:00-13:00</option>
+            <option value="time2">13:00-18:00</option>
+            <option value="time3">16:00-21:00</option>
+          </select>
         </div>
         <div class="modal-footer">
           <button id="confirmWordBtn" class="btn btn-primary" data-bs-dismiss="modal">ยืนยัน</button>
@@ -175,7 +208,8 @@
             <div class="form-group">
               <label for="sec">เวลาเรียน</label>
               <select class="form-select"
-                style="margin-top: 7px;margin-bottom: 7px;padding-top: 9px;padding-bottom: 9px;" id="updatetime" required>
+                style="margin-top: 7px;margin-bottom: 7px;padding-top: 9px;padding-bottom: 9px;" id="updatetime"
+                required>
                 <option value="time"></option>
                 <option value="time1">08:00-13:00</option>
                 <option value="time2">13:00-18:00</option>
@@ -275,7 +309,7 @@
       sec = "Sec" + document.getElementById('addsec').value
     }
     let data = {
-           number: document.getElementById('addnumber').value,
+      number: document.getElementById('addnumber').value,
       username: document.getElementById('addusername').value,
       password: document.getElementById('addpassword').value,
       firstname: document.getElementById('addfirstname').value,
@@ -283,7 +317,7 @@
       group: document.getElementById('addgroup').value,
       type: type,
       section: sec,
-      time : time
+      time: time
     };
 
     fetch('/add_user', {
@@ -324,7 +358,7 @@
     document.getElementById('updatetype').value = user.type !== 'teacher' ? 'student' : user.type;
     document.getElementById('updatesec').value = user.section;
     document.getElementById('updategroup').value = user.group;
-    document.getElementById('updatetime').value = user.time !== 'time1' ? 'time2' ?? 'time3'  : user.time;
+    document.getElementById('updatetime').value = user.time !== 'time1' ? 'time2' ?? 'time3' : user.time;
     $('#edit_user').modal('show');
   }
 </script>
@@ -350,7 +384,7 @@
       group: document.getElementById('updategroup').value,
       type: type,
       section: sec,
-      time : time
+      time: time
     };
 
     fetch('/update_user', {
@@ -398,66 +432,67 @@
   const wordFileInput = document.getElementById('wordFileInput');
   const confirmWordBtn = document.getElementById('confirmWordBtn');
 
-  async function convertDocxToText(arrayBuffer) {
-    return new Promise((resolve, reject) => {
-      mammoth.convertToHtml({ arrayBuffer: arrayBuffer })
-        .then(result => {
-          const text = result.value.replace(/<\/?[^>]+(>|$)/g, ''); // Remove HTML tags
-          resolve(text);
+  confirmWordBtn.addEventListener('click', async () => {
+    var time = "";
+    const textData = document.getElementById('exampleFormControlTextarea1').value;
+    const sec = "Sec" + document.getElementById('numberDropdown').value;
+    const lines = textData.split('\n');
+    const extractedData = [];
+    const regex = /(\d+-\d+)\s+([\u0E00-\u0E7F]+)\s+([\u0E00-\u0E7F]+)\s*/g;
+    const status = document.getElementById('roleDropdown1').value;
+    var selectedValue = document.getElementById('time').value;
+
+    if (selectedValue === "time1") {
+      time = "08:00-13:00";
+    } else if (selectedValue === "time2") {
+      time = "13:00-18:00";
+    } else if (selectedValue === "time3") {
+      time = "16:00-21:00";
+    }
+
+    lines.forEach(line => {
+      const match = regex.exec(line);
+      if (match) {
+        extractedData.push({
+          user: match[1].replace('-', ''),
+          firstName: match[2].trim(),
+          lastName: match[3].trim()
+        });
+      }
+    });
+    extractedData.shift();
+
+    while ((match = regex.exec(textData)) !== null) {
+      extractedData.push({
+        user: match[1].replace('-', ''),
+        firstName: match[2].trim(),
+        lastName: match[3].trim(),
+        sec: sec,
+        status: status,
+        time: time
+      });
+    }
+
+    extractedData.forEach(data => {
+      fetch('/insert_user', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
+      })
+        .then(response => {
+          if (response.ok) {
+            return response.json();
+          }
+          throw new Error('Network response was not ok.');
+        })
+        .then(data => {
+          console.log(data);
         })
         .catch(error => {
-          reject(error);
+          console.log('Error:', error.message);
         });
     });
-  }
-
-  confirmWordBtn.addEventListener('click', async () => {
-    const selectedFile = wordFileInput.files[0];
-    if (selectedFile) {
-      const reader = new FileReader();
-      reader.readAsArrayBuffer(selectedFile);
-
-      reader.onload = async () => {
-        const arrayBuffer = reader.result;
-        const textData = await convertDocxToText(arrayBuffer);
-
-        const regex = /(\d+-\d+)([\u0E00-\u0E7F]+)\s?([\u0E00-\u0E7F]+)(\d*)(Student|student|teacher)/g;
-        let match;
-        const extractedData = [];
-
-        while ((match = regex.exec(textData)) !== null) {
-          extractedData.push({
-            user: match[1].replace('-', ''),
-            firstName: match[2].trim(),
-            lastName: match[3].trim(),
-            sec: match[4] ? parseInt(match[4]) : null,
-            status: match[5]
-          });
-        }
-
-        extractedData.forEach(data => {
-          fetch('/insert_user', {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(data)
-          })
-            .then(function (response) {
-              if (response.ok) {
-                return response.json();
-              }
-              throw new Error('Network response was not ok.');
-            })
-            .then(function (data) {
-              console.log(data);
-              location.reload();
-            })
-            .catch(function (error) {
-              console.log('Error:', error.message);
-            });
-        });
-      };
-    }
   });
 </script>

@@ -2,7 +2,7 @@ const db = require("../config/dbconnection");
 
 exports.getUserAll = async function (callback) {
     var rows = await db.execute(
-        'SELECT * FROM `user`',
+        'SELECT * FROM `user` ORDER BY username',
     )
     return rows;
 }
