@@ -12,17 +12,17 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/mammoth/1.6.0/mammoth.browser.min.js"></script>
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.11.6/umd/popper.min.js"></script>
-<style>
-  .input-group {
-    position: relative;
-    display: flex;
-    flex-wrap: nowrap;
-    align-items: stretch;
-    align-content: center;
-    justify-content: space-evenly;
-    flex-direction: row;
-}
-</style>
+  <style>
+    .input-group {
+      position: relative;
+      display: flex;
+      flex-wrap: nowrap;
+      align-items: stretch;
+      align-content: center;
+      justify-content: space-evenly;
+      flex-direction: row;
+    }
+  </style>
 </head>
 
 <body>
@@ -51,7 +51,7 @@
     <button class="btn btn-primary" type="button">ค้นหา</button>
     <button id="wordBtn" class="btn btn-warning">เพิ่มข้อมูลแบบ Word</button>
     <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#add_user">เพิ่มข้อมูล</button>
-</div>
+  </div>
   <br>
   <div class="container" style="width: 100%;">
     <form id="deleteForm" action="/del_user" method="POST">
@@ -125,6 +125,12 @@
         <div class="modal-header">
           <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
         </div>
+        <br>
+        <div class="modal-body">
+          <label for="numberDropdown">กลุ่ม CPE : </label>
+          <input type="cpe" class="form-control" id="exampleInputCPE">
+        </div>
+        <br>
         <div class="modal-body">
           <label for="numberDropdown">Sec : </label>
           <select class="form-select" id="numberDropdown">
@@ -439,6 +445,7 @@
     const lines = textData.split('\n');
     const extractedData = [];
     const regex = /(\d+-\d+)\s+([\u0E00-\u0E7F]+)\s+([\u0E00-\u0E7F]+)\s*/g;
+    const cpe = document.getElementById('exampleInputCPE').value;
     const status = document.getElementById('roleDropdown1').value;
     var selectedValue = document.getElementById('time').value;
 
@@ -468,6 +475,7 @@
         firstName: match[2].trim(),
         lastName: match[3].trim(),
         sec: sec,
+        group: cpe,
         status: status,
         time: time
       });
