@@ -46,11 +46,13 @@
   </nav>
   <!-- modalform -->
   <h1 class="text-center my-4">ข้อมูลนักศึกษา</h1>
-  <div class="input-group" style="width: 50%; margin-bottom: 10px; right: -40%;">
-    <input type="text" class="form" style="width: 35%;" placeholder="ค้นหาข้อมูลนักศึกษา">
+  <div class="input-group" style="width: 50%; margin-bottom: 10px; margin-left: 33%;">
+    <input type="text" class="form-control" placeholder="ค้นหาข้อมูลนักศึกษา">
     <button class="btn btn-primary" type="button">ค้นหา</button>
-    <button id="wordBtn" class="btn btn-warning">เพิ่มข้อมูลแบบ Word</button>
+    <div style="margin-left: 5px;">
+    <button id="wordBtn" class="btn btn-warning">เพิ่มข้อมูลหลายคน</button>
     <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#add_user">เพิ่มข้อมูล</button>
+    </div>
   </div>
   <br>
   <div class="container" style="width: 100%;">
@@ -70,6 +72,7 @@
           <th scope="col" style="text-align: center;">กลุ่ม CPE</th>
           <th scope="col" style="text-align: center;">ตำแหน่ง</th>
           <th scope="col" style="text-align: center;">เวลาเรียน</th>
+          <th scope="col" style="text-align: center;">เวลาสอบ</th>
           <th scope="col" style="text-align: center;">การจัดการ</th>
         </tr>
       </thead>
@@ -106,6 +109,9 @@
               <%= title[i].time %>
             </td>
             <td style="text-align: center;">
+              <%= title[i].exam_time %>
+            </td>
+            <td style="text-align: center;">
               <button onclick="onClickModalEdit('<%= title[i].username %>')" class="btn btn-primary">แก้ไข</button>
               <a href="javascript:void(0);" class="btn btn-danger" data-username="<%= title[i].username %>"
                 onclick="onClickModalDelete(this)" data-toggle="modal" data-target="#confirmDeleteModal">
@@ -121,16 +127,8 @@
   <div class="modal fade" id="wordModal" tabindex="-1" aria-labelledby="wordModalLabel" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
-        <h5 class="modal-title" id="wordModalLabel" style="margin-left: 3%;">เลือกไฟล์ Word</h5>
-        <div class="modal-header">
-          <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
-        </div>
-        <br>
-        <div class="modal-body">
-          <label for="numberDropdown">กลุ่ม CPE : </label>
-          <input type="cpe" class="form-control" id="exampleInputCPE">
-        </div>
-        <br>
+        <h5 class="modal-title" id="wordModalLabel" style="margin-left: 3%;">เพิ่มข้อมูลนักศึกษา</h5>
+
         <div class="modal-body">
           <label for="numberDropdown">Sec : </label>
           <select class="form-select" id="numberDropdown">
@@ -141,15 +139,9 @@
               </option>
               <% } %>
           </select>
-          <br>
-          <label for="roleDropdown">Status : </label>
-          <select class="form-select" id="roleDropdown1">
-            <option value=""></option>
-            <option value="student">Student</option>
-            <option value="teacher">Teacher</option>
-          </select>
-          <br>
-          <label for="sec">เวลาเรียน</label>
+          <label for="numberDropdown">กลุ่ม CPE : </label>
+          <input type="cpe" class="form-control" id="exampleInputCPE">
+          <label for="time">เวลาเรียน</label>
           <select class="form-select" style="margin-top: 7px;margin-bottom: 7px;padding-top: 9px;padding-bottom: 9px;"
             id="time" required>
             <option value="time"></option>
@@ -157,6 +149,17 @@
             <option value="time2">13:00-18:00</option>
             <option value="time3">16:00-21:00</option>
           </select>
+          <label for="roleDropdown">เวลาสอบ</label>
+          <select class="form-select" id="roleDropdown1">
+            <option value="examtime"></option>
+            <option value="examtime1">09:00-12:00</option>
+            <option value="examtime2">13:00-16:00</option>
+          </select>
+          <div class="modal-body">
+            <label for="roleDropdown">วางรายชื่อนักศึกษา</label>
+            <textarea class="form-control" id="exampleFormControlTextarea1" rows="5"></textarea>
+          </div>
+          <br>
         </div>
         <div class="modal-footer">
           <button id="confirmWordBtn" class="btn btn-primary" data-bs-dismiss="modal">ยืนยัน</button>
@@ -171,7 +174,7 @@
         <div class="modal-header">
           <h4 class="modal-title">แก้ไขข้อมูลนักศึกษา</h4>
         </div>
-        <form action="update_user" class="needs-validation" novalidate>
+        <div action="update_user" class="needs-validation" novalidate>
           <div class="modal-body">
             <div class="form-group">
               <label for="id">เลขที่</label>
@@ -222,12 +225,21 @@
                 <option value="time3">16:00-21:00</option>
               </select>
             </div>
+            <label for="sec">เวลาสอบ</label>
+              <select class="form-select"
+                style="margin-top: 7px;margin-bottom: 7px;padding-top: 9px;padding-bottom: 9px;" id="updateexamtime"
+                required>
+                <option value="examtime"></option>
+                <option value="examtime1">09:00-12:00</option>
+                <option value="examtime2">13:00-16:00</option>
+              </select>
+            </div>
             <br>
-          </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-danger" data-bs-dismiss="modal">ปิด</button>
             <button type="submit" id="submitUpdateUser" class="btn btn-success">แก้ไข</button>
           </div>
+        </div>
         </form>
       </div>
     </div>
@@ -286,6 +298,15 @@
                 <option value="time1">08:00-13:00</option>
                 <option value="time2">13:00-18:00</option>
                 <option value="time3">16:00-21:00</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="time">เวลาสอบ</label>
+              <select class="form-select"
+                style="margin-top: 7px;margin-bottom: 7px;padding-top: 9px;padding-bottom: 9px;" id="addexamtime" required>
+                <option selected disabled value="">เลือกเวลา</option>
+                <option value="examtime1">09:00-12:00</option>
+                <option value="examtime2">13:00-16:00</option>
               </select>
             </div>
             <br>
