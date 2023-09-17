@@ -110,9 +110,14 @@
     <h1>เฉลยคำตอบ</h1>
     <div class="container" style="margin-top: 10px; margin-bottom: 3%;">
       <h2>
-      <label for="">ชื่อข้อสอบ</label> 
-      <label for="">กลางภาค - ปลายภาค</label>
-      </h2> 
+        <label for="">
+          <%= data.topic %>
+        </label>
+        <% let term; if (data.sub_term==='middle' ) { term='กลางภาค' ; } else { term='ปลายภาค' ; } %>
+          <label for="">
+            <%= term %>
+          </label>
+      </h2>
     </div>
 
     <div class="clearfix">
@@ -295,15 +300,11 @@
             <% } %>
         </form>
       </div>
-
     </div>
-
     <div class="submit-button">
       <button type="submit" class="btn btn-primary">Submit</button>
     </div>
-
   </div>
-
 </body>
 
 </html>
