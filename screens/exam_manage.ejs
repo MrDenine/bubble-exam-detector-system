@@ -191,10 +191,10 @@
           <h4 class="modal-title text-center">รายงานผลคะแนนสอบ</h4>
         </div>
         <br>
-        <form class="container" action="">
+        <form class="container" action="exam_result" method="POST">
           <div class="container">
             <div class="form-group mb-3">
-              <select class="form-control" id="year">
+              <select class="form-control" id="year" name="year">
                 <option>เลือกปีการศึกษา</option>
                 <option>2021</option>
                 <option>2022</option>
@@ -202,7 +202,7 @@
               </select>
             </div>
             <div class="form-group mb-3">
-              <select class="form-control" id="term">
+              <select class="form-control" id="term" name="term">
                 <option>เลือกเทอม</option>
                 <option>1</option>
                 <option>2</option>
@@ -210,14 +210,14 @@
               </select>
             </div>
             <div class="form-group mb-3">
-              <select class="form-control" id="term">
+              <select class="form-control" id="sub_term" name="sub_term">
                 <option>เลือกกลางภาค-ปลายภาค</option>
                 <option value="middle">กลางภาค</option>
                 <option value="final">ปลายภาค</option>
               </select>
             </div>
             <div class="form-group mb-3">
-              <select class="form-control" id="group" required>
+              <select class="form-control" id="group" name="submit" required>
                 <option>เลือก Sec</option>
                 <option>Sec 1</option>
                 <option>Sec 2</option>

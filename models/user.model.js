@@ -61,3 +61,14 @@ exports.postInsertuser = async function (user, firstName, lastName, sec, status)
         console.error('Error inserting data:', error);
     }
 }
+
+exports.postGetExamResult = async function (year, term, sub_term, sec) {
+    try {
+        var rows = await db.execute(
+            '',
+        )
+        return rows;
+    } catch (error) {
+        console.error('Error inserting data:', error);
+    }
+}
