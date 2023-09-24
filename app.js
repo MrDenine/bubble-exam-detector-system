@@ -4,8 +4,8 @@ const session = require('express-session');
 const cookieParser = require('cookie-parser');
 const app = express();
 
-app.listen(3000, function () {
-  console.info('[SERVER] Listening on port 3000');
+app.listen(3001, function () {
+  console.info('[SERVER] Listening on port 3001');
 
   app.use(cookieParser());
   app.use(session({

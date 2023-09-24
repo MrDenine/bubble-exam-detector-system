@@ -45,6 +45,7 @@ router.post('/del_user/:username', userController.delUser);
 router.post('/login1', loginController.handleLogin);
 router.post('/exam_manage', exam_manageController.insertData);
 router.post('/exam_result', show_scoreadminController.getExamResult);
+router.post('/ansExam', ansController.postExamResult);
 
 router.get('/getAnswer', omrController.getAnswer);
 router.get('/logout', indexController.handleLogout);

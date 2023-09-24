@@ -119,10 +119,9 @@
           </label>
       </h2>
     </div>
-
-    <div class="clearfix">
-      <div class="half-width">
-        <form>
+    <form action="/ansExam" method="post">
+      <div class="clearfix">
+        <div class="half-width">
           <!-- ตอบคำถามที่ 1-20 -->
           <% for (let i=1; i <=20; i++) { %>
             <div class="mb-3">
@@ -154,11 +153,9 @@
               </div>
             </div>
             <% } %>
-        </form>
-      </div>
+        </div>
 
-      <div class="half-width">
-        <form>
+        <div class="half-width">
           <!-- ตอบคำถามที่ 21-40 -->
           <% for (let i=21; i <=40; i++) { %>
             <div class="mb-3">
@@ -190,11 +187,9 @@
               </div>
             </div>
             <% } %>
-        </form>
-      </div>
+        </div>
 
-      <div class="half-width">
-        <form>
+        <div class="half-width">
           <!-- ตอบคำถามที่ 41-60 -->
           <% for (let i=41; i <=60; i++) { %>
             <div class="mb-3">
@@ -226,11 +221,9 @@
               </div>
             </div>
             <% } %>
-        </form>
-      </div>
+        </div>
 
-      <div class="half-width">
-        <form>
+        <div class="half-width">
           <!-- ตอบคำถามที่ 61-80 -->
           <% for (let i=61; i <=80; i++) { %>
             <div class="mb-3">
@@ -262,11 +255,9 @@
               </div>
             </div>
             <% } %>
-        </form>
-      </div>
+        </div>
 
-      <div class="half-width">
-        <form>
+        <div class="half-width">
           <!-- ตอบคำถามที่ 81-100 -->
           <% for (let i=81; i <=100; i++) { %>
             <div class="mb-3">
@@ -298,12 +289,12 @@
               </div>
             </div>
             <% } %>
-        </form>
+        </div>
       </div>
-    </div>
-    <div class="submit-button">
-      <button type="submit" class="btn btn-primary">Submit</button>
-    </div>
+      <div class="submit-button">
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </div>
+    </form>
   </div>
 </body>
 

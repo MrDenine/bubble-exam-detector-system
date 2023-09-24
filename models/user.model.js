@@ -72,3 +72,28 @@ exports.postGetExamResult = async function (year, term, sub_term, sec) {
         console.error('Error inserting data:', error);
     }
 }
+
+exports.postExamResult = async function (year, term, topic, sub_term, body) {
+    // CREATE TABLE ans (
+    //     id INT AUTO_INCREMENT PRIMARY KEY,
+    //     year INT,
+    //     term INT,
+    //     topic VARCHAR(255),
+    //     sub_term VARCHAR(255),
+    //     ans TEXT
+    // );
+    try {
+        const query = `
+            INSERT INTO ans (year, term, topic, sub_term, ans)
+            VALUES (?, ?, ?, ?, ?)
+        `;
+        
+        const bodyString = JSON.stringify(body);
+        const values = [year, term, topic, sub_term, bodyString];
+        const [rows] = await db.execute(query, values);
+
+        return rows;
+    } catch (error) {
+        console.error('Error inserting data:', error);
+    }
+}
