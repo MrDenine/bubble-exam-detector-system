@@ -56,10 +56,10 @@
             <button type="button" class="btn btn-success btn-lg shadow w-100" data-bs-toggle="modal"
               data-bs-target="#id03">รายงานผลคะแนนสอบ</button>
           </div>
-          <div class="container mb-2">
+          <!-- <div class="container mb-2">
             <button type="button" class="btn btn-success btn-lg shadow w-100" data-bs-toggle="modal"
               data-bs-target="#id04">การวิเคราะห์ผลคำตอบ</button>
-          </div>
+          </div> -->
         </center>
       </div>
     </div>
@@ -80,7 +80,7 @@
               <input type="text" class="form-control" id="topic-input" name="topic" placeholder="กรอกชื่อข้อสอบ">
             </div>
             <div class="form-group mb-3">
-              <select class="form-control" id="year" name="year">
+              <select class="form-select" id="year" name="year">
                 <option>เลือกปีการศึกษา</option>
                 <option>2021</option>
                 <option>2022</option>
@@ -88,7 +88,7 @@
               </select>
             </div>
             <div class="form-group mb-3">
-              <select class="form-control" id="term" name="term">
+              <select class="form-select" id="term" name="term">
                 <option>เลือกเทอม</option>
                 <option>1</option>
                 <option>2</option>
@@ -96,7 +96,7 @@
               </select>
             </div>
             <div class="form-group mb-3">
-              <select class="form-control" id="sub_term" name="sub_term">
+              <select class="form-select" id="sub_term" name="sub_term">
                 <option>เลือกกลางภาค-ปลายภาค</option>
                 <option value="middle">กลางภาค</option>
                 <option value="final">ปลายภาค</option>
@@ -135,19 +135,23 @@
         <form class="container" action="">
           <div class="container">
             <div class="form-group mb-3">
-              <label for="topic-input">ชื่อข้อสอบ</label>
-              <input type="text" class="form-control" id="topic-input" name="topic" placeholder="กรอกชื่อข้อสอบ">
+              <select class="form-select" id="topic" name="topic">
+                <option>เลือกข้อสอบ</option>
+                <option>ข้อสอบ1</option>
+              </select>
             </div>
             <div class="form-group mb-3">
-              <select class="form-control" id="year">
+              <select class="form-select" id="year">
                 <option>เลือกปีการศึกษา</option>
                 <option>2021</option>
                 <option>2022</option>
                 <option>2023</option>
+                <option>2024</option>
+                <option>2025</option>
               </select>
             </div>
             <div class="form-group mb-3">
-              <select class="form-control" id="term">
+              <select class="form-select" id="term">
                 <option>เลือกเทอม</option>
                 <option>1</option>
                 <option>2</option>
@@ -155,11 +159,19 @@
               </select>
             </div>
             <div class="form-group mb-3">
-              <select class="form-control" id="term">
+              <select class="form-select" id="term">
                 <option>เลือกกลางภาค-ปลายภาค</option>
                 <option value="middle">กลางภาค</option>
                 <option value="final">ปลายภาค</option>
               </select>
+            </div>
+            <div class="form-group mb-3">
+              <label for="sec">Sec :</label>
+              <input type="text" class="form-control" name="sec" id="section" required>
+            </div>
+            <div class="form-group mb-3">
+              <label for="group">กลุ่ม CPE</label>
+              <input type="text" class="form-control" name="group" id="group" p  required>
             </div>
             <!-- เอาข้อมูลชื่อรหัสชั้นตอนเก็บคำตอบ -->
             <form action="">
@@ -194,7 +206,7 @@
         <form class="container" action="exam_result" method="POST">
           <div class="container">
             <div class="form-group mb-3">
-              <select class="form-control" id="year" name="year">
+              <select class="form-select" id="year" name="year">
                 <option>เลือกปีการศึกษา</option>
                 <option>2021</option>
                 <option>2022</option>
@@ -202,7 +214,7 @@
               </select>
             </div>
             <div class="form-group mb-3">
-              <select class="form-control" id="term" name="term">
+              <select class="form-select" id="term" name="term">
                 <option>เลือกเทอม</option>
                 <option>1</option>
                 <option>2</option>
@@ -210,19 +222,27 @@
               </select>
             </div>
             <div class="form-group mb-3">
-              <select class="form-control" id="sub_term" name="sub_term">
+              <select class="form-select" id="sub_term" name="sub_term">
                 <option>เลือกกลางภาค-ปลายภาค</option>
                 <option value="middle">กลางภาค</option>
                 <option value="final">ปลายภาค</option>
               </select>
             </div>
             <div class="form-group mb-3">
-              <select class="form-control" id="group" name="submit" required>
-                <option>เลือก Sec</option>
-                <option>Sec 1</option>
-                <option>Sec 2</option>
-              </select>
+          <select class="form-select" id="section">
+            <option value="">เลือก Sec</option>
+            <% for (let i=1; i <=100; i++) { %>
+              <option value="<%= i %>">
+                <%= i %>
+              </option>
+              <% } %>
+          </select>
             </div>
+            <div class="form-group mb-3">
+              <label for="group">กลุ่ม CPE</label>
+              <input type="text" class="form-control" name="group" id="group" required>
+            </div>
+            <br>
             <div class="form-group mb-3">
               <center>
                 <button class="btn btn-success" type="submit" style="width: 400px;">แสดงผล</button>
@@ -238,10 +258,10 @@
     </div>
   </div>
   <!-- modalid04 -->
-  <div class="modal" id="id04">
+  <!-- <div class="modal" id="id04">
     <div class="modal-dialog">
       <div class="modal-content">
-        <!-- Modal Header -->
+
         <div class="modal-header">
           <h4 class="modal-title text-center">การวิเคราะห์ผลคำตอบ</h4>
         </div>
@@ -285,13 +305,14 @@
             </div>
           </div>
         </form>
-        <!-- Modal footer -->
+
         <div class="modal-footer">
           <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
         </div>
       </div>
     </div>
-  </div>
+  </div> -->
+  
 </body>
 
 </html>

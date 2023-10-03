@@ -25,12 +25,39 @@
 </nav>
 <!-- Navbar -->
 
-  
-
   <div class="container" >
     <h1 class="text-center my-4">คะแนนสอบ</h1>
-    <div style="margin-left: 80%">
-      <button onclick="createExcel()" class="btn btn-warning">Export to Excel</button>
+    <div class="input-group" style="width: 75%; margin-bottom: 10px; margin-left: 10%;">
+        <select class="form-select" id="year">
+          <option>ปีการศึกษา</option>
+          <option>2021</option>
+          <option>2022</option>
+          <option>2023</option>
+          <option>2024</option>
+          <option>2025</option>
+        </select>
+        <select class="form-select" id="term">
+          <option>เทอม</option>
+          <option>1</option>
+          <option>2</option>
+          <option>3</option>
+        </select>
+        <select class="form-select" id="term" style="width: 10%;">
+          <option>กลางภาค-ปลายภาค</option>
+          <option value="middle">กลางภาค</option>
+          <option value="final">ปลายภาค</option>
+        </select>
+        <select class="form-select" id="section">
+          <option value="">Sec</option>
+          <% for (let i=1; i <=100; i++) { %>
+            <option value="<%= i %>">
+              <%= i %>
+            </option>
+            <% } %>
+        </select>
+        <input type="text" class="form-control" name="group" id="group" value="CPE" required>
+      <button class="btn btn-primary" type="button">ค้นหา</button>
+      <button onclick="createExcel()" class="btn btn-warning" style="margin-left: 5px;">Export to Excel</button>
     </div>
     <br>
     <table class="table" >
@@ -40,6 +67,8 @@
           <th scope="col">รหัสนักศึกษา</th>
           <th scope="col">ชื่อ</th>
           <th scope="col">นามสกุล</th>
+          <th scope="col">กลุ่มเรียน</th>
+          <th scope="col">กลุ่ม CPE</th>
           <th scope="col">คะแนนสอบ</th>
         </tr>
       </thead>
@@ -49,6 +78,8 @@
           <td>11623046</td>
           <td>วันจันทร์</td>
           <td>อังคาร</td>
+          <td>sec 2</td>
+          <td>CEP62346</td>
           <td>20</td>
         </tr>
       </tbody>

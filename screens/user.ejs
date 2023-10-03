@@ -131,27 +131,27 @@
 
         <div class="modal-body">
           <label for="numberDropdown">Sec : </label>
-          <select class="form-select" id="numberDropdown">
-            <option value=""></option>
+          <select class="form-select" id="section">
+            <option value="">เลือก Sec</option>
             <% for (let i=1; i <=100; i++) { %>
               <option value="<%= i %>">
                 <%= i %>
               </option>
               <% } %>
           </select>
-          <label for="numberDropdown">กลุ่ม CPE : </label>
+          <label for="group">กลุ่ม CPE : </label>
           <input type="cpe" class="form-control" id="exampleInputCPE">
           <label for="time">เวลาเรียน</label>
           <select class="form-select" style="margin-top: 7px;margin-bottom: 7px;padding-top: 9px;padding-bottom: 9px;"
             id="time" required>
-            <option value="time"></option>
+            <option value="time">เลือกเวลา</option>
             <option value="time1">08:00-13:00</option>
             <option value="time2">13:00-18:00</option>
             <option value="time3">16:00-21:00</option>
           </select>
-          <label for="roleDropdown">เวลาสอบ</label>
-          <select class="form-select" id="roleDropdown1">
-            <option value="examtime"></option>
+          <label for="exam_time">เวลาสอบ</label>
+          <select class="form-select" id="exam_time">
+            <option value="examtime">เลือกเวลา</option>
             <option value="examtime1">09:00-12:00</option>
             <option value="examtime2">13:00-16:00</option>
           </select>
@@ -198,8 +198,7 @@
             </div>
             <div class="form-group">
               <label for="sec">ตำแหน่ง</label>
-              <select class="form-select"
-                style="margin-top: 7px;margin-bottom: 7px;padding-top: 9px;padding-bottom: 9px;" id="updatetype"
+              <select class="form-select" style="margin-top: 7px; margin-bottom: 7px; padding-top: 9px; padding-bottom: 9px;" id="updatetype"
                 required>
                 <option value="type"></option>
                 <option value="teacher">teacher</option>
@@ -283,7 +282,7 @@
               </select>
             </div>
             <div class="form-group">
-              <label for="sec">กลุ่มเรียน</label>
+              <label for="sec">Sec :</label>
               <input type="text" class="form-control" name="sec" id="addsec" required>
             </div>
             <div class="form-group">
@@ -301,10 +300,10 @@
               </select>
             </div>
             <div class="form-group">
-              <label for="time">เวลาสอบ</label>
+              <label for="examtime">เวลาสอบ</label>
               <select class="form-select"
                 style="margin-top: 7px;margin-bottom: 7px;padding-top: 9px;padding-bottom: 9px;" id="addexamtime" required>
-                <option selected disabled value="">เลือกเวลา</option>
+                <option selected disabled value="examtime">เลือกเวลา</option>
                 <option value="examtime1">09:00-12:00</option>
                 <option value="examtime2">13:00-16:00</option>
               </select>
