@@ -12,6 +12,7 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/mammoth/1.6.0/mammoth.browser.min.js"></script>
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.11.6/umd/popper.min.js"></script>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <style>
     .input-group {
       position: relative;
@@ -47,11 +48,11 @@
   <!-- modalform -->
   <h1 class="text-center my-4">ข้อมูลนักศึกษา</h1>
   <div class="input-group" style="width: 50%; margin-bottom: 10px; margin-left: 33%;">
-    <input type="text" class="form-control" placeholder="ค้นหาข้อมูลนักศึกษา">
-    <button class="btn btn-primary" type="button">ค้นหา</button>
+    <input type="text" class="form-control" placeholder="ค้นหาข้อมูลนักศึกษา" oninput="searchTable()">
     <div style="margin-left: 5px;">
-    <button id="wordBtn" class="btn btn-warning">เพิ่มข้อมูลหลายคน</button>
-    <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#add_user">เพิ่มข้อมูล</button>
+      <button id="wordBtn" class="btn btn-warning">เพิ่มข้อมูลหลายคน</button>
+      <button type="button" class="btn btn-warning" data-bs-toggle="modal"
+        data-bs-target="#add_user">เพิ่มข้อมูล</button>
     </div>
   </div>
   <br>
@@ -79,7 +80,6 @@
       <tbody>
         <% for(let i=0; i < title.length; i++){ %>
           <tr>
-
             <td></td>
             <td style="text-align: center;">
               <%= i+1 %>
@@ -198,7 +198,8 @@
             </div>
             <div class="form-group">
               <label for="sec">ตำแหน่ง</label>
-              <select class="form-select" style="margin-top: 7px; margin-bottom: 7px; padding-top: 9px; padding-bottom: 9px;" id="updatetype"
+              <select class="form-select"
+                style="margin-top: 7px; margin-bottom: 7px; padding-top: 9px; padding-bottom: 9px;" id="updatetype"
                 required>
                 <option value="type"></option>
                 <option value="teacher">teacher</option>
@@ -225,15 +226,14 @@
               </select>
             </div>
             <label for="sec">เวลาสอบ</label>
-              <select class="form-select"
-                style="margin-top: 7px;margin-bottom: 7px;padding-top: 9px;padding-bottom: 9px;" id="updateexamtime"
-                required>
-                <option value="examtime"></option>
-                <option value="examtime1">09:00-12:00</option>
-                <option value="examtime2">13:00-16:00</option>
-              </select>
-            </div>
-            <br>
+            <select class="form-select" style="margin-top: 7px;margin-bottom: 7px;padding-top: 9px;padding-bottom: 9px;"
+              id="updateexamtime" required>
+              <option value="examtime"></option>
+              <option value="examtime1">09:00-12:00</option>
+              <option value="examtime2">13:00-16:00</option>
+            </select>
+          </div>
+          <br>
           <div class="modal-footer">
             <button type="button" class="btn btn-danger" data-bs-dismiss="modal">ปิด</button>
             <button type="submit" id="submitUpdateUser" class="btn btn-success">แก้ไข</button>
@@ -302,7 +302,8 @@
             <div class="form-group">
               <label for="examtime">เวลาสอบ</label>
               <select class="form-select"
-                style="margin-top: 7px;margin-bottom: 7px;padding-top: 9px;padding-bottom: 9px;" id="addexamtime" required>
+                style="margin-top: 7px;margin-bottom: 7px;padding-top: 9px;padding-bottom: 9px;" id="addexamtime"
+                required>
                 <option selected disabled value="examtime">เลือกเวลา</option>
                 <option value="examtime1">09:00-12:00</option>
                 <option value="examtime2">13:00-16:00</option>
@@ -523,4 +524,32 @@
         });
     });
   });
+</script>
+<script>
+  function searchTable() {
+    var input, filter, table, tr, td, i, j, txtValue;
+    input = document.querySelector(".form-control");
+    filter = input.value.toUpperCase();
+    table = document.querySelector(".table");
+    tr = table.getElementsByTagName("tr");
+
+    for (i = 1; i < tr.length; i++) { // เริ่มต้นที่ 1 เพื่อข้ามแถวหัวตาราง
+      var rowVisible = false;
+      td = tr[i].getElementsByTagName("td");
+
+      for (j = 0; j < td.length; j++) { // วนลูปทุกคอลัมน์ในแถว
+        txtValue = td[j].textContent || td[j].innerText;
+        if (txtValue.toUpperCase().indexOf(filter) > -1) {
+          rowVisible = true;
+          break; // หากพบข้อมูลที่ตรงในคอลัมน์นึง ให้หยุดค้นหาคอลัมน์อื่น
+        }
+      }
+
+      if (rowVisible) {
+        tr[i].style.display = "";
+      } else {
+        tr[i].style.display = "none";
+      }
+    }
+  }
 </script>
