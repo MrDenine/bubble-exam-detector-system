@@ -17,16 +17,16 @@ exports.handleLogin = async (req, res, next) => {
       req.session.username = user[0].username;
       if (userType === 'teacher') {
         res.cookie('loggedIn', 'true');
-        res.redirect('/');
+        res.redirect(`/?username=${username}`);
       } else if (userType === 'student') {
         res.cookie('loggedIn', 'true');
-        res.redirect('/restu');
+        res.redirect(`/restu?username=${username}`);
       } else {
         res.render('login', { error: 'Invalid user type.' });
       }
     } else {
       res.render('login', { error: 'Invalid username or password.' });
-    } 
+    }
   } catch (err) {
     next(err);
   }

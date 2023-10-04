@@ -7,7 +7,8 @@ exports.handleLogout = (req, res) => {
 
 exports.render_userPage = async function (req, res) {
     let user = await userModel.getUserAll();
-    res.render('user', { title: user[0] });
+    const username = req.session.username;
+    res.render('user', { title: user[0], username: username });
 }
 
 exports.updateUser = async function (req, res) {

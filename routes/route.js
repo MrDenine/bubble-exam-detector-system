@@ -13,6 +13,7 @@ const show_scorestuController = require('../controllers/show_scorestuController'
 const ansController = require('../controllers/ansController');
 const ans2Controller = require('../controllers/ans2Controller');
 const omrController = require('../controllers/omrController');
+let username;
 
 router.use(express.json());
 router.use(express.urlencoded({ extended: false }));
@@ -20,6 +21,7 @@ router.use(cookieParser());
 
 const checkAuth = (req, res, next) => {
     if (req.cookies.loggedIn === 'true') {
+        username = req.session.username;
         next();
     } else {
         res.redirect('/login');
@@ -49,5 +51,6 @@ router.post('/ansExam', ansController.postExamResult);
 
 router.get('/getAnswer', omrController.getAnswer);
 router.get('/logout', indexController.handleLogout);
+router.get('/username', (req, res) => res.send(username));
 
 module.exports = router;

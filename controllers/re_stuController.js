@@ -4,5 +4,6 @@ exports.handleLogout = (req, res) => {
 };
 
 exports.render_re_stuPage = function (req, res) {
-    res.render('re_stu', { title: 're_stu' })
+    const username = req.session.username;
+    res.render('re_stu', { title: 're_stu', username: username })
 }

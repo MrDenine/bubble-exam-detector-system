@@ -6,7 +6,8 @@ exports.handleLogout = (req, res) => {
 };
 
 exports.render_manageExamPage = function (req, res) {
-    res.render('exam_manage', { title: 'exam_manage' });
+    const username = req.session.username;
+    res.render('exam_manage', { title: 'exam_manage', username: username });
 }
 
 exports.insertData = async function (req, res) {

@@ -25,13 +25,13 @@
     <div class="collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav">
         <li class="nav-item">
-          <a class="nav-link" href="/">Home</a>
+          <a class="nav-link" href="/?username=<%= username %>">Home</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="/user">เพิ่มข้อมูลนักศึกษา</a>
+          <a class="nav-link" href="/user?username=<%= username %>">เพิ่มข้อมูลนักศึกษา</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link active" href="/exammanage">จัดการข้อสอบ</a>
+          <a class="nav-link active" href="/exammanage?username=<%= username %>">จัดการข้อสอบ</a>
         </li>
       </ul>
       <a href="/logout" class="btn btn-danger" style="margin-left:auto;">ออกจากระบบ</a>&nbsp;&nbsp;&nbsp;&nbsp;
@@ -109,8 +109,10 @@
             </form>
             <div class="form-group mb-3">
               <center>
-                <button class="btn btn-success" type="submit" name="submit" value="submit1" style="width:200px;">อัพกระดาษคำตอบ</button>
-                <button class="btn btn-primary" type="submit" name="submit" value="submit2" style="width:200px;">กำหนดเอง</button>
+                <button class="btn btn-success" type="submit" name="submit" value="submit1"
+                  style="width:200px;">อัพกระดาษคำตอบ</button>
+                <button class="btn btn-primary" type="submit" name="submit" value="submit2"
+                  style="width:200px;">กำหนดเอง</button>
               </center>
             </div>
           </div>
@@ -171,7 +173,7 @@
             </div>
             <div class="form-group mb-3">
               <label for="group">กลุ่ม CPE</label>
-              <input type="text" class="form-control" name="group" id="group" p  required>
+              <input type="text" class="form-control" name="group" id="group" p required>
             </div>
             <!-- เอาข้อมูลชื่อรหัสชั้นตอนเก็บคำตอบ -->
             <form action="">
@@ -229,14 +231,14 @@
               </select>
             </div>
             <div class="form-group mb-3">
-          <select class="form-select" id="section">
-            <option value="">เลือก Sec</option>
-            <% for (let i=1; i <=100; i++) { %>
-              <option value="<%= i %>">
-                <%= i %>
-              </option>
-              <% } %>
-          </select>
+              <select class="form-select" id="section">
+                <option value="">เลือก Sec</option>
+                <% for (let i=1; i <=100; i++) { %>
+                  <option value="<%= i %>">
+                    <%= i %>
+                  </option>
+                  <% } %>
+              </select>
             </div>
             <div class="form-group mb-3">
               <label for="group">กลุ่ม CPE</label>
@@ -257,62 +259,6 @@
       </div>
     </div>
   </div>
-  <!-- modalid04 -->
-  <!-- <div class="modal" id="id04">
-    <div class="modal-dialog">
-      <div class="modal-content">
-
-        <div class="modal-header">
-          <h4 class="modal-title text-center">การวิเคราะห์ผลคำตอบ</h4>
-        </div>
-        <br>
-        <form class="container" action="">
-          <div class="container">
-            <div class="form-group mb-3">
-              <select class="form-control" id="year">
-                <option>เลือกปีการศึกษา</option>
-                <option>2021</option>
-                <option>2022</option>
-                <option>2023</option>
-              </select>
-            </div>
-            <div class="form-group mb-3">
-              <select class="form-control" id="term">
-                <option>เลือกเทอม</option>
-                <option>1</option>
-                <option>2</option>
-                <option>3</option>
-              </select>
-            </div>
-            <div class="form-group mb-3">
-              <select class="form-control" id="term">
-                <option>เลือกกลางภาค-ปลายภาค</option>
-                <option value="middle">กลางภาค</option>
-                <option value="final">ปลายภาค</option>
-              </select>
-            </div>
-            <div class="form-group mb-3">
-              <select class="form-control" id="group" required>
-                <option>เลือก Sec</option>
-                <option>Sec 1</option>
-                <option>Sec 2</option>
-              </select>
-            </div>
-            <div class="form-group mb-3">
-              <center>
-                <button class="btn btn-success" type="submit" style="width: 400px;">แสดงผล</button>
-              </center>
-            </div>
-          </div>
-        </form>
-
-        <div class="modal-footer">
-          <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
-        </div>
-      </div>
-    </div>
-  </div> -->
-  
 </body>
 
 </html>

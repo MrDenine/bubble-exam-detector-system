@@ -6,7 +6,8 @@ exports.handleLogout = (req, res) => {
 };
 
 exports.render_show_scoreadminPage = function (req, res) {
-    res.render('show_scoreadmin', { title: 'show_scoreadmin' })
+    const username = req.session.username;
+    res.render('show_scoreadmin', { title: 'show_scoreadmin', username: username })
 }
 
 exports.getExamResult = async function (req, res) {

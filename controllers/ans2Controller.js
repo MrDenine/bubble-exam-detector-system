@@ -4,5 +4,6 @@ exports.handleLogout = (req, res) => {
 };
 
 exports.render_ans2Page = function (req, res) {
-    res.render('ans2', { title: 'ans2' })
+    const username = req.session.username;
+    res.render('ans2', { title: 'ans2', username: username })
 }
