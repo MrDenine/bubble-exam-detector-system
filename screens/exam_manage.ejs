@@ -17,7 +17,7 @@
 <body>
   <!-- Navbar -->
   <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    &nbsp;&nbsp;<a class="navbar-brand">Computer Programmimg</a>
+    &nbsp;&nbsp;<a class="navbar-brand">Computer Programming</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
       aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
@@ -53,8 +53,7 @@
               data-bs-target="#id02">ตรวจกระดาษคำตอบ</button>
           </div>
           <div class="container mb-2">
-            <button type="button" class="btn btn-success btn-lg shadow w-100" data-bs-toggle="modal"
-              data-bs-target="#id03">รายงานผลคะแนนสอบ</button>
+              <a type="button" class="btn btn-success btn-lg shadow w-100" href="/show_sadmin">รายงานผลคะแนนสอบ</a>
           </div>
           <!-- <div class="container mb-2">
             <button type="button" class="btn btn-success btn-lg shadow w-100" data-bs-toggle="modal"
@@ -196,69 +195,7 @@
       </div>
     </div>
   </div>
-  <!-- modalid03 -->
-  <div class="modal" id="id03">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <!-- Modal Header -->
-        <div class="modal-header">
-          <h4 class="modal-title text-center">รายงานผลคะแนนสอบ</h4>
-        </div>
-        <br>
-        <form class="container" action="exam_result" method="POST">
-          <div class="container">
-            <div class="form-group mb-3">
-              <select class="form-select" id="year" name="year">
-                <option>เลือกปีการศึกษา</option>
-                <option>2021</option>
-                <option>2022</option>
-                <option>2023</option>
-              </select>
-            </div>
-            <div class="form-group mb-3">
-              <select class="form-select" id="term" name="term">
-                <option>เลือกเทอม</option>
-                <option>1</option>
-                <option>2</option>
-                <option>3</option>
-              </select>
-            </div>
-            <div class="form-group mb-3">
-              <select class="form-select" id="sub_term" name="sub_term">
-                <option>เลือกกลางภาค-ปลายภาค</option>
-                <option value="middle">กลางภาค</option>
-                <option value="final">ปลายภาค</option>
-              </select>
-            </div>
-            <div class="form-group mb-3">
-              <select class="form-select" id="section">
-                <option value="">เลือก Sec</option>
-                <% for (let i=1; i <=100; i++) { %>
-                  <option value="<%= i %>">
-                    <%= i %>
-                  </option>
-                  <% } %>
-              </select>
-            </div>
-            <div class="form-group mb-3">
-              <label for="group">กลุ่ม CPE</label>
-              <input type="text" class="form-control" name="group" id="group" required>
-            </div>
-            <br>
-            <div class="form-group mb-3">
-              <center>
-                <button class="btn btn-success" type="submit" style="width: 400px;">แสดงผล</button>
-              </center>
-            </div>
-          </div>
-        </form>
-        <!-- Modal footer -->
-        <div class="modal-footer">
-          <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
-        </div>
-      </div>
-    </div>
-  </div>
+
 </body>
 
 </html>

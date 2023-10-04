@@ -17,7 +17,7 @@
 <body>
   <!-- Navbar -->
   <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    &nbsp;&nbsp;<a class="navbar-brand">Computer Programmimg</a>
+    &nbsp;&nbsp;<a class="navbar-brand">Computer Programming</a>
     <div class="collapse navbar-collapse" id="navbarNav">
       <a href="/logout" class="btn btn-danger" style="margin-left:auto;">ออกจากระบบ</a>&nbsp;&nbsp;&nbsp;&nbsp;
     </div>
@@ -26,38 +26,6 @@
 
   <div class="container">
     <h1 class="text-center my-4">คะแนนสอบ</h1>
-    <div class="input-group" style="width: 75%; margin-bottom: 10px; margin-left: 10%;">
-      <select class="form-select" id="year">
-        <option>ปีการศึกษา</option>
-        <option>2021</option>
-        <option>2022</option>
-        <option>2023</option>
-        <option>2024</option>
-        <option>2025</option>
-      </select>
-      <select class="form-select" id="term">
-        <option>เทอม</option>
-        <option>1</option>
-        <option>2</option>
-        <option>3</option>
-      </select>
-      <select class="form-select" id="term" style="width: 10%;">
-        <option>กลางภาค-ปลายภาค</option>
-        <option value="middle">กลางภาค</option>
-        <option value="final">ปลายภาค</option>
-      </select>
-      <select class="form-select" id="section">
-        <option value="">Sec</option>
-        <% for (let i=1; i <=100; i++) { %>
-          <option value="<%= i %>">
-            <%= i %>
-          </option>
-          <% } %>
-      </select>
-      <input type="text" class="form-control" name="group" id="group" value="CPE" required>
-      <button class="btn btn-primary" type="button">ค้นหา</button>
-      <button onclick="createExcel()" class="btn btn-warning" style="margin-left: 5px;">Export to Excel</button>
-    </div>
     <br>
     <table class="table">
       <thead>
@@ -66,7 +34,7 @@
           <th scope="col">รหัสนักศึกษา</th>
           <th scope="col">ชื่อ</th>
           <th scope="col">นามสกุล</th>
-          <th scope="col">กลุ่มเรียน</th>
+          <th scope="col">Sec</th>
           <th scope="col">กลุ่ม CPE</th>
           <th scope="col">คะแนนสอบ</th>
         </tr>
@@ -77,7 +45,7 @@
           <td>11623046</td>
           <td>วันจันทร์</td>
           <td>อังคาร</td>
-          <td>sec 2</td>
+          <td>2</td>
           <td>CEP62346</td>
           <td>20</td>
         </tr>
@@ -87,31 +55,3 @@
 </body>
 
 </html>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.16.9/xlsx.full.min.js"></script>
-<script>
-  function createExcel() {
-    var table = document.querySelector("table");
-    var ws_data = XLSX.utils.table_to_sheet(table);
-
-    var range = XLSX.utils.decode_range(ws_data['!ref']);
-    for (let C = range.s.c; C <= range.e.c; ++C) {
-      var cell_address = { c: C, r: range.s.r };
-      var cell_ref = XLSX.utils.encode_cell(cell_address);
-
-      if (!ws_data[cell_ref]) continue; // ในกรณีที่ cell นั้นว่าง
-
-      if (!ws_data[cell_ref].s) {
-        ws_data[cell_ref].s = {};
-      }
-      ws_data[cell_ref].s.fill = {
-        patternType: "solid",
-        fgColor: { rgb: "FFFFA500" }
-      };
-    }
-
-    var wb = XLSX.utils.book_new();
-    XLSX.utils.book_append_sheet(wb, ws_data, "Sheet1");
-
-    XLSX.writeFile(wb, "scores.xlsx");
-  }
-</script>
