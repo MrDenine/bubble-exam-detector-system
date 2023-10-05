@@ -45,6 +45,7 @@
       <a href="/logout" class="btn btn-danger" style="margin-left:auto;">ออกจากระบบ</a>&nbsp;&nbsp;&nbsp;&nbsp;
     </div>
   </nav>
+
   <!-- modalform -->
   <h1 class="text-center my-4">ข้อมูลนักศึกษา</h1>
   <div class="input-group" style="width: 50%; margin-bottom: 10px; margin-left: 33%;">
@@ -55,6 +56,7 @@
         data-bs-target="#add_user">เพิ่มข้อมูล</button>
     </div>
   </div>
+
   <br>
   <div class="container" style="width: 100%;">
     <form id="deleteForm" action="/del_user" method="POST">
@@ -132,7 +134,7 @@
         <div class="modal-body">
           <label for="numberDropdown">Sec : </label>
           <select class="form-select" id="section">
-            <option value="">เลือก Sec</option>
+            <option selected disabled value="">เลือก Sec</option>
             <% for (let i=1; i <=100; i++) { %>
               <option value="<%= i %>">
                 <%= i %>
@@ -140,24 +142,25 @@
               <% } %>
           </select>
           <label for="group">กลุ่ม CPE : </label>
-          <input type="cpe" class="form-control" id="exampleInputCPE">
+          <input type="group" class="form-control" id="group">
           <label for="time">เวลาเรียน</label>
           <select class="form-select" style="margin-top: 7px;margin-bottom: 7px;padding-top: 9px;padding-bottom: 9px;"
-            id="time" required>
-            <option value="time">เลือกเวลา</option>
+          name="time" id="time" required>
+            <option selected disabled value="">เลือกเวลา</option>
             <option value="time1">08:00-13:00</option>
             <option value="time2">13:00-18:00</option>
             <option value="time3">16:00-21:00</option>
           </select>
           <label for="exam_time">เวลาสอบ</label>
-          <select class="form-select" id="exam_time">
-            <option value="examtime">เลือกเวลา</option>
-            <option value="examtime1">09:00-12:00</option>
-            <option value="examtime2">13:00-16:00</option>
+          <select class="form-select" style="margin-top: 7px;margin-bottom: 7px;padding-top: 9px;padding-bottom: 9px;"
+          name="exam_time" id="exam_time" required>
+            <option selected disabled value="">เลือกเวลา</option>
+            <option value="exam_time1">09:00-12:00</option>
+            <option value="exam_time2">13:00-16:00</option>
           </select>
-          <div class="modal-body">
+          <div class="">
             <label for="roleDropdown">วางรายชื่อนักศึกษา</label>
-            <textarea class="form-control" id="exampleFormControlTextarea1" rows="5"></textarea>
+            <textarea class="form-control" id="exampleFormControlTextarea1" rows="4"></textarea>
           </div>
           <br>
         </div>
@@ -177,60 +180,56 @@
         <div action="update_user" class="needs-validation" novalidate>
           <div class="modal-body">
             <div class="form-group">
-              <label for="id">เลขที่</label>
+              <label for="number">เลขที่</label>
               <input type="text" class="form-control" name="number" id="updatenumber" required>
             </div>
             <div class="form-group">
               <label for="username">รหัสผู้ใช้</label>
-              <input type="text" class="form-control" name="username" id="updateusername" value="" readonly disabled>
+              <input type="text" class="form-control" name="username" id="updateusername" readonly disabled>
             </div>
             <div class="form-group">
               <label for="password">รหัสผ่าน</label>
               <input type="password" class="form-control" name="password" id="updatepassword">
             </div>
             <div class="form-group">
-              <label for="name">ชื่อ</label>
+              <label for="firstname">ชื่อ</label>
               <input type="text" class="form-control" name="firstname" id="updatefirstname">
             </div>
             <div class="form-group">
-              <label for="surname">นามสกุล</label>
+              <label for="lastname">นามสกุล</label>
               <input type="text" class="form-control" name="lastname" id="updatelastname">
             </div>
             <div class="form-group">
-              <label for="sec">ตำแหน่ง</label>
+              <label for="type">ตำแหน่ง</label>
               <select class="form-select"
-                style="margin-top: 7px; margin-bottom: 7px; padding-top: 9px; padding-bottom: 9px;" id="updatetype"
-                required>
-                <option value="type"></option>
+                style="margin-top: 7px; margin-bottom: 7px; padding-top: 9px; padding-bottom: 9px;" 
+                name="type" id="updatetype" required>
                 <option value="teacher">teacher</option>
                 <option value="student">student</option>
               </select>
             </div>
             <div class="form-group">
-              <label for="sec">กลุ่มเรียน</label>
-              <input type="text" class="form-control" name="sec" id="updatesec">
+              <label for="section">Sec : </label>
+              <input type="text" class="form-control" name="section" id="updatesec">
             </div>
             <div class="form-group">
-              <label for="sec">กลุ่ม CPE</label>
+              <label for="group">กลุ่ม CPE</label>
               <input type="text" class="form-control" name="group" id="updategroup" required>
             </div>
             <div class="form-group">
-              <label for="sec">เวลาเรียน</label>
-              <select class="form-select"
-                style="margin-top: 7px;margin-bottom: 7px;padding-top: 9px;padding-bottom: 9px;" id="updatetime"
-                required>
-                <option value="time"></option>
+              <label for="time">เวลาเรียน</label>
+              <select class="form-select" style="margin-top: 7px;margin-bottom: 7px;padding-top: 9px;padding-bottom: 9px;"
+               id="updatetime" required>
                 <option value="time1">08:00-13:00</option>
                 <option value="time2">13:00-18:00</option>
                 <option value="time3">16:00-21:00</option>
               </select>
             </div>
-            <label for="sec">เวลาสอบ</label>
+            <label for="exam_time">เวลาสอบ</label>
             <select class="form-select" style="margin-top: 7px;margin-bottom: 7px;padding-top: 9px;padding-bottom: 9px;"
-              id="updateexamtime" required>
-              <option value="examtime"></option>
-              <option value="examtime1">09:00-12:00</option>
-              <option value="examtime2">13:00-16:00</option>
+            id="updateexam_time" required>
+              <option value="exam_time1">09:00-12:00</option>
+              <option value="exam_time2">13:00-16:00</option>
             </select>
           </div>
           <br>
@@ -269,21 +268,22 @@
               <input type="text" class="form-control" name="firstname" id="addfirstname" required>
             </div>
             <div class="form-group">
-              <label for="surname">นามสกุล</label>
+              <label for="lastname">นามสกุล</label>
               <input type="text" class="form-control" name="lastname" id="addlastname" required>
             </div>
             <div class="form-group">
-              <label for="sec">ตำแหน่ง</label>
+              <label for="type">ตำแหน่ง</label>
               <select class="form-select"
-                style="margin-top: 7px;margin-bottom: 7px;padding-top: 9px;padding-bottom: 9px;" id="addtype" required>
+                style="margin-top: 7px;margin-bottom: 7px;padding-top: 9px;padding-bottom: 9px;" 
+                name="type" id="addtype" required>
                 <option selected disabled value="">เลือกสถานะ</option>
                 <option value="teacher">Teacher</option>
                 <option value="student">Student</option>
               </select>
             </div>
             <div class="form-group">
-              <label for="sec">Sec :</label>
-              <input type="text" class="form-control" name="sec" id="addsec" required>
+              <label for="section">Sec :</label>
+              <input type="text" class="form-control" name="section" id="addsec" required>
             </div>
             <div class="form-group">
               <label for="group">กลุ่ม CPE</label>
@@ -293,20 +293,20 @@
               <label for="time">เวลาเรียน</label>
               <select class="form-select"
                 style="margin-top: 7px;margin-bottom: 7px;padding-top: 9px;padding-bottom: 9px;" id="addtime" required>
-                <option selected disabled value="">เลือกเวลา</option>
+                <option selected disabled value="time">เลือกเวลา</option>
                 <option value="time1">08:00-13:00</option>
                 <option value="time2">13:00-18:00</option>
                 <option value="time3">16:00-21:00</option>
               </select>
             </div>
             <div class="form-group">
-              <label for="examtime">เวลาสอบ</label>
+              <label for="exam_time">เวลาสอบ</label>
               <select class="form-select"
-                style="margin-top: 7px;margin-bottom: 7px;padding-top: 9px;padding-bottom: 9px;" id="addexamtime"
+                style="margin-top: 7px;margin-bottom: 7px;padding-top: 9px;padding-bottom: 9px;" id="addexam_time"
                 required>
-                <option selected disabled value="examtime">เลือกเวลา</option>
-                <option value="examtime1">09:00-12:00</option>
-                <option value="examtime2">13:00-16:00</option>
+                <option selected disabled value="exam_time">เลือกเวลา</option>
+                <option value="exam_time1">09:00-12:00</option>
+                <option value="exam_time2">13:00-16:00</option>
               </select>
             </div>
             <br>
@@ -323,6 +323,7 @@
 
 </html>
 
+<!-- เพิ่มข้อมูล -->
 <script>
   document.getElementById('submitAddUser').addEventListener('click', function (event) {
     event.preventDefault();
@@ -331,10 +332,27 @@
   function submitAddUser() {
     type = document.getElementById('addtype').value
     if (type == 'teacher') {
-      sec = document.getElementById('addsec').value
+      section = document.getElementById('addsec').value
     } else if (type == 'student') {
-      sec = "Sec" + document.getElementById('addsec').value
+      section = document.getElementById('addsec').value
     }
+
+    time = document.getElementById('addtime').value
+    if (time == 'time1') {
+      time = document.getElementById('addtime').value
+    } else if (time == 'time2') {
+      time = document.getElementById('addtime').value
+    } else if (time == 'time3') {
+      time = document.getElementById('addtime').value
+    }
+
+    exam_time = document.getElementById('addexam_time').value
+    if (exam_time == 'exam_time1') {
+      exam_time = document.getElementById('addexam_time').value
+    } else if (time == 'exam_time2') {
+      exam_time = document.getElementById('addexam_time').value
+    } 
+    
     let data = {
       number: document.getElementById('addnumber').value,
       username: document.getElementById('addusername').value,
@@ -343,8 +361,9 @@
       lastname: document.getElementById('addlastname').value,
       group: document.getElementById('addgroup').value,
       type: type,
-      section: sec,
-      time: time
+      section: section,
+      time: time,
+      exam_time: exam_time
     };
 
     fetch('/add_user', {
@@ -369,6 +388,7 @@
       });
   }
 </script>
+<!-- อัพเดตข้อมูล(แก้ไข) -->
 <script>
   function onClickModalEdit(data_user) {
     var username = data_user;
@@ -386,9 +406,11 @@
     document.getElementById('updatesec').value = user.section;
     document.getElementById('updategroup').value = user.group;
     document.getElementById('updatetime').value = user.time !== 'time1' ? 'time2' ?? 'time3' : user.time;
+    document.getElementById('updateexam_time').value = user.exam_time !== 'exam_time1' ? 'exam_time2' : user.exam_time;
     $('#edit_user').modal('show');
   }
 </script>
+<!-- อัพเดตข้อมูล ปุ่มส่ง (แก้ไข) -->
 <script>
   document.getElementById('submitUpdateUser').addEventListener('click', function (event) {
     event.preventDefault();
@@ -398,9 +420,9 @@
     type = document.getElementById('updatetype').value
     console.log(type)
     if (type == 'teacher') {
-      sec = document.getElementById('updatesec').value
+      section = document.getElementById('updatesec').value
     } else if (type == 'student') {
-      sec = "Sec" + document.getElementById('updatesec').value
+      section = document.getElementById('updatesec').value
     }
     let data = {
       number: document.getElementById('updatenumber').value,
@@ -410,8 +432,9 @@
       lastname: document.getElementById('updatelastname').value,
       group: document.getElementById('updategroup').value,
       type: type,
-      section: sec,
-      time: time
+      section: section,
+      time: time,
+      exam_time: exam_time
     };
 
     fetch('/update_user', {
@@ -436,6 +459,7 @@
       });
   }
 </script>
+<!-- ลบข้อมูล -->
 <script>
   function onClickModalDelete(element) {
     let username = element.getAttribute('data-username');
@@ -448,6 +472,7 @@
     }
   }
 </script>
+<!-- กรอกนักศึกษาเยอะๆ -->
 <script>
   const wordBtn = document.getElementById('wordBtn');
   const wordModal = new bootstrap.Modal(document.getElementById('wordModal'));
@@ -462,7 +487,7 @@
   confirmWordBtn.addEventListener('click', async () => {
     var time = "";
     const textData = document.getElementById('exampleFormControlTextarea1').value;
-    const sec = "Sec" + document.getElementById('numberDropdown').value;
+    const section = document.getElementById('numberDropdown').value;
     const lines = textData.split('\n');
     const extractedData = [];
     const regex = /(\d+-\d+)\s+([\u0E00-\u0E7F]+)\s+([\u0E00-\u0E7F]+)\s*/g;
@@ -476,6 +501,14 @@
       time = "13:00-18:00";
     } else if (selectedValue === "time3") {
       time = "16:00-21:00";
+    }
+
+    var selectedValue = document.getElementById('exam_time').value;
+
+    if (selectedValue === "exam_time1") {
+      time = "09:00-12:00";
+    } else if (selectedValue === "exam_time2") {
+      time = "13:00-16:00";
     }
 
     lines.forEach(line => {
@@ -495,10 +528,11 @@
         user: match[1].replace('-', ''),
         firstName: match[2].trim(),
         lastName: match[3].trim(),
-        sec: sec,
+        section: section,
         group: cpe,
         status: status,
-        time: time
+        time: time,
+        exam_time: exam_time
       });
     }
 
@@ -525,6 +559,7 @@
     });
   });
 </script>
+<!-- ค้นหาข้อมูล -->
 <script>
   function searchTable() {
     var input, filter, table, tr, td, i, j, txtValue;

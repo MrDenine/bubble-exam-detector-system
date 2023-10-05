@@ -13,8 +13,8 @@ exports.render_userPage = async function (req, res) {
 
 exports.updateUser = async function (req, res) {
     try {
-        const { username, password, firstname, lastname, type, section } = req.body;
-        const updateuser = await userModel.postUpdateuser(username, password, firstname, lastname, type, section);
+        const { number, username, password, firstname, lastname, type, section, group, time, exame_time } = req.body;
+        const updateuser = await userModel.postUpdateuser(number, username, password, firstname, lastname, type, section, group, time, exame_time);
         res.json({ status: "Success", message: "User update successfully" });
     } catch (error) {
         res.json({ status: "Failed", message: "Failed to update user" });
@@ -23,8 +23,8 @@ exports.updateUser = async function (req, res) {
 
 exports.insertUser = async function (req, res) {
     try {
-        const { user, firstName, lastName, sec, status, time, group } = req.body;
-        const insertuser = await userModel.postInsertuser(user, firstName, lastName, sec, status, time, group);
+        const { number, username, password, firstname, lastname, type, section, group, time, exame_time } = req.body;
+        const insertuser = await userModel.postInsertuser(number, username, password, firstname, lastname, type, section, group, time, exame_time);
         res.json({ status: "Success", message: "User update successfully" });
     } catch (error) {
         res.json({ status: "Failed", message: "Failed to update user" });
@@ -33,8 +33,8 @@ exports.insertUser = async function (req, res) {
 
 exports.addUser = async function (req, res) {
     try {
-        const { username, password, firstname, lastname, type, section } = req.body;
-        const result = await userModel.postAdduser(username, password, firstname, lastname, type, section);
+        const { number, username, password, firstname, lastname, type, section, group, time, exame_time } = req.body;
+        const result = await userModel.postAdduser(number,username, password, firstname, lastname, type, section, group, time, exame_time);
         res.json({ status: "Success", message: "User added successfully" });
     } catch (error) {
         res.json({ status: "Failed", message: "Failed to add user" });
