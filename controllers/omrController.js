@@ -1,5 +1,7 @@
 const axios = require('axios').default;
 const fs = require('fs');
+const FormData = require('form-data');
+const db = require("../config/dbconnection");
 
 exports.handleLogout = (req, res) => {
     res.clearCookie('loggedIn');
@@ -7,40 +9,100 @@ exports.handleLogout = (req, res) => {
 };
 
 exports.getAnswer = async function (req, res) {
-    const image_processing_api_test = "http://127.0.0.1:3000/response";
-    const image_processing_api = "http://127.0.0.1:3000/predict";
-    var bodyFormData = new FormData();
-    bodyFormData.append('file', req.body.image);
+    const image_processing_api = "http://127.0.0.1:4000/predict";
+
+    if (!req.file) {
+        return res.status(400).send('กรุณาอัปโหลดไฟล์รูปภาพ');
+    }
+
+    const { topic, year, term, subterm, section, group } = req.body;
+
+    const imagePath = req.file.path;
+    const imageData = fs.readFileSync(imagePath);
+
+    const formData = new FormData();
+    formData.append("file", imageData, { filename: req.file.originalname });
+
+
+    const query = `
+        SELECT ans
+        FROM ans WHERE topic = ?  AND year = ? AND term = ? AND sub_term = ?
+    `;
+    const params = [topic, year, term, subterm];
+
+    const [result] = await db.execute(query, params);
+
+    const answer = result[0].ans
+
 
     axios({
         method: "post",
         url: image_processing_api,
-        data: bodyFormData,
-        headers: { "Content-Type": "multipart/form-data" },
+        data: formData,
+        headers: { ...formData.getHeaders() },
     })
-        .then(function (response) {
+        .then(async function (response) {
 
-            var answer_compare
-            sheet_input = response.data;
 
-            if (Object.keys(answer_compare.answer_data).length != Object.keys(sheet_input.answer).length) {
-                res.send({ "error": "invalid" })
+
+            var answerData = response.data.answer;
+            if (!Array.isArray(answerData)) {
+                return res.status(400).send({ "error": "invalid" });
             }
 
-            var score = 0;
-            var total = Object.keys(answer_compare.answer_data).length;
 
-            for (let i = 0; i < Object.keys(answer_compare.answer_data).length; i++) {
-                if (answer_compare.answer_data[i]["answer"] == sheet_input.answer[i]["answer"] && sheet_input.answer[i]["answer"] != null) {
+            var score = 0;
+            for (let i = 0; i < answerData.length; i++) {
+                const responseAnswer = answerData[i].answer;
+                const correctAnswers = answer[`${i + 1}`];
+
+                if (correctAnswers && (correctAnswers.includes(convertAnswer(responseAnswer)))) {
                     score++;
                 }
             }
-            sheet_input["score"] = score;
-            sheet_input["total"] = total;
-            res.send(sheet_input)
+
+            const correctAnswersCount = Object.values(answer).filter(Array.isArray).filter(arr => arr.length === 3).length;
+            if (correctAnswersCount >= 1) {
+                score += 1;
+            }
+
+            const querycheckdub = `SELECT username FROM user_exam WHERE username = ?  AND year = ? AND term = ? AND sub_term = ?`;
+
+            const [isDub] = await db.execute(querycheckdub, [response.data.id, year, term, subterm]);
+
+            console.log(isDub[0])
+
+            if (isDub[0] == undefined){
+                const query = `
+                INSERT INTO user_exam (username, section, groupCPE, user_score, year, term, sub_term)
+                VALUES (?, ?, ?, ?, ?, ?, ?)
+                `;
+                const params = [response.data.id, section, group, score, year, term, subterm]
+            
+                const [result] = await db.execute(query, params, subterm);
+
+                if (result){
+                    res.json({ status: "Success", message: `ตรวจสอบรหัสนักศึกษา ${response.data.id} เรียบร้อย` });
+                } 
+            } else {
+                res.json({ status: "Faild", message: `รหัสนักศึกษา ${response.data.id} มีการตรวจสอบไปแล้ว` });
+            }
+
         })
         .catch(function (error) {
-            //handle error
-            res.send(error)
+            console.log(error);
         });
+}
+
+function convertAnswer(ans){
+    if (ans == "ก") {
+        ans = "a"
+    } else if (ans == "ข"){
+        ans = "b"
+    } else if (ans == "ค"){
+        ans = "c"
+    } else if(ans == "ง"){
+        ans = "d"
+    }
+    return ans
 }

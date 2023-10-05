@@ -50,7 +50,7 @@ router.post('/exam_result', show_scoreadminController.getExamResult);
 router.post('/ansExam', ansController.postExamResult);
 router.post('/showScoreSTU',re_stuController.showScoreSTU);
 
-router.get('/getAnswer', omrController.getAnswer);
+router.post('/getAnswer', omrController.getAnswer);
 router.get('/logout', indexController.handleLogout);
 router.get('/username', (req, res) => res.send(username));
 

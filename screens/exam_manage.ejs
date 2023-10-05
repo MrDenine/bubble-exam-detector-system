@@ -81,9 +81,11 @@
             <div class="form-group mb-3">
               <select class="form-select" id="year" name="year">
                 <option>เลือกปีการศึกษา</option>
-                <option>2021</option>
-                <option>2022</option>
-                <option>2023</option>
+                <option>2565</option>
+                <option>2566</option>
+                <option>2567</option>
+                <option>2568</option>
+                <option>2569</option>
               </select>
             </div>
             <div class="form-group mb-3">
@@ -108,10 +110,8 @@
             </form>
             <div class="form-group mb-3">
               <center>
-                <button class="btn btn-success" type="submit" name="submit" value="submit1"
-                  style="width:200px;">อัพกระดาษคำตอบ</button>
-                <button class="btn btn-primary" type="submit" name="submit" value="submit2"
-                  style="width:200px;">กำหนดเอง</button>
+                <button class="btn btn-success" type="submit" name="submit" value="submit1" style="width:200px;">อัพกระดาษคำตอบ</button>
+                <button class="btn btn-primary" type="submit" name="submit" value="submit2" style="width:200px;">กำหนดเอง</button>
               </center>
             </div>
           </div>
@@ -133,26 +133,28 @@
           <h4 class="modal-title text-center">ตรวจกระดาษคำตอบ</h4>
         </div>
         <br>
-        <form class="container" action="">
+        <form class="container" id="upload-form" enctype="multipart/form-data">
           <div class="container">
             <div class="form-group mb-3">
               <select class="form-select" id="topic" name="topic">
                 <option>เลือกข้อสอบ</option>
-                <option>ข้อสอบ1</option>
+                <option>เทสสอบ1</option>
+                <option>เทสสอบ2</option>
+                <option>เทสสอบ3</option>
               </select>
             </div>
             <div class="form-group mb-3">
-              <select class="form-select" id="year">
+              <select class="form-select" id="year-testresult" name="year">
                 <option>เลือกปีการศึกษา</option>
-                <option>2021</option>
-                <option>2022</option>
-                <option>2023</option>
-                <option>2024</option>
-                <option>2025</option>
+                <option>2565</option>
+                <option>2566</option>
+                <option>2567</option>
+                <option>2568</option>
+                <option>2569</option>
               </select>
             </div>
             <div class="form-group mb-3">
-              <select class="form-select" id="term">
+              <select class="form-select" id="term-testresult" name="term">
                 <option>เลือกเทอม</option>
                 <option>1</option>
                 <option>2</option>
@@ -160,7 +162,7 @@
               </select>
             </div>
             <div class="form-group mb-3">
-              <select class="form-select" id="term">
+              <select class="form-select" id="subterm" name="sub-term">
                 <option>เลือกกลางภาค-ปลายภาค</option>
                 <option value="middle">กลางภาค</option>
                 <option value="final">ปลายภาค</option>
@@ -172,14 +174,12 @@
             </div>
             <div class="form-group mb-3">
               <label for="group">กลุ่ม CPE</label>
-              <input type="text" class="form-control" name="group" id="group" p required>
+              <input type="text" class="form-control" name="group" id="group" p  required>
             </div>
             <!-- เอาข้อมูลชื่อรหัสชั้นตอนเก็บคำตอบ -->
-            <form action="">
-              <label for="image-input">เลือกรูปภาพ</label>
-              <input type="file" id="image-input" accept="image/*" class="mb-3">
-              <br>
-            </form>
+            <label for="image-input">เลือกรูปภาพ</label>
+            <input type="file" id="image-testresult" accept="image/*" class="mb-3" name="image">
+            <br>
             <div class="form-group mb-3">
               <center>
                 <button class="btn btn-success" type="submit" style="width: 400px;"
@@ -197,5 +197,43 @@
   </div>
 
 </body>
+
+<script>
+  document.getElementById('upload-form').addEventListener('submit', function (event) {
+    event.preventDefault();
+    submitTestResult();
+  });
+
+  function submitTestResult() {
+    // Create a FormData object to send the form data as multipart/form-data
+    const formData = new FormData();
+    formData.append("image", document.getElementById('image-testresult').files[0]);
+    formData.append("topic", document.getElementById('topic').value);
+    formData.append("year", document.getElementById('year-testresult').value);
+    formData.append("term", document.getElementById('term-testresult').value);
+    formData.append("subterm", document.getElementById('subterm').value);
+    formData.append("section", document.getElementById('section').value);
+    formData.append("group", document.getElementById('group').value);
+
+    fetch('/getAnswer', {
+      method: 'POST',
+      body: formData  // Use the FormData object
+    })
+      .then(function (response) {
+        if (response.ok) {
+          return response.json();
+        }
+      })
+      .then(function (data) {
+        
+       location.reload();
+        alert(data.message);
+      })
+      .catch(function (error) {
+        console.log('Error:', error.message);
+      });
+  }
+
+</script>
 
 </html>

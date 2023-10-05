@@ -15,7 +15,7 @@ exports.handleLogin = async (req, res, next) => {
     if (user.length > 0) {
       const userType = user[0].type;
       req.session.username = user[0].username;
-      if (userType === 'teacher') {
+      if (userType === 'teacher' || userType === 'Teacher') {
         res.cookie('loggedIn', 'true');
         res.redirect(`/?username=${username}`);
       } else if (userType === 'student' || userType === 'Student') {

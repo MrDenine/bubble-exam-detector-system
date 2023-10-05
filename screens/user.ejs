@@ -102,7 +102,7 @@
               <%= title[i].section %>
             </td>
             <td style="text-align: center;">
-              <%= title[i].group %>
+              <%= title[i].groupCPE %>
             </td>
             <td style="text-align: center;">
               <%= title[i].type %>
@@ -141,8 +141,8 @@
               </option>
               <% } %>
           </select>
-          <label for="group">กลุ่ม CPE : </label>
-          <input type="group" class="form-control" id="group">
+          <label for="groupCPE">กลุ่ม CPE : </label>
+          <input type="groupCPE" class="form-control" id="groupCPE">
           <label for="time">เวลาเรียน</label>
           <select class="form-select" style="margin-top: 7px;margin-bottom: 7px;padding-top: 9px;padding-bottom: 9px;"
           name="time" id="time" required>
@@ -213,23 +213,23 @@
               <input type="text" class="form-control" name="section" id="updatesec">
             </div>
             <div class="form-group">
-              <label for="group">กลุ่ม CPE</label>
-              <input type="text" class="form-control" name="group" id="updategroup" required>
+              <label for="groupCPE">กลุ่ม CPE</label>
+              <input type="text" class="form-control" name="groupCPE" id="updategroup" required>
             </div>
             <div class="form-group">
               <label for="time">เวลาเรียน</label>
               <select class="form-select" style="margin-top: 7px;margin-bottom: 7px;padding-top: 9px;padding-bottom: 9px;"
                id="updatetime" required>
-                <option value="08:00-13:00">08:00-13:00</option>
-                <option value="13:00-18:00">13:00-18:00</option>
-                <option value="16:00-21:00">16:00-21:00</option>
+                <option value="time1">08:00-13:00</option>
+                <option value="time2">13:00-18:00</option>
+                <option value="time3">16:00-21:00</option>
               </select>
             </div>
             <label for="exam_time">เวลาสอบ</label>
             <select class="form-select" style="margin-top: 7px;margin-bottom: 7px;padding-top: 9px;padding-bottom: 9px;"
             id="updateexam_time" required>
-              <option value="09:00-12:00">09:00-12:00</option>
-              <option value="13:00-16:00">13:00-16:00</option>
+              <option value="exam_time1">09:00-12:00</option>
+              <option value="exam_time2">13:00-16:00</option>
             </select>
           </div>
           <br>
@@ -286,17 +286,17 @@
               <input type="text" class="form-control" name="section" id="addsec" required>
             </div>
             <div class="form-group">
-              <label for="group">กลุ่ม CPE</label>
-              <input type="text" class="form-control" name="group" id="addgroup" required>
+              <label for="groupCPE">กลุ่ม CPE</label>
+              <input type="text" class="form-control" name="groupCPE" id="addgroup" required>
             </div>
             <div class="form-group">
               <label for="time">เวลาเรียน</label>
               <select class="form-select"
                 style="margin-top: 7px;margin-bottom: 7px;padding-top: 9px;padding-bottom: 9px;" id="addtime" required>
                 <option selected disabled value="time">เลือกเวลา</option>
-                <option value="08:00-13:00">08:00-13:00</option>
-                <option value="13:00-18:00">13:00-18:00</option>
-                <option value="16:00-21:00">16:00-21:00</option>
+                  <option value="time1">08:00-13:00</option>
+                  <option value="time2">13:00-18:00</option>
+                  <option value="time3">16:00-21:00</option>
               </select>
             </div>
             <div class="form-group">
@@ -305,8 +305,8 @@
                 style="margin-top: 7px;margin-bottom: 7px;padding-top: 9px;padding-bottom: 9px;" id="addexam_time"
                 required>
                 <option selected disabled value="exam_time">เลือกเวลา</option>
-                <option value="09:00-12:00">09:00-12:00</option>
-                <option value="13:00-16:00">13:00-16:00</option>
+                <option value="exam_time1">09:00-12:00</option>
+                <option value="exam_time2">13:00-16:00</option>
               </select>
             </div>
             <br>
@@ -397,7 +397,19 @@
       return item.username === username;
     });
     
-    console.log(user);
+    if (user.time == "08:00-13:00") {
+      user.time = "time1"
+    } else if (user.time == "13:00-18:00"){
+      user.time = "time2"
+    } else if (user.time == "16:00-21:00"){
+      user.time = "time3"
+    }
+
+    if (user.exam_time == "09:00-12:00") {
+      user.exam_time = "exam_time1"
+    } else if (user.exam_time == "13:00-16:00"){
+      user.exam_time = "exam_time2"
+    } 
 
     document.getElementById('updatenumber').value = user.number;
     document.getElementById('updateusername').value = user.username;
@@ -406,7 +418,7 @@
     document.getElementById('updatelastname').value = user.lastname;
     document.getElementById('updatetype').value = user.type !== 'teacher' ? 'student' : user.type;
     document.getElementById('updatesec').value = user.section;
-    document.getElementById('updategroup').value = user.group;
+    document.getElementById('updategroup').value = user.groupCPE;
     document.getElementById('updatetime').value = user.time;
     document.getElementById('updateexam_time').value = user.exam_time;
     $('#edit_user').modal('show');
@@ -420,12 +432,33 @@
   });
   function submitUpdateUser() {
     type = document.getElementById('updatetype').value
+    let time = "";
+    let exam_time = "";
     console.log(type)
     if (type == 'teacher') {
       section = document.getElementById('updatesec').value
     } else if (type == 'student') {
       section = document.getElementById('updatesec').value
     }
+
+    let selectedValue = document.getElementById('updatetime').value;
+
+    if (selectedValue === "time1") {
+      time = "08:00-13:00";
+    } else if (selectedValue === "time2") {
+      time = "13:00-18:00";
+    } else if (selectedValue === "time3") {
+      time = "16:00-21:00";
+    }
+
+    selectedValue = document.getElementById('updateexam_time').value;
+
+    if (selectedValue === "exam_time1") {
+      exam_time = "09:00-12:00";
+    } else if (selectedValue === "exam_time2") {
+      exam_time = "13:00-16:00";
+    }
+
     let data = {
       number: document.getElementById('updatenumber').value,
       username: document.getElementById('updateusername').value,
@@ -438,6 +471,8 @@
       time: time,
       exam_time: exam_time
     };
+
+    console.log(data)
 
     fetch('/update_user', {
       method: 'POST',
@@ -488,6 +523,7 @@
 
   confirmWordBtn.addEventListener('click', async () => {
     var time = "";
+    let exam_time = "";
     const textData = document.getElementById('exampleFormControlTextarea1').value;
     const section = document.getElementById('numberDropdown').value;
     const lines = textData.split('\n');
@@ -505,12 +541,12 @@
       time = "16:00-21:00";
     }
 
-    var selectedValue = document.getElementById('exam_time').value;
+    selectedValue = document.getElementById('exam_time').value;
 
     if (selectedValue === "exam_time1") {
-      time = "09:00-12:00";
+      exam_time = "09:00-12:00";
     } else if (selectedValue === "exam_time2") {
-      time = "13:00-16:00";
+      exam_time = "13:00-16:00";
     }
 
     lines.forEach(line => {

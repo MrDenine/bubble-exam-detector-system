@@ -13,18 +13,19 @@ exports.render_userPage = async function (req, res) {
 
 exports.updateUser = async function (req, res) {
     try {
-        const { number, username, password, firstname, lastname, type, section, group, time, exame_time } = req.body;
-        const updateuser = await userModel.postUpdateuser(number, username, password, firstname, lastname, type, section, group, time, exame_time);
+        const { number, username, password, firstname, lastname, type, section, group, time, exam_time } = req.body;
+        const updateuser = await userModel.postUpdateuser(number, username, password, firstname, lastname, type, section, group, time, exam_time);
         res.json({ status: "Success", message: "User update successfully" });
     } catch (error) {
+        console.log(error)
         res.json({ status: "Failed", message: "Failed to update user" });
     }
 };
 
 exports.insertUser = async function (req, res) {
     try {
-        const { number, username, password, firstname, lastname, type, section, group, time, exame_time } = req.body;
-        const insertuser = await userModel.postInsertuser(number, username, password, firstname, lastname, type, section, group, time, exame_time);
+        const { number, username, password, firstname, lastname, type, section, group, time, exam_time } = req.body;
+        const insertuser = await userModel.postInsertuser(number, username, password, firstname, lastname, type, section, group, time, exam_time);
         res.json({ status: "Success", message: "User update successfully" });
     } catch (error) {
         res.json({ status: "Failed", message: "Failed to update user" });

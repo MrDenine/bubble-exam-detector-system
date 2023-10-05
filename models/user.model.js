@@ -14,15 +14,17 @@ exports.getShowScoreSTU1 = async function (year, term, sub_term) {
     return rows;
 }
 
-exports.postUpdateuser = async function (number,username, password, firstname, lastname, type, section, group, time, exame_time) {
+exports.postUpdateuser = async function (number,username, password, firstname, lastname, type, section, group, time, exam_time) {
+    console.log(number,username, password, firstname, lastname, type, section, group, time, exam_time)
     const query = `
         UPDATE user
-        SET number = ?, password = ?, firstname = ?, lastname = ?, type = ?, section = ? , group = ?, time = ?, exame_time = ? ,
+        SET number = ?, password = ?, firstname = ?, lastname = ?, type = ?, section = ? , groupCPE = ?, time = ?, exam_time = ? ,
         WHERE username = ?
     `;
     const params = [number, password, firstname, lastname, type, section, group, time, exame_time, username];
 
     const [result] = await db.execute(query, params);
+
     return result;
 };
 
@@ -50,21 +52,21 @@ exports.postDelUser = async function (username) {
     return rows;
 }
 
-exports.postInsertuser = async function (number, username, firstname, lastname, type, section, group, time, exame_time) {
-    try {
-        const query = `
-            INSERT INTO user (number, username, password, firstname, lastname, type, section, group, time, exame_time)
-            VALUES (?, ?, '1234', ?, ?, ?, ?, ?, ?, ?)
-        `;
+// exports.postInsertuser = async function (number, username, firstname, lastname, type, section, group, time, exam_time) {
+//     try {
+//         const query = `
+//             INSERT INTO user (number, username, password, firstname, lastname, type, section, group, time, exam_time)
+//             VALUES (?, ?, '1234', ?, ?, ?, ?, ?, ?, ?)
+//         `;
 
-        const values = [number, username, firstname, lastname, type, section, group, time, exame_time];
-        const [rows] = await db.execute(query, values);
+//         const values = [number, username, firstname, lastname, type, section, group, time, exam_time];
+//         const [rows] = await db.execute(query, values);
 
-        console.log(`Inserted ${rows.affectedRows} row(s)`);
-    } catch (error) {
-        console.error('Error inserting data:', error);
-    }
-}
+//         console.log(`Inserted ${rows.affectedRows} row(s)`);
+//     } catch (error) {
+//         console.error('Error inserting data:', error);
+//     }
+// }
 
 exports.postAddANS = async function (year, term, topic, sub_term) {
     const sql = `INSERT INTO master_exam (topic, answer, exam_score, year, term, sub_term) VALUES (?, ?, ?, ?, ?, ?)`;
