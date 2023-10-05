@@ -220,16 +220,16 @@
               <label for="time">เวลาเรียน</label>
               <select class="form-select" style="margin-top: 7px;margin-bottom: 7px;padding-top: 9px;padding-bottom: 9px;"
                id="updatetime" required>
-                <option value="time1">08:00-13:00</option>
-                <option value="time2">13:00-18:00</option>
-                <option value="time3">16:00-21:00</option>
+                <option value="08:00-13:00">08:00-13:00</option>
+                <option value="13:00-18:00">13:00-18:00</option>
+                <option value="16:00-21:00">16:00-21:00</option>
               </select>
             </div>
             <label for="exam_time">เวลาสอบ</label>
             <select class="form-select" style="margin-top: 7px;margin-bottom: 7px;padding-top: 9px;padding-bottom: 9px;"
             id="updateexam_time" required>
-              <option value="exam_time1">09:00-12:00</option>
-              <option value="exam_time2">13:00-16:00</option>
+              <option value="09:00-12:00">09:00-12:00</option>
+              <option value="13:00-16:00">13:00-16:00</option>
             </select>
           </div>
           <br>
@@ -396,6 +396,8 @@
     var user = users.find(function (item) {
       return item.username === username;
     });
+    
+    console.log(user);
 
     document.getElementById('updatenumber').value = user.number;
     document.getElementById('updateusername').value = user.username;
@@ -405,8 +407,8 @@
     document.getElementById('updatetype').value = user.type !== 'teacher' ? 'student' : user.type;
     document.getElementById('updatesec').value = user.section;
     document.getElementById('updategroup').value = user.group;
-    document.getElementById('updatetime').value = user.time !== 'time1' ? 'time2' ?? 'time3' : user.time;
-    document.getElementById('updateexam_time').value = user.exam_time !== 'exam_time1' ? 'exam_time2' : user.exam_time;
+    document.getElementById('updatetime').value = user.time;
+    document.getElementById('updateexam_time').value = user.exam_time;
     $('#edit_user').modal('show');
   }
 </script>
