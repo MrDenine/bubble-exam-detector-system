@@ -2,7 +2,14 @@ const db = require("../config/dbconnection");
 
 exports.getUserAll = async function (callback) {
     var rows = await db.execute(
-        'SELECT * FROM `user` ORDER BY username',
+        'SELECT * FROM `user` ORDER BY number, id',
+    )
+    return rows;
+}
+
+exports.getShowScoreSTU1 = async function (year, term, sub_term) {
+    var rows = await db.execute(
+        `SELECT * FROM user_exam INNER JOIN user ON user_exam.username = user.username WHERE user_exam.year = '${year}' AND user_exam.term = '${term}' AND user_exam.sub_term = '${sub_term}'`
     )
     return rows;
 }
@@ -18,6 +25,13 @@ exports.postUpdateuser = async function (number,username, password, firstname, l
     const [result] = await db.execute(query, params);
     return result;
 };
+
+exports.GetResult = async function (callback) {
+    var rows = await db.execute(
+        'SELECT * FROM `user_exam` INNER JOIN `user` ON user_exam.username = user.username',
+    )
+    return rows;
+}
 
 exports.postAdduser = async function ( number, username, password, firstname, lastname, type, section, group, time, exame_time ) {
     const query = `

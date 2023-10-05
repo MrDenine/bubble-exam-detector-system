@@ -48,6 +48,7 @@ router.post('/login1', loginController.handleLogin);
 router.post('/exam_manage', exam_manageController.insertData);
 router.post('/exam_result', show_scoreadminController.getExamResult);
 router.post('/ansExam', ansController.postExamResult);
+router.post('/showScoreSTU',re_stuController.showScoreSTU);
 
 router.get('/getAnswer', omrController.getAnswer);
 router.get('/logout', indexController.handleLogout);

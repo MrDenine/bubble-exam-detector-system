@@ -5,9 +5,11 @@ exports.handleLogout = (req, res) => {
     res.redirect('/login');
 };
 
-exports.render_show_scoreadminPage = function (req, res) {
+exports.render_show_scoreadminPage = async function (req, res) {
     const username = req.session.username;
-    res.render('show_scoreadmin', { title: 'show_scoreadmin', username: username })
+    const result = await userModel.GetResult();
+
+    res.render('show_scoreadmin', { title: 'show_scoreadmin', username: username, result: result[0] })
 }
 
 exports.getExamResult = async function (req, res) {

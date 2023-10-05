@@ -1,7 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<link>
 <meta charset="UTF-8">
 <title>ผลคะแนนสอบ</title>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -15,7 +13,6 @@
 </head>
 
 <body>
-  <!-- Navbar -->
   <nav class="navbar navbar-expand-lg navbar-light bg-light">
     &nbsp;&nbsp;<a class="navbar-brand">Computer Programming</a>
     <div class="collapse navbar-collapse" id="navbarNav">
@@ -24,31 +21,30 @@
       <a href="/logout" class="btn btn-danger">ออกจากระบบ</a>&nbsp;&nbsp;&nbsp;&nbsp;
     </div>
   </nav>
-  <!-- Navbar -->
 
   <div class="container">
     <h1 class="text-center my-4">คะแนนสอบ</h1>
     <div class="input-group" style="width: 75%; margin-bottom: 10px; margin-left: 10%;">
-      <select class="form-select" id="year">
+      <select class="form-select" id="year" onchange="filterTableYear()">
         <option>ปีการศึกษา</option>
-        <option>2021</option>
-        <option>2022</option>
-        <option>2023</option>
-        <option>2024</option>
-        <option>2025</option>
+        <option>2565</option>
+        <option>2566</option>
+        <option>2567</option>
+        <option>2568</option>
+        <option>2569</option>
       </select>
-      <select class="form-select" id="term">
+      <select class="form-select" id="term" onchange="filterTableTerm()">
         <option>เทอม</option>
         <option>1</option>
         <option>2</option>
         <option>3</option>
       </select>
-      <select class="form-select" id="term" style="width: 10%;">
+      <select class="form-select" id="termName" style="width: 10%;" onchange="filterTableTermName()">
         <option>กลางภาค-ปลายภาค</option>
-        <option value="middle">กลางภาค</option>
-        <option value="final">ปลายภาค</option>
+        <option value="กลางภาค">กลางภาค</option>
+        <option value="ปลายภาค">ปลายภาค</option>
       </select>
-      <select class="form-select" id="section">
+      <select class="form-select" id="section" onchange="filterTableSection()">
         <option value="">Sec</option>
         <% for (let i=1; i <=100; i++) { %>
           <option value="<%= i %>">
@@ -56,8 +52,8 @@
           </option>
           <% } %>
       </select>
-      <input type="text" class="form-control" name="group" id="group" value="CPE" required>
-      <button class="btn btn-primary" type="button">ค้นหา</button>
+      <input type="text" class="form-control" name="group" id="group" value="CPE"
+        oninput="searchTableGroup(this.value)">
       <button onclick="createExcel()" class="btn btn-warning" style="margin-left: 5px;">Export to Excel</button>
     </div>
     <br>
@@ -68,21 +64,49 @@
           <th scope="col">รหัสนักศึกษา</th>
           <th scope="col">ชื่อ</th>
           <th scope="col">นามสกุล</th>
+          <th scope="col">ปีการศึกษา</th>
+          <th scope="col">เทอม</th>
+          <th scope="col">ภาค</th>
           <th scope="col">Sec</th>
           <th scope="col">กลุ่ม CPE</th>
           <th scope="col">คะแนนสอบ</th>
         </tr>
       </thead>
       <tbody>
-        <tr>
-          <td>1</td>
-          <td>11623046</td>
-          <td>วันจันทร์</td>
-          <td>อังคาร</td>
-          <td>2</td>
-          <td>CEP62346</td>
-          <td>20</td>
-        </tr>
+        <% for(let i=0; i < result.length; i++){ %>
+          <tr>
+            <td>
+              <%= i+1 %>
+            </td>
+            <td>
+              <%= result[i].username %>
+            </td>
+            <td>
+              <%= result[i].firstname %>
+            </td>
+            <td>
+              <%= result[i].lastname %>
+            </td>
+            <td>
+              <%= result[i].year %>
+            </td>
+            <td>
+              <%= result[i].term %>
+            </td>
+            <td>
+              <%= result[i].sub_term %>
+            </td>
+            <td>
+              <%= result[i].section %>
+            </td>
+            <td>
+              <%= result[i].group %>
+            </td>
+            <td>
+              <%= result[i].user_score %>
+            </td>
+          </tr>
+          <% } %>
       </tbody>
     </table>
   </div>
@@ -94,17 +118,18 @@
   function createExcel() {
     var table = document.querySelector("table");
     var ws_data = XLSX.utils.table_to_sheet(table);
-
     var range = XLSX.utils.decode_range(ws_data['!ref']);
+
     for (let C = range.s.c; C <= range.e.c; ++C) {
       var cell_address = { c: C, r: range.s.r };
       var cell_ref = XLSX.utils.encode_cell(cell_address);
 
-      if (!ws_data[cell_ref]) continue; // ในกรณีที่ cell นั้นว่าง
+      if (!ws_data[cell_ref]) continue;
 
       if (!ws_data[cell_ref].s) {
         ws_data[cell_ref].s = {};
       }
+
       ws_data[cell_ref].s.fill = {
         patternType: "solid",
         fgColor: { rgb: "FFFFA500" }
@@ -115,5 +140,109 @@
     XLSX.utils.book_append_sheet(wb, ws_data, "Sheet1");
 
     XLSX.writeFile(wb, "scores.xlsx");
+  }
+</script>
+<script>
+  function filterTableYear() {
+    var selectedValue = document.getElementById("year").value;
+    var table = document.querySelector("table");
+    var rows = table.querySelectorAll("tbody tr");
+
+    for (var i = 0; i < rows.length; i++) {
+      var row = rows[i];
+      var secValue = row.cells[4].textContent.trim();
+
+      if (secValue === selectedValue || selectedValue === "" || selectedValue === "ปีการศึกษา") {
+        row.style.display = "";
+      } else {
+        row.style.display = "none";
+      }
+    }
+  }
+</script>
+<script>
+  function filterTableTerm() {
+    var selectedValue = document.getElementById("term").value;
+    var table = document.querySelector("table");
+    var rows = table.querySelectorAll("tbody tr");
+
+    for (var i = 0; i < rows.length; i++) {
+      var row = rows[i];
+      var secValue = row.cells[5].textContent.trim();
+
+      if (secValue === selectedValue || selectedValue === "" || selectedValue === "เทอม") {
+        row.style.display = "";
+      } else {
+        row.style.display = "none";
+      }
+    }
+  }
+</script>
+<script>
+  function filterTableTermName() {
+    var selectedValue = document.getElementById("termName").value;
+    var table = document.querySelector("table");
+    var rows = table.querySelectorAll("tbody tr");
+
+    for (var i = 0; i < rows.length; i++) {
+      var row = rows[i];
+      var secValue = row.cells[6].textContent.trim();
+
+      if (secValue === selectedValue || selectedValue === "" || selectedValue === "กลางภาค-ปลายภาค") {
+        row.style.display = "";
+      } else {
+        row.style.display = "none";
+      }
+    }
+  }
+</script>
+<script>
+  function filterTableSection() {
+    var selectedValue = document.getElementById("section").value;
+    var table = document.querySelector("table");
+    var rows = table.querySelectorAll("tbody tr");
+
+    for (var i = 0; i < rows.length; i++) {
+      var row = rows[i];
+      var secValue = row.cells[7].textContent.trim();
+
+      if (secValue === selectedValue || selectedValue === "") {
+        row.style.display = "";
+      } else {
+        row.style.display = "none";
+      }
+    }
+  }
+</script>
+<script>
+  function searchTableGroup() {
+    var inputValue = document.getElementById("group").value.toLowerCase();
+    var table = document.querySelector("table");
+    var rows = table.querySelectorAll("tbody tr");
+    var groupColumnIndex = -1;
+    var headerRow = table.querySelector("thead tr");
+    var headerCells = headerRow.querySelectorAll("th");
+
+    for (var i = 0; i < headerCells.length; i++) {
+      if (headerCells[i].textContent.trim() === "กลุ่ม CPE") {
+        groupColumnIndex = i;
+        break;
+      }
+    }
+
+    if (groupColumnIndex === -1) {
+      return;
+    }
+
+    for (var i = 0; i < rows.length; i++) {
+      var row = rows[i];
+      var groupValue = row.cells[groupColumnIndex].innerHTML.toLowerCase();
+
+      if (groupValue.includes(inputValue)) {
+        row.style.display = "";
+      } else {
+        row.style.display = "none";
+      }
+    }
   }
 </script>
