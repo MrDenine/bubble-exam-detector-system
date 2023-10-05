@@ -33,8 +33,9 @@ exports.insertUser = async function (req, res) {
 
 exports.addUser = async function (req, res) {
     try {
-        const { number, username, password, firstname, lastname, type, section, group, time, exame_time } = req.body;
-        const result = await userModel.postAdduser(number,username, password, firstname, lastname, type, section, group, time, exame_time);
+        const { number, username, password, firstname, lastname, type, section, group, time, exam_time } = req.body;
+        const result = await userModel.postAdduser(number,username, password, firstname, lastname, type, section, group, time, exam_time);
+
         res.json({ status: "Success", message: "User added successfully" });
     } catch (error) {
         res.json({ status: "Failed", message: "Failed to add user" });

@@ -33,14 +33,12 @@ exports.GetResult = async function (callback) {
     return rows;
 }
 
-exports.postAdduser = async function ( number, username, password, firstname, lastname, type, section, group, time, exame_time ) {
+exports.postAdduser = async function ( number, username, password, firstname, lastname, type, section, group, time, exam_time ) {
     const query = `
-      INSERT INTO user (number, username, password, firstname, lastname, type, section, group, time, exame_time)
-      VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+      INSERT INTO user (number, username, password, firstname, lastname, type, section, \`group\`, time, exam_time)
+      VALUES ('${number}', '${username}', '${password}', '${firstname}', '${lastname}', '${type}', '${section}', '${group}', '${time}', '${exam_time}')
     `;
-    const params = [number, username, password, firstname, lastname, type, section, group, time, exame_time];
-
-    const [result] = await db.execute(query, params);
+    const [result] = await db.execute(query);
     return result;
 };
 
