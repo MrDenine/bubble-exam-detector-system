@@ -5,7 +5,7 @@ exports.handleLogout = (req, res) => {
     res.redirect('/login');
 };
 
-exports.render_show_scoreadminPage = async function (req, res) {
+exports.render_show_scoreadminPage = async function (req, res) { 
     const username = req.session.username;
     const result = await userModel.GetResult();
 

@@ -228,7 +228,7 @@
             <label for="exam_time">เวลาสอบ</label>
             <select class="form-select" style="margin-top: 7px;margin-bottom: 7px;padding-top: 9px;padding-bottom: 9px;"
             id="updateexam_time" required>
-              <option value="09:00-12:0">09:00-12:00</option>
+              <option value="09:00-12:00">09:00-12:00</option>
               <option value="13:00-16:00">13:00-16:00</option>
             </select>
           </div>
@@ -277,8 +277,8 @@
                 style="margin-top: 7px;margin-bottom: 7px;padding-top: 9px;padding-bottom: 9px;" 
                 name="type" id="addtype" required>
                 <option selected disabled value="">เลือกสถานะ</option>
-                <option value="teacher">Teacher</option>
-                <option value="student">Student</option>
+                <option value="teacher">teacher</option>
+                <option value="student">student</option>
               </select>
             </div>
             <div class="form-group">
@@ -337,21 +337,22 @@
       section = document.getElementById('addsec').value
     }
 
-    time = document.getElementById('addtime').value
-    if (time == 'time1') {
-      time = document.getElementById('addtime').value
-    } else if (time == 'time2') {
-      time = document.getElementById('addtime').value
-    } else if (time == 'time3') {
-      time = document.getElementById('addtime').value
+    var selectedValue = document.getElementById('addtime').value;
+    if (selectedValue === "time1") {
+      time = "08:00-13:00";
+    } else if (selectedValue === "time2") {
+      time = "13:00-18:00";
+    } else if (selectedValue === "time3") {
+      time = "16:00-21:00";
     }
 
-    exam_time = document.getElementById('addexam_time').value
-    if (exam_time == 'exam_time1') {
-      exam_time = document.getElementById('addexam_time').value
-    } else if (time == 'exam_time2') {
-      exam_time = document.getElementById('addexam_time').value
-    } 
+    selectedValue = document.getElementById('addexam_time').value;
+
+    if (selectedValue === "exam_time1") {
+      exam_time = "09:00-12:00";
+    } else if (selectedValue === "exam_time2") {
+      exam_time = "13:00-16:00";
+    }
     
     let data = {
       number: document.getElementById('addnumber').value,

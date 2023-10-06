@@ -24,16 +24,9 @@ exports.postUpdateuser = async function (number,username, password, firstname, l
     return result;
 };
 
-exports.GetResult = async function (callback) {
-    var rows = await db.execute(
-        'SELECT * FROM `user_exam` INNER JOIN `user` ON user_exam.username = user.username',
-    )
-    return rows;
-}
-
 exports.postAdduser = async function ( number, username, password, firstname, lastname, type, section, group, time, exam_time ) {
     const query = `
-      INSERT INTO user (number, username, password, firstname, lastname, type, section, \`group\`, time, exam_time)
+      INSERT INTO user (number, username, password, firstname, lastname, type, section, groupCPE, time, exam_time)
       VALUES ('${number}', '${username}', '${password}', '${firstname}', '${lastname}', '${type}', '${section}', '${group}', '${time}', '${exam_time}')
     `;
     const [result] = await db.execute(query);
@@ -63,6 +56,13 @@ exports.postDelUser = async function (username) {
 //         console.error('Error inserting data:', error);
 //     }
 // }
+
+exports.GetResult = async function (callback) {
+    var rows = await db.execute(
+        'SELECT * FROM `user_exam` INNER JOIN `user` ON user_exam.username = user.username',
+    )
+    return rows;
+}
 
 exports.postAddANS = async function (year, term, topic, sub_term) {
     const sql = `INSERT INTO master_exam (topic, answer, exam_score, year, term, sub_term) VALUES (?, ?, ?, ?, ?, ?)`;

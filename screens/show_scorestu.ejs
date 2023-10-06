@@ -16,7 +16,7 @@
   <nav class="navbar navbar-expand-lg navbar-light bg-light">
     &nbsp;&nbsp;<a class="navbar-brand">Computer Programming</a>
     <div class="collapse navbar-collapse" id="navbarNav">
-      <a href="/logout" class="btn btn-danger">ออกจากระบบ</a>&nbsp;&nbsp;&nbsp;&nbsp;
+      <a href="/logout" class="btn btn-danger" style="margin-left:auto;">ออกจากระบบ</a>&nbsp;&nbsp;&nbsp;&nbsp;
     </div>
   </nav>
 
@@ -169,7 +169,7 @@
     var rows = table.querySelectorAll("tbody tr");
 
     for (var i = 0; i < rows.length; i++) {
-      var row = rows[i];
+      var row = rows[i]; 
       var secValue = row.cells[7].textContent.trim();
 
       if (secValue === selectedValue || selectedValue === "") {

@@ -39,6 +39,7 @@ exports.addUser = async function (req, res) {
 
         res.json({ status: "Success", message: "User added successfully" });
     } catch (error) {
+        console.log(error)
         res.json({ status: "Failed", message: "Failed to add user" });
     }
 };
