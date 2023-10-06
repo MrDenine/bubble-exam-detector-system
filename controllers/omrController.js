@@ -32,7 +32,7 @@ exports.getAnswer = async function (req, res) {
 
     const [result] = await db.execute(query, params);
 
-    const answer = result[0].ans
+    const answer = JSON.parse(result[0].ans)
 
 
     axios({
@@ -55,6 +55,7 @@ exports.getAnswer = async function (req, res) {
             for (let i = 0; i < answerData.length; i++) {
                 const responseAnswer = answerData[i].answer;
                 const correctAnswers = answer[`${i + 1}`];
+                
 
                 if (correctAnswers && (correctAnswers.includes(convertAnswer(responseAnswer)))) {
                     score++;
@@ -70,7 +71,6 @@ exports.getAnswer = async function (req, res) {
 
             const [isDub] = await db.execute(querycheckdub, [response.data.id, year, term, subterm]);
 
-            console.log(isDub[0])
 
             if (isDub[0] == undefined){
                 const query = `
