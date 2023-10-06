@@ -16,6 +16,7 @@ exports.getExamResult = async function (req, res) {
     try {
         const { year, term, sub_term, sec } = req.body;
         const result = await userModel.postGetExamResult(year, term, sub_term, sec);
+        
 
         res.send(`<script>window.location.href = "/show_sadmin?year=${year}&term=${term}&sub_term=${sub_term}$sec=${sec}";</script>`);
     } catch (error) {

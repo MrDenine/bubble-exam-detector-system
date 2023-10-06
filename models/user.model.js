@@ -8,6 +8,14 @@ exports.getUserAll = async function (callback) {
 }
 
 exports.getShowScoreSTU1 = async function (year, term, sub_term) {
+
+    if(sub_term == "กลางภาค"){
+        sub_term = "middle" 
+    }else{
+        sub_term = "final" 
+    }
+
+    console.log(year, term, sub_term)
     var rows = await db.execute(
         `SELECT * FROM user_exam INNER JOIN user ON user_exam.username = user.username WHERE user_exam.year = '${year}' AND user_exam.term = '${term}' AND user_exam.sub_term = '${sub_term}'`
     )
