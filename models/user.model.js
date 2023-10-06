@@ -15,16 +15,12 @@ exports.getShowScoreSTU1 = async function (year, term, sub_term) {
 }
 
 exports.postUpdateuser = async function (number,username, password, firstname, lastname, type, section, group, time, exam_time) {
-    console.log(number,username, password, firstname, lastname, type, section, group, time, exam_time)
     const query = `
         UPDATE user
-        SET number = ?, password = ?, firstname = ?, lastname = ?, type = ?, section = ? , groupCPE = ?, time = ?, exam_time = ? ,
-        WHERE username = ?
+        SET number = '${number}', password = '${password}', firstname = '${firstname}', lastname = '${lastname}', type = '${type}', section = '${section}', groupCPE = '${group}', time = '${time}', exam_time = '${exam_time}'
+        WHERE username = '${username}'
     `;
-    const params = [number, password, firstname, lastname, type, section, group, time, exame_time, username];
-
-    const [result] = await db.execute(query, params);
-
+    const [result] = await db.execute(query);
     return result;
 };
 
