@@ -495,12 +495,14 @@
     while ((match = regex.exec(textData)) !== null) {
       const number = match[1];
       const user = match[2].replace('-', '');
+      const password = user.slice(-4);
       const firstName = match[4].trim();
       const lastName = match[5].trim();
 
       extractedData.push({
         number,
         user,
+        password,
         firstName,
         lastName,
         section,

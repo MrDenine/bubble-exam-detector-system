@@ -47,11 +47,11 @@ exports.postDelUser = async function (username) {
     return rows;
 }
 
-exports.postInsertuser = async function (number, user, firstName, lastName, section, groupCPE, time, examTime) {
+exports.postInsertuser = async function (number, user, password, firstName, lastName, section, groupCPE, time, examTime) {
     try {
         const query = `
             INSERT INTO user (number, username, password, firstname, lastname, type, section, groupCPE, time, exam_time)
-            VALUES ('${number}', '${user}', '1234', '${firstName}', '${lastName}', 'student', '${section}', '${groupCPE}', '${time}', '${examTime}')
+            VALUES ('${number}', '${user}', '${password}', '${firstName}', '${lastName}', 'student', '${section}', '${groupCPE}', '${time}', '${examTime}')
         `;
         const [rows] = await db.execute(query);
         return rows;
