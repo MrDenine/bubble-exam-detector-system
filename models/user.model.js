@@ -8,21 +8,19 @@ exports.getUserAll = async function (callback) {
 }
 
 exports.getShowScoreSTU1 = async function (year, term, sub_term) {
-
-    if(sub_term == "กลางภาค"){
-        sub_term = "middle" 
-    }else{
-        sub_term = "final" 
+    if (sub_term == "กลางภาค") {
+        sub_term = "middle"
+    } else {
+        sub_term = "final"
     }
 
-    console.log(year, term, sub_term)
     var rows = await db.execute(
         `SELECT * FROM user_exam INNER JOIN user ON user_exam.username = user.username WHERE user_exam.year = '${year}' AND user_exam.term = '${term}' AND user_exam.sub_term = '${sub_term}'`
     )
     return rows;
 }
 
-exports.postUpdateuser = async function (number,username, password, firstname, lastname, type, section, group, time, exam_time) {
+exports.postUpdateuser = async function (number, username, password, firstname, lastname, type, section, group, time, exam_time) {
     const query = `
         UPDATE user
         SET number = '${number}', password = '${password}', firstname = '${firstname}', lastname = '${lastname}', type = '${type}', section = '${section}', groupCPE = '${group}', time = '${time}', exam_time = '${exam_time}'
@@ -32,7 +30,7 @@ exports.postUpdateuser = async function (number,username, password, firstname, l
     return result;
 };
 
-exports.postAdduser = async function ( number, username, password, firstname, lastname, type, section, group, time, exam_time ) {
+exports.postAdduser = async function (number, username, password, firstname, lastname, type, section, group, time, exam_time) {
     const query = `
       INSERT INTO user (number, username, password, firstname, lastname, type, section, groupCPE, time, exam_time)
       VALUES ('${number}', '${username}', '${password}', '${firstname}', '${lastname}', '${type}', '${section}', '${group}', '${time}', '${exam_time}')
@@ -75,7 +73,6 @@ exports.GetResult = async function (callback) {
 exports.postAddANS = async function (year, term, topic, sub_term) {
     const sql = `INSERT INTO master_exam (topic, answer, exam_score, year, term, sub_term) VALUES (?, ?, ?, ?, ?, ?)`;
     const values = [topic, '', null, year, term, sub_term];
-
     const [result] = await db.execute(sql, values);
     return result;
 }
@@ -91,7 +88,6 @@ exports.postGetExamResult = async function (year, term, sub_term, section) {
     }
 }
 
-
 exports.postExamResult = async function (year, term, topic, sub_term, body) {
     // CREATE TABLE ans (
     //     id INT AUTO_INCREMENT PRIMARY KEY,
@@ -106,7 +102,7 @@ exports.postExamResult = async function (year, term, topic, sub_term, body) {
             INSERT INTO ans (year, term, topic, sub_term, ans)
             VALUES (?, ?, ?, ?, ?)
         `;
-        
+
         const bodyString = JSON.stringify(body);
         const values = [year, term, topic, sub_term, bodyString];
         const [rows] = await db.execute(query, values);

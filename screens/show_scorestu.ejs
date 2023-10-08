@@ -60,7 +60,11 @@
               <%= result[i].term %>
             </td>
             <td>
-              <%= result[i].sub_term %>
+              <% if (result[i].sub_term=="middle" ) { %>
+                กลางภาค
+                <% } else { %>
+                  ปลายภาค
+                  <% } %>
             </td>
             <td>
               <%= result[i].section %>
@@ -170,7 +174,7 @@
     var rows = table.querySelectorAll("tbody tr");
 
     for (var i = 0; i < rows.length; i++) {
-      var row = rows[i]; 
+      var row = rows[i];
       var secValue = row.cells[7].textContent.trim();
 
       if (secValue === selectedValue || selectedValue === "") {

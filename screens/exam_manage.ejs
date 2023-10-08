@@ -53,7 +53,7 @@
               data-bs-target="#id02">ตรวจกระดาษคำตอบ</button>
           </div>
           <div class="container mb-2">
-              <a type="button" class="btn btn-success btn-lg shadow w-100" href="/show_sadmin">รายงานผลคะแนนสอบ</a>
+            <a type="button" class="btn btn-success btn-lg shadow w-100" href="/show_sadmin">รายงานผลคะแนนสอบ</a>
           </div>
           <!-- <div class="container mb-2">
             <button type="button" class="btn btn-success btn-lg shadow w-100" data-bs-toggle="modal"
@@ -110,8 +110,10 @@
             </form>
             <div class="form-group mb-3">
               <center>
-                <button class="btn btn-success" type="submit" name="submit" value="submit1" style="width:200px;">อัพกระดาษคำตอบ</button>
-                <button class="btn btn-primary" type="submit" name="submit" value="submit2" style="width:200px;">กำหนดเอง</button>
+                <button class="btn btn-success" type="submit" name="submit" value="submit1"
+                  style="width:200px;">อัพกระดาษคำตอบ</button>
+                <button class="btn btn-primary" type="submit" name="submit" value="submit2"
+                  style="width:200px;">กำหนดเอง</button>
               </center>
             </div>
           </div>
@@ -174,7 +176,7 @@
             </div>
             <div class="form-group mb-3">
               <label for="group">กลุ่ม CPE</label>
-              <input type="text" class="form-control" name="group" id="group" p  required>
+              <input type="text" class="form-control" name="group" id="group" p required>
             </div>
             <!-- เอาข้อมูลชื่อรหัสชั้นตอนเก็บคำตอบ -->
             <label for="image-input">เลือกรูปภาพ</label>
@@ -195,7 +197,6 @@
       </div>
     </div>
   </div>
-
 </body>
 
 <script>
@@ -205,7 +206,6 @@
   });
 
   function submitTestResult() {
-    // Create a FormData object to send the form data as multipart/form-data
     const formData = new FormData();
     formData.append("image", document.getElementById('image-testresult').files[0]);
     formData.append("topic", document.getElementById('topic').value);
@@ -225,15 +225,13 @@
         }
       })
       .then(function (data) {
-        
-       location.reload();
+        location.reload();
         alert(data.message);
       })
       .catch(function (error) {
         console.log('Error:', error.message);
       });
   }
-
 </script>
 
 </html>

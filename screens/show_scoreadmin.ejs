@@ -41,8 +41,8 @@
       </select>
       <select class="form-select" id="termName" style="width: 10%;" onchange="filterTableTermName()">
         <option>กลางภาค-ปลายภาค</option>
-        <option value="middle">กลางภาค</option>
-        <option value="final">ปลายภาค</option>
+        <option value="กลางภาค">กลางภาค</option>
+        <option value="ปลายภาค">ปลายภาค</option>
       </select>
       <select class="form-select" id="section" onchange="filterTableSection()">
         <option value="">Sec</option>
@@ -94,7 +94,11 @@
               <%= result[i].term %>
             </td>
             <td>
-              <%= result[i].sub_term %>
+              <% if (result[i].sub_term=="middle" ) { %>
+                กลางภาค
+                <% } else { %>
+                  ปลายภาค
+                  <% } %>
             </td>
             <td>
               <%= result[i].section %>
@@ -188,7 +192,7 @@
       var row = rows[i];
       var secValue = row.cells[6].textContent.trim();
 
-      if (secValue === selectedValue || selectedValue === "" || selectedValue === "middel-final") {
+      if (secValue === selectedValue || selectedValue === "" || selectedValue === "กลางภาค-ปลายภาค") {
         row.style.display = "";
       } else {
         row.style.display = "none";

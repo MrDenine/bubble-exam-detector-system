@@ -145,7 +145,7 @@
           <input type="groupCPE" class="form-control" id="groupCPE">
           <label for="time">เวลาเรียน</label>
           <select class="form-select" style="margin-top: 7px;margin-bottom: 7px;padding-top: 9px;padding-bottom: 9px;"
-          name="time" id="time" required>
+            name="time" id="time" required>
             <option selected disabled value="">เลือกเวลา</option>
             <option value="time1">08:00-13:00</option>
             <option value="time2">13:00-18:00</option>
@@ -153,7 +153,7 @@
           </select>
           <label for="exam_time">เวลาสอบ</label>
           <select class="form-select" style="margin-top: 7px;margin-bottom: 7px;padding-top: 9px;padding-bottom: 9px;"
-          name="exam_time" id="exam_time" required>
+            name="exam_time" id="exam_time" required>
             <option selected disabled value="">เลือกเวลา</option>
             <option value="exam_time1">09:00-12:00</option>
             <option value="exam_time2">13:00-16:00</option>
@@ -202,8 +202,8 @@
             <div class="form-group">
               <label for="type">ตำแหน่ง</label>
               <select class="form-select"
-                style="margin-top: 7px; margin-bottom: 7px; padding-top: 9px; padding-bottom: 9px;" 
-                name="type" id="updatetype" required>
+                style="margin-top: 7px; margin-bottom: 7px; padding-top: 9px; padding-bottom: 9px;" name="type"
+                id="updatetype" required>
                 <option value="teacher">teacher</option>
                 <option value="student">student</option>
               </select>
@@ -218,8 +218,9 @@
             </div>
             <div class="form-group">
               <label for="time">เวลาเรียน</label>
-              <select class="form-select" style="margin-top: 7px;margin-bottom: 7px;padding-top: 9px;padding-bottom: 9px;"
-               id="updatetime" required>
+              <select class="form-select"
+                style="margin-top: 7px;margin-bottom: 7px;padding-top: 9px;padding-bottom: 9px;" id="updatetime"
+                required>
                 <option value="08:00-13:00">08:00-13:00</option>
                 <option value="13:00-18:00">13:00-18:00</option>
                 <option value="16:00-21:00">16:00-21:00</option>
@@ -227,7 +228,7 @@
             </div>
             <label for="exam_time">เวลาสอบ</label>
             <select class="form-select" style="margin-top: 7px;margin-bottom: 7px;padding-top: 9px;padding-bottom: 9px;"
-            id="updateexam_time" required>
+              id="updateexam_time" required>
               <option value="09:00-12:00">09:00-12:00</option>
               <option value="13:00-16:00">13:00-16:00</option>
             </select>
@@ -274,8 +275,8 @@
             <div class="form-group">
               <label for="type">ตำแหน่ง</label>
               <select class="form-select"
-                style="margin-top: 7px;margin-bottom: 7px;padding-top: 9px;padding-bottom: 9px;" 
-                name="type" id="addtype" required>
+                style="margin-top: 7px;margin-bottom: 7px;padding-top: 9px;padding-bottom: 9px;" name="type"
+                id="addtype" required>
                 <option selected disabled value="">เลือกสถานะ</option>
                 <option value="teacher">teacher</option>
                 <option value="student">student</option>
@@ -294,9 +295,9 @@
               <select class="form-select"
                 style="margin-top: 7px;margin-bottom: 7px;padding-top: 9px;padding-bottom: 9px;" id="addtime" required>
                 <option selected disabled value="time">เลือกเวลา</option>
-                  <option value="time1">08:00-13:00</option>
-                  <option value="time2">13:00-18:00</option>
-                  <option value="time3">16:00-21:00</option>
+                <option value="time1">08:00-13:00</option>
+                <option value="time2">13:00-18:00</option>
+                <option value="time3">16:00-21:00</option>
               </select>
             </div>
             <div class="form-group">
@@ -353,7 +354,7 @@
     } else if (selectedValue === "exam_time2") {
       exam_time = "13:00-16:00";
     }
-    
+
     let data = {
       number: document.getElementById('addnumber').value,
       username: document.getElementById('addusername').value,
