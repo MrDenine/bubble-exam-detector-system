@@ -27,7 +27,6 @@
 </head>
 
 <body>
-  <!-- Navbar -->
   <nav class="navbar navbar-expand-lg navbar-light bg-light">
     &nbsp;&nbsp;<a class="navbar-brand">Computer Programming</a>
     <div class="collapse navbar-collapse" id="navbarNav">
@@ -46,7 +45,6 @@
     </div>
   </nav>
 
-  <!-- modalform -->
   <h1 class="text-center my-4">ข้อมูลนักศึกษา</h1>
   <div class="input-group" style="width: 50%; margin-bottom: 10px; margin-left: 33%;">
     <input type="text" class="form-control" placeholder="ค้นหาข้อมูลนักศึกษา" oninput="searchTable()">
@@ -56,7 +54,6 @@
         data-bs-target="#add_user">เพิ่มข้อมูล</button>
     </div>
   </div>
-
   <br>
   <div class="container" style="width: 100%;">
     <form id="deleteForm" action="/del_user" method="POST">
@@ -130,7 +127,6 @@
     <div class="modal-dialog">
       <div class="modal-content">
         <h5 class="modal-title" id="wordModalLabel" style="margin-left: 3%;">เพิ่มข้อมูลนักศึกษา</h5>
-
         <div class="modal-body">
           <label for="numberDropdown">Sec : </label>
           <select class="form-select" id="section">
@@ -147,16 +143,16 @@
           <select class="form-select" style="margin-top: 7px;margin-bottom: 7px;padding-top: 9px;padding-bottom: 9px;"
             name="time" id="time" required>
             <option selected disabled value="">เลือกเวลา</option>
-            <option value="time1">08:00-13:00</option>
-            <option value="time2">13:00-18:00</option>
-            <option value="time3">16:00-21:00</option>
+            <option value="08:00-13:00">08:00-13:00</option>
+            <option value="13:00-18:00">13:00-18:00</option>
+            <option value="16:00-21:00">16:00-21:00</option>
           </select>
           <label for="exam_time">เวลาสอบ</label>
           <select class="form-select" style="margin-top: 7px;margin-bottom: 7px;padding-top: 9px;padding-bottom: 9px;"
             name="exam_time" id="exam_time" required>
             <option selected disabled value="">เลือกเวลา</option>
-            <option value="exam_time1">09:00-12:00</option>
-            <option value="exam_time2">13:00-16:00</option>
+            <option value="09:00-12:00">09:00-12:00</option>
+            <option value="13:00-16:00">13:00-16:00</option>
           </select>
           <div class="">
             <label for="roleDropdown">วางรายชื่อนักศึกษา</label>
@@ -323,8 +319,6 @@
 </body>
 
 </html>
-
-<!-- เพิ่มข้อมูล -->
 <script>
   document.getElementById('submitAddUser').addEventListener('click', function (event) {
     event.preventDefault();
@@ -390,7 +384,6 @@
       });
   }
 </script>
-<!-- อัพเดตข้อมูล(แก้ไข) -->
 <script>
   function onClickModalEdit(data_user) {
     var username = data_user;
@@ -412,12 +405,12 @@
     $('#edit_user').modal('show');
   }
 </script>
-<!-- อัพเดตข้อมูล ปุ่มส่ง (แก้ไข) -->
 <script>
   document.getElementById('submitUpdateUser').addEventListener('click', function (event) {
     event.preventDefault();
     submitUpdateUser();
   });
+
   function submitUpdateUser() {
     type = document.getElementById('updatetype').value
     let time = "";
@@ -466,7 +459,6 @@
       });
   }
 </script>
-<!-- ลบข้อมูล -->
 <script>
   function onClickModalDelete(element) {
     let username = element.getAttribute('data-username');
@@ -479,7 +471,6 @@
     }
   }
 </script>
-<!-- กรอกนักศึกษาเยอะๆ -->
 <script>
   const wordBtn = document.getElementById('wordBtn');
   const wordModal = new bootstrap.Modal(document.getElementById('wordModal'));
@@ -492,55 +483,30 @@
   const confirmWordBtn = document.getElementById('confirmWordBtn');
 
   confirmWordBtn.addEventListener('click', async () => {
-    var time = "";
-    let exam_time = "";
     const textData = document.getElementById('exampleFormControlTextarea1').value;
-    const section = document.getElementById('numberDropdown').value;
-    const lines = textData.split('\n');
+    const section = document.getElementById('section').value;
+    const groupCPE = document.getElementById('groupCPE').value;
+    const time = document.getElementById('time').value;
+    const examTime = document.getElementById('exam_time').value;
+    const regex = /(\d+)\s+(\d+-\d+)\s+(นาย|นางสาว)([\u0E00-\u0E7F]+)\s+([\u0E00-\u0E7F]+)\s*/g;
     const extractedData = [];
-    const regex = /(\d+-\d+)\s+([\u0E00-\u0E7F]+)\s+([\u0E00-\u0E7F]+)\s*/g;
-    const cpe = document.getElementById('exampleInputCPE').value;
-    const status = document.getElementById('roleDropdown1').value;
-    var selectedValue = document.getElementById('time').value;
-
-    if (selectedValue === "time1") {
-      time = "08:00-13:00";
-    } else if (selectedValue === "time2") {
-      time = "13:00-18:00";
-    } else if (selectedValue === "time3") {
-      time = "16:00-21:00";
-    }
-
-    selectedValue = document.getElementById('exam_time').value;
-
-    if (selectedValue === "exam_time1") {
-      exam_time = "09:00-12:00";
-    } else if (selectedValue === "exam_time2") {
-      exam_time = "13:00-16:00";
-    }
-
-    lines.forEach(line => {
-      const match = regex.exec(line);
-      if (match) {
-        extractedData.push({
-          user: match[1].replace('-', ''),
-          firstName: match[2].trim(),
-          lastName: match[3].trim()
-        });
-      }
-    });
-    extractedData.shift();
+    let match;
 
     while ((match = regex.exec(textData)) !== null) {
+      const number = match[1];
+      const user = match[2].replace('-', '');
+      const firstName = match[4].trim();
+      const lastName = match[5].trim();
+
       extractedData.push({
-        user: match[1].replace('-', ''),
-        firstName: match[2].trim(),
-        lastName: match[3].trim(),
-        section: section,
-        group: cpe,
-        status: status,
-        time: time,
-        exam_time: exam_time
+        number,
+        user,
+        firstName,
+        lastName,
+        section,
+        groupCPE,
+        time,
+        examTime
       });
     }
 
@@ -560,6 +526,7 @@
         })
         .then(data => {
           console.log(data);
+          location.reload();
         })
         .catch(error => {
           console.log('Error:', error.message);
@@ -567,7 +534,6 @@
     });
   });
 </script>
-<!-- ค้นหาข้อมูล -->
 <script>
   function searchTable() {
     var input, filter, table, tr, td, i, j, txtValue;
@@ -576,15 +542,15 @@
     table = document.querySelector(".table");
     tr = table.getElementsByTagName("tr");
 
-    for (i = 1; i < tr.length; i++) { // เริ่มต้นที่ 1 เพื่อข้ามแถวหัวตาราง
+    for (i = 1; i < tr.length; i++) {
       var rowVisible = false;
       td = tr[i].getElementsByTagName("td");
 
-      for (j = 0; j < td.length; j++) { // วนลูปทุกคอลัมน์ในแถว
+      for (j = 0; j < td.length; j++) {
         txtValue = td[j].textContent || td[j].innerText;
         if (txtValue.toUpperCase().indexOf(filter) > -1) {
           rowVisible = true;
-          break; // หากพบข้อมูลที่ตรงในคอลัมน์นึง ให้หยุดค้นหาคอลัมน์อื่น
+          break;
         }
       }
 

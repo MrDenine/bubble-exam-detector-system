@@ -47,21 +47,18 @@ exports.postDelUser = async function (username) {
     return rows;
 }
 
-// exports.postInsertuser = async function (number, username, firstname, lastname, type, section, group, time, exam_time) {
-//     try {
-//         const query = `
-//             INSERT INTO user (number, username, password, firstname, lastname, type, section, group, time, exam_time)
-//             VALUES (?, ?, '1234', ?, ?, ?, ?, ?, ?, ?)
-//         `;
-
-//         const values = [number, username, firstname, lastname, type, section, group, time, exam_time];
-//         const [rows] = await db.execute(query, values);
-
-//         console.log(`Inserted ${rows.affectedRows} row(s)`);
-//     } catch (error) {
-//         console.error('Error inserting data:', error);
-//     }
-// }
+exports.postInsertuser = async function (number, user, firstName, lastName, section, groupCPE, time, examTime) {
+    try {
+        const query = `
+            INSERT INTO user (number, username, password, firstname, lastname, type, section, groupCPE, time, exam_time)
+            VALUES ('${number}', '${user}', '1234', '${firstName}', '${lastName}', 'student', '${section}', '${groupCPE}', '${time}', '${examTime}')
+        `;
+        const [rows] = await db.execute(query);
+        return rows;
+    } catch (error) {
+        console.error('Error inserting data:', error);
+    }
+}
 
 exports.GetResult = async function (callback) {
     var rows = await db.execute(
