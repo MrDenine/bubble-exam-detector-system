@@ -55,6 +55,34 @@
     </div>
   </div>
   <br>
+  <div class="input-group" style="width: 75%; margin-bottom: 10px; margin-left: 10%;">
+    <select class="form-select" id="type" onchange="filterTableType()">
+      <option>teacher</option>
+      <option>student</option>
+      <option>all</option>
+    </select>
+    <select class="form-select" id="section" onchange="filterTableSection()">
+      <option value="">Sec</option>
+      <% for (let i=1; i <=100; i++) { %>
+        <option value="<%= i %>">
+          <%= i %>
+        </option>
+        <% } %>
+    </select>
+    <input type="text" class="form-control" name="group" id="group" value="CPE" oninput="searchTableGroup(this.value)">
+    <select class="form-select" id="time" onchange="filterTableTime()">
+      <option>เวลาเรียน</option>
+      <option>08:00-13:00</option>
+      <option>13:00-18:00</option>
+      <option>16:00-21:00</option>
+    </select>
+    <select class="form-select" id="exam_time" style="width: 10%;" onchange="filterTableExamTime()">
+      <option>เวลาสอบ</option>
+      <option>09:00-12:00</option>
+      <option>13:00-16:00</option>
+    </select>
+  </div>
+  <br>
   <div class="container" style="width: 100%;">
     <form id="deleteForm" action="/del_user" method="POST">
       <input type="hidden" name="username" id="deleteUsername">
@@ -560,6 +588,117 @@
         tr[i].style.display = "";
       } else {
         tr[i].style.display = "none";
+      }
+    }
+  }
+</script>
+<script>
+  window.onload = function () {
+    var typeSelect = document.getElementById("type");
+    typeSelect.value = "teacher";
+    filterTableType();
+  }
+
+  function filterTableType() {
+    var selectedValue = document.getElementById("type").value;
+    var table = document.querySelector("table");
+    var rows = table.querySelectorAll("tbody tr");
+
+    for (var i = 0; i < rows.length; i++) {
+      var row = rows[i];
+      var secValue = row.cells[8].textContent.trim();
+      console.log(secValue, selectedValue);
+
+      if (secValue === selectedValue || selectedValue === "" || selectedValue === "all") {
+        row.style.display = "";
+      } else {
+        row.style.display = "none";
+      }
+    }
+  }
+</script>
+<script>
+  function filterTableTime() {
+    var selectedValue = document.getElementById("time").value;
+    var table = document.querySelector("table");
+    var rows = table.querySelectorAll("tbody tr");
+
+    for (var i = 0; i < rows.length; i++) {
+      var row = rows[i];
+      var secValue = row.cells[9].textContent.trim();
+
+      if (secValue === selectedValue || selectedValue === "" || selectedValue === "เวลาเรียน") {
+        row.style.display = "";
+      } else {
+        row.style.display = "none";
+      }
+    }
+  }
+</script>
+<script>
+  function filterTableExamTime() {
+    var selectedValue = document.getElementById("exam_time").value;
+    var table = document.querySelector("table");
+    var rows = table.querySelectorAll("tbody tr");
+
+    for (var i = 0; i < rows.length; i++) {
+      var row = rows[i];
+      var secValue = row.cells[10].textContent.trim();
+
+      if (secValue === selectedValue || selectedValue === "" || selectedValue === "เวลาสอบ") {
+        row.style.display = "";
+      } else {
+        row.style.display = "none";
+      }
+    }
+  }
+</script>
+<script>
+  function filterTableSection() {
+    var selectedValue = document.getElementById("section").value;
+    var table = document.querySelector("table");
+    var rows = table.querySelectorAll("tbody tr");
+
+    for (var i = 0; i < rows.length; i++) {
+      var row = rows[i];
+      var secValue = row.cells[6].textContent.trim();
+
+      if (secValue === selectedValue || selectedValue === "") {
+        row.style.display = "";
+      } else {
+        row.style.display = "none";
+      }
+    }
+  }
+</script>
+<script>
+  function searchTableGroup() {
+    var inputValue = document.getElementById("group").value.toLowerCase();
+    var table = document.querySelector("table");
+    var rows = table.querySelectorAll("tbody tr");
+    var groupColumnIndex = -1;
+    var headerRow = table.querySelector("thead tr");
+    var headerCells = headerRow.querySelectorAll("th");
+
+    for (var i = 0; i < headerCells.length; i++) {
+      if (headerCells[i].textContent.trim() === "กลุ่ม CPE") {
+        groupColumnIndex = i;
+        break;
+      }
+    }
+
+    if (groupColumnIndex === -1) {
+      return;
+    }
+
+    for (var i = 0; i < rows.length; i++) {
+      var row = rows[i];
+      var groupValue = row.cells[groupColumnIndex].innerHTML.toLowerCase();
+
+      if (groupValue.includes(inputValue)) {
+        row.style.display = "";
+      } else {
+        row.style.display = "none";
       }
     }
   }
