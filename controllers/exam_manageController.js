@@ -1,13 +1,23 @@
 const userModel = require("../models/user.model");
+const db = require("../config/dbconnection");
 
 exports.handleLogout = (req, res) => {
     res.clearCookie('loggedIn');
     res.redirect('/login');
 };
 
-exports.render_manageExamPage = function (req, res) {
+exports.render_manageExamPage = async function (req, res) {
     const username = req.session.username;
-    res.render('exam_manage', { title: 'exam_manage', username: username });
+
+    const query = `
+        SELECT topic
+        FROM ans WHERE 1
+    `;
+
+    const [result] = await db.execute(query);
+
+
+    res.render('exam_manage', { title: 'exam_manage', username: username, result: result });
 }
 
 exports.insertData = async function (req, res) {
