@@ -74,10 +74,10 @@ exports.getAnswer = async function (req, res) {
 
             if (isDub[0] == undefined){
                 const query = `
-                INSERT INTO user_exam (username, section, groupCPE, user_score, year, term, sub_term, userans)
-                VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+                INSERT INTO user_exam (username, section, groupCPE, user_score, year, term, sub_term)
+                VALUES (?, ?, ?, ?, ?, ?, ?)
                 `;
-                const params = [response.data.id, section, group, score, year, term, subterm, JSON.stringify(answerData)]
+                const params = [response.data.id, section, group, score, year, term, subterm]
             
                 const [result] = await db.execute(query, params, subterm);
 
