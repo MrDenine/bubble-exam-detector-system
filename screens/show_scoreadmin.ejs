@@ -70,6 +70,7 @@
           <th scope="col">Sec</th>
           <th scope="col">กลุ่ม CPE</th>
           <th scope="col">คะแนนสอบ</th>
+          <th scope="col" hidden>คำตอบ</th>
         </tr>
       </thead>
       <tbody>
@@ -108,6 +109,9 @@
             </td>
             <td>
               <%= result[i].user_score %>
+            </td>
+            <td hidden>
+              <%= result[i].userans %>
             </td>
           </tr>
           <% } %>
